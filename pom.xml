@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.limbo.practice</groupId>
+    <artifactId>long-night</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1.0-SNAPSHOT</version>
+    <modules>
+        <module>night-web</module>
+        <module>night-service</module>
+    </modules>
+    <properties>
+        <!--工程编码-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--工程默认jdk版本-->
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <!--junit版本号-->
+        <junit.version>4.11</junit.version>
+        <!--spring版本号-->
+        <spring.version>4.0.2.RELEASE</spring.version>
+        <!--mybtis版本号-->
+        <!--mysql-jdbc版本号-->
+        <mysql.jdbc.version>5.1.35</mysql.jdbc.version>
+        <!--log4j版本号-->
+
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
