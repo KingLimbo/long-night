@@ -27,6 +27,20 @@
         <mysql.jdbc.version>5.1.35</mysql.jdbc.version>
         <!--log4j版本号-->
 
+        <!--maven-clean版本号-->
+        <maven.clean.version>2.4.1</maven.clean.version>
+        <!--maven-validate版本号-->
+        <maven.validate.version>2.4.1</maven.validate.version>
+        <!--maven-compiler版本号-->
+        <maven.compiler.version>3.7.0</maven.compiler.version>
+        <!--maven-test版本号-->
+        <!--maven-package版本号-->
+        <!--maven-verify版本号-->
+        <!--maven-install版本号-->
+        <maven.install.version>2.5.2</maven.install.version>
+        <!--maven-site版本号-->
+        <!--maven-deploy版本号-->
+
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -38,5 +52,28 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
