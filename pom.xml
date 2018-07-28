@@ -21,7 +21,7 @@
         <!--junit版本号-->
         <junit.version>4.11</junit.version>
         <!--spring版本号-->
-        <spring.version>4.0.2.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE </spring.version>
         <!--mybtis版本号-->
         <!--mysql-jdbc版本号-->
         <mysql.jdbc.version>5.1.35</mysql.jdbc.version>
@@ -44,11 +44,20 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!-- 测试依赖 -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <!-- spring依赖 -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
