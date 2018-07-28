@@ -14,10 +14,10 @@
     </modules>
     <properties>
         <!--工程编码-->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--工程默认jdk版本-->
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <!--junit版本号-->
         <junit.version>4.11</junit.version>
         <!--spring版本号-->
@@ -27,6 +27,8 @@
         <mysql.jdbc.version>5.1.35</mysql.jdbc.version>
         <!--log4j版本号-->
 
+        <!--maven-compiler版本号-->
+        <maven.resources.version>3.0.2</maven.resources.version>
         <!--maven-clean版本号-->
         <maven.clean.version>2.4.1</maven.clean.version>
         <!--maven-validate版本号-->
@@ -70,6 +72,30 @@
                     <configuration>
                         <source>${maven.compiler.source}</source>
                         <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.version}</version>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <outputDirectory>${basedir}/target/extra-resources</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>src/main/resources</directory>
+                                <filtering>true</filtering>
+                            </resource>
+                        </resources>
                     </configuration>
                 </plugin>
             </plugins>
