@@ -24,4 +24,16 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <!--项目访问的根目录url:localhost:8090/项目名称/addUser.action-->
+                    <path>/long-night</path>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
