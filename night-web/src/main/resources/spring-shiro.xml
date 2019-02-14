@@ -5,12 +5,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-
     <!-- 缓存管理器 使用Ehcache实现 -->
     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml" />
     </bean>
 
+    <!-- 安全管理器 用于管理安全认证，缓存信息 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--认证管理器-->
         <!--<property name="realm" ref="shiroSecurityRealm" />-->
@@ -19,6 +19,7 @@
         <!-- rememberMe管理器 -->
         <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
+
     <!-- 会话ID生成器 -->
     <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
 
@@ -29,11 +30,14 @@
         <property name="maxAge" value="-1"/>
     </bean>
 
+    <!-- rememberMe配置 -->
     <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg value="rememberMe"/>
         <property name="httpOnly" value="true"/>
-        <property name="maxAge" value="2592000"/><!-- 30天 -->
+        <!-- 30天 -->
+        <property name="maxAge" value="2592000"/>
     </bean>
+
     <!-- rememberMe管理器 -->
     <bean id="rememberMeManager"
           class="org.apache.shiro.web.mgt.CookieRememberMeManager">
