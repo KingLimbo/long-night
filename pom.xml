@@ -146,17 +146,6 @@
                 <artifactId>spring-data-redis</artifactId>
                 <version>${redis.data.version}</version>
             </dependency>
-            <!-- ProtoStuff序列化 -->
-            <dependency>
-                <groupId>com.dyuproject.protostuff</groupId>
-                <artifactId>protostuff-core</artifactId>
-                <version>${protostuff.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.dyuproject.protostuff</groupId>
-                <artifactId>protostuff-runtime</artifactId>
-                <version>${protostuff.version}</version>
-            </dependency>
             <!--mybatis 数据访问层 end -->
 
             <!-- 日志文件管理包 -->
