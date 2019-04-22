@@ -1,4 +1,4 @@
-package com.limbo.practice.core.common.utils;
+package com.limbo.practice.core.utils;
 
 /**
  * 开发公司：SOJSON在线工具 <p>

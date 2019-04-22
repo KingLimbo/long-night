@@ -1,4 +1,4 @@
-package com.limbo.practice.core.common.utils;
+package com.limbo.practice.core.utils;
 
 import org.apache.log4j.Logger;
 

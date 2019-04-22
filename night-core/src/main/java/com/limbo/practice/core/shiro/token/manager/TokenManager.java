@@ -1,14 +1,10 @@
 package com.limbo.practice.core.shiro.token.manager;
 
-import com.limbo.practice.core.common.utils.SpringContextUtil;
+import com.limbo.practice.core.utils.SpringContextUtil;
 import com.limbo.practice.core.shiro.session.CustomSessionManager;
 import com.limbo.practice.core.shiro.token.SampleRealm;
-import com.limbo.practice.core.shiro.session.CustomSessionManager;
-import com.limbo.practice.core.shiro.token.SampleRealm;
-import com.limbo.practice.core.shiro.token.ShiroToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.SimplePrincipalCollection;
 
 import java.util.List;
 

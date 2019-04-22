@@ -1,6 +1,6 @@
-package com.limbo.practice.core.common.utils;
+package com.limbo.practice.core.utils;
 
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.*;
 
@@ -40,7 +40,7 @@ public class SerializeUtil {
             bos.close();
             rv = bos.toByteArray();
         } catch (Exception e) {
-            LoggerUtils.fmtError(CLAZZ, e, "serialize error %s", JSONObject.fromObject(value));
+            LoggerUtils.fmtError(CLAZZ, e, "serialize error %s", JSONObject.toJSONString(value));
         } finally {
             close(os);
             close(bos);

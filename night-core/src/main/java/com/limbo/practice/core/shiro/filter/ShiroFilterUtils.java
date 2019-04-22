@@ -1,7 +1,7 @@
 package com.limbo.practice.core.shiro.filter;
 
 
-import com.limbo.practice.core.common.utils.LoggerUtils;
+import com.limbo.practice.core.utils.LoggerUtils;
 import net.sf.json.JSONObject;
 
 import javax.servlet.ServletRequest;

@@ -45,25 +45,23 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
+        <!-- spring核心包 end -->
 
-        <!-- shiro权限 -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-all</artifactId>
-        </dependency>
-
-        <!-- 日志文件管理包 -->
-        <!-- log start -->
+        <!-- 日志文件管理包 start-->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
-
         <!-- 格式化对象，方便输出日志 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <classifier>jdk15</classifier>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -83,12 +81,9 @@
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
         </dependency>
+        <!-- 日志文件管理包 end-->
 
-        <!--shiro依赖-->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-all</artifactId>
-        </dependency>
+        <!--shiro依赖 start-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
@@ -105,15 +100,16 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
         </dependency>
+        <!--shiro依赖 end-->
 
-        <!-- redis begin -->
+        <!-- redis start -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
         <!-- redis end -->
 
-        <!-- Spring 升级4+ 依赖的JSON包 -->
+        <!-- Spring 升级4+ 依赖的JSON包 start-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -126,7 +122,7 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
         </dependency>
-        <!-- /Spring 升级4+ 依赖的JSON包 -->
+        <!-- /Spring 升级4+ 依赖的JSON包 end-->
 
 
         <dependency>
@@ -139,27 +135,24 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
         </dependency>
+        <!-- 高度重用的Util类 -->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <classifier>jdk15</classifier>
-        </dependency>
-        <!-- freemarker begin -->
+
+        <!-- freemarker start -->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
-        <!-- freemarker + shiro（标签） begin -->
+        <!-- freemarker + shiro（标签） -->
         <dependency>
             <groupId>net.mingsoft</groupId>
             <artifactId>shiro-freemarker-tags</artifactId>
         </dependency>
-        <!-- freemarker + shiro（标签） begin -->
-        <!-- freemarker begin -->
+        <!-- freemarker end -->
+
     </dependencies>
     <build>
         <resources>

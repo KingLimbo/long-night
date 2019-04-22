@@ -27,11 +27,12 @@
         <!-- log4j日志文件管理包版本 -->
         <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
-
         <!--spring版本号-->
         <spring.version>4.3.18.RELEASE </spring.version>
         <!-- jackson版本号 -->
         <jackson.version>1.2.47</jackson.version>
+        <!-- json.lib 版本号 -->
+        <json.lib.version>2.4</json.lib.version>
         <!-- mybatis版本号 -->
         <mybatis.version>3.2.6</mybatis.version>
         <!-- mybatis.spring版本号 -->
@@ -50,7 +51,6 @@
         <redis.data.version>2.1.2.RELEASE</redis.data.version>
         <!-- protostuff,data版本号 -->
         <protostuff.version>1.6.0</protostuff.version>
-
         <!-- jstl版本号 -->
         <jstl.version>1.2.5</jstl.version>
         <!-- servlet版本号 -->
@@ -61,22 +61,19 @@
         <fastjson.version>1.2.47</fastjson.version>
         <!-- jackson-databind版本号 -->
         <jackson.databind.version>2.7.4</jackson.databind.version>
-
         <!-- shiro 版本号 -->
         <shiro.version>1.3.2</shiro.version>
-
         <!--HttpClient 版本号 -->
         <httpclient.version>3.1</httpclient.version>
         <!--commons.logging 版本号 -->
         <commons.logging.version>1.1.3</commons.logging.version>
         <!--commons.lang 版本号 -->
         <commons.lang.version>2.6</commons.lang.version>
-        <!-- json.lib 版本号 -->
-        <json.lib.version>2.4</json.lib.version>
         <!-- freemarker.version 版本号 -->
         <freemarker.version>2.3.20</freemarker.version>
         <!-- shiro.freemarker.tags 版本号 -->
         <shiro.freemarker.tags.version>0.1</shiro.freemarker.tags.version>
+
 
         <!--maven-clean版本号-->
         <maven.clean.version>3.1.0</maven.clean.version>
@@ -127,24 +124,34 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- 导入json转换的包 -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.databind.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.databind.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.databind.version}</version>
-            </dependency>
+            <!--&lt;!&ndash; json转换的包 start&ndash;&gt;-->
+            <!--<dependency>-->
+                <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+                <!--<artifactId>jackson-databind</artifactId>-->
+                <!--<version>${jackson.databind.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+                <!--<artifactId>jackson-core</artifactId>-->
+                <!--<version>${jackson.databind.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+                <!--<artifactId>jackson-annotations</artifactId>-->
+                <!--<version>${jackson.databind.version}</version>-->
+            <!--</dependency>-->
+            <!--&lt;!&ndash; json转换的包 end&ndash;&gt;-->
 
-            <!--mybatis 数据访问层 start -->
+            <!--&lt;!&ndash; josn处理工具 start&ndash;&gt;-->
+            <!--<dependency>-->
+            <!--<groupId>net.sf.json-lib</groupId>-->
+            <!--<artifactId>json-lib</artifactId>-->
+            <!--<version>${json.lib.version}</version>-->
+            <!--<classifier>jdk15</classifier>-->
+            <!--</dependency>-->
+            <!--&lt;!&ndash; josn处理工具 end&ndash;&gt;-->
+
+            <!-- mybatis 数据访问层 start -->
             <!-- mybatis核心包 -->
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -182,20 +189,20 @@
             </dependency>
             <!--mybatis 数据访问层 end -->
 
-            <!-- 日志文件管理包 -->
+            <!-- 日志文件管理包 start-->
             <!-- log start -->
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
-
-            <!-- 格式化对象，方便输出日志 -->
+            <!-- json格式化对象，方便输出日志 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+            <!-- 简单日志门面API -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -213,8 +220,9 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
+            <!-- 日志文件管理包 end-->
 
-            <!-- 上传组件包 -->
+            <!-- 上传组件包 start-->
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
@@ -225,18 +233,39 @@
                 <artifactId>commons-io</artifactId>
                 <version>2.4</version>
             </dependency>
+            <!-- 用于摘要运算、编码解码的包。常见的编码解码工具Base64、MD5、Hex、SHA1、DES等。 -->
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>1.9</version>
             </dependency>
+            <!-- 上传组件包 end-->
 
-            <!-- shiro权限 -->
+            <!--&lt;!&ndash; 日志的门面接口 start&ndash;&gt;-->
+            <!--<dependency>-->
+            <!--<groupId>commons-logging</groupId>-->
+            <!--<artifactId>commons-logging</artifactId>-->
+            <!--<version>${commons.logging.version}</version>-->
+            <!--</dependency>-->
+            <!--&lt;!&ndash; 日志的门面接口 end&ndash;&gt;-->
+
+            <!-- 常用工具类包 start-->
             <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-all</artifactId>
-                <version>${shiro.version}</version>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons.lang.version}</version>
             </dependency>
+            <!-- 常用工具类包 end-->
+
+            <!-- httpclient start-->
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!-- httpclient end-->
+
+            <!-- shiro权限 start-->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-core</artifactId>
@@ -252,55 +281,30 @@
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro.version}</version>
             </dependency>
+            <!-- shiro权限 end-->
 
-
-            <!-- httpclient -->
-            <dependency>
-                <groupId>commons-httpclient</groupId>
-                <artifactId>commons-httpclient</artifactId>
-                <version>${httpclient.version}</version>
-            </dependency>
-
-            <!-- mybatis自动生成表工具 -->
+            <!-- mybatis自动生成表工具 start-->
             <dependency>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-core</artifactId>
                 <version>${mybatis.generator.version}</version>
             </dependency>
+            <!-- mybatis自动生成表工具 end-->
 
-            <dependency>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-                <version>${commons.logging.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>${commons.lang.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>net.sf.json-lib</groupId>
-                <artifactId>json-lib</artifactId>
-                <version>${json.lib.version}</version>
-                <classifier>jdk15</classifier>
-            </dependency>
-
-            <!-- freemarker begin -->
+            <!-- freemarker start -->
             <dependency>
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
                 <version>${freemarker.version}</version>
             </dependency>
-            <!-- freemarker begin -->
-            <!-- freemarker + shiro（标签） begin -->
+            <!-- freemarker + shiro（标签） -->
             <dependency>
                 <groupId>net.mingsoft</groupId>
                 <artifactId>shiro-freemarker-tags</artifactId>
                 <version>${shiro.freemarker.tags.version}</version>
             </dependency>
-            <!-- freemarker + shiro（标签） begin -->
+            <!-- freemarker end -->
+
         </dependencies>
 
     </dependencyManagement>

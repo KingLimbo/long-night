@@ -1,6 +1,6 @@
 package com.limbo.practice.core.shiro.filter;
 
-import com.limbo.practice.core.common.utils.LoggerUtils;
+import com.limbo.practice.core.utils.LoggerUtils;
 import com.limbo.practice.core.shiro.session.CustomSessionManager;
 import com.limbo.practice.core.shiro.session.SessionStatus;
 import net.sf.json.JSONObject;

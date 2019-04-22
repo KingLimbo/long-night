@@ -1,7 +1,5 @@
-package com.limbo.practice.core.common.utils;
+package com.limbo.practice.core.utils;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import sun.misc.BASE64Decoder;
 
 import java.io.Serializable;
@@ -113,17 +111,17 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
      * @param args
      * @return
      */
-    public static net.sf.json.JSONObject isJSONObject(String args) {
-        net.sf.json.JSONObject result = null;
-        if (isBlank(args)) {
-            return result;
-        }
-        try {
-            return net.sf.json.JSONObject.fromObject(args.trim());
-        } catch (Exception e) {
-            return result;
-        }
-    }
+//    public static net.sf.json.JSONObject isJSONObject(String args) {
+//        net.sf.json.JSONObject result = null;
+//        if (isBlank(args)) {
+//            return result;
+//        }
+//        try {
+//            return net.sf.json.JSONObject.fromObject(args.trim());
+//        } catch (Exception e) {
+//            return result;
+//        }
+//    }
 
     /**
      * 判断一个字符串是否为JSONArray,是返回JSONArray,不是返回null
@@ -131,28 +129,28 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
      * @param args
      * @return
      */
-    public static net.sf.json.JSONArray isJSONArray(Object args) {
-        JSONArray result = new JSONArray();
-        if (isBlank(args)) {
-            return null;
-        }
-        if (args instanceof net.sf.json.JSONArray) {
-
-            net.sf.json.JSONArray arr = (net.sf.json.JSONArray) args;
-            for (Object json : arr) {
-                if (json != null && json instanceof net.sf.json.JSONObject) {
-                    result.add(json);
-                    continue;
-                } else {
-                    result.add(JSONObject.fromObject(json));
-                }
-            }
-            return result;
-        } else {
-            return null;
-        }
-
-    }
+//    public static net.sf.json.JSONArray isJSONArray(Object args) {
+//        JSONArray result = new JSONArray();
+//        if (isBlank(args)) {
+//            return null;
+//        }
+//        if (args instanceof net.sf.json.JSONArray) {
+//
+//            net.sf.json.JSONArray arr = (net.sf.json.JSONArray) args;
+//            for (Object json : arr) {
+//                if (json != null && json instanceof net.sf.json.JSONObject) {
+//                    result.add(json);
+//                    continue;
+//                } else {
+//                    result.add(JSONObject.fromObject(json));
+//                }
+//            }
+//            return result;
+//        } else {
+//            return null;
+//        }
+//
+//    }
 
     public static String trimToEmpty(Object str) {
         return (isBlank(str) ? "" : str.toString().trim());

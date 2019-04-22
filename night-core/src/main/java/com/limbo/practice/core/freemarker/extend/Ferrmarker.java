@@ -1,8 +1,8 @@
 package com.limbo.practice.core.freemarker.extend;
 
-import com.limbo.practice.core.common.utils.SpringContextUtil;
-import com.limbo.practice.core.common.utils.StringUtils;
-import com.limbo.practice.core.common.utils.UtilPath;
+import com.limbo.practice.core.utils.SpringContextUtil;
+import com.limbo.practice.core.utils.StringUtils;
+import com.limbo.practice.core.utils.UtilPath;
 import com.limbo.practice.core.tags.APITemplateModel;
 import freemarker.template.*;
 import org.apache.commons.logging.Log;

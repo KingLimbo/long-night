@@ -1,4 +1,4 @@
-package com.limbo.practice.core.common.utils;
+package com.limbo.practice.core.utils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;

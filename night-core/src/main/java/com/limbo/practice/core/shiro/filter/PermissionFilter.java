@@ -1,6 +1,6 @@
 package com.limbo.practice.core.shiro.filter;
 
-import com.limbo.practice.core.common.utils.LoggerUtils;
+import com.limbo.practice.core.utils.LoggerUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.filter.AccessControlFilter;

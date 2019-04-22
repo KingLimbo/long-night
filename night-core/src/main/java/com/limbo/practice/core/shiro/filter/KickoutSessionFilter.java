@@ -1,6 +1,6 @@
 package com.limbo.practice.core.shiro.filter;
 
-import com.limbo.practice.core.common.utils.LoggerUtils;
+import com.limbo.practice.core.utils.LoggerUtils;
 import com.limbo.practice.core.shiro.cache.VCache;
 import com.limbo.practice.core.shiro.session.ShiroSessionRepository;
 import com.limbo.practice.core.shiro.token.manager.TokenManager;
