@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.limbo.practice.core.login.dao.LoginDao">
+
+    <resultMap id="BaseResultMap" type="com.limbo.practice.core.login.domain.LoginUser">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="login_account" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="user_head" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="user_sex" javaType="java.lang.Boolean" jdbcType="BIT" />
+            <arg column="login_status" javaType="java.lang.Boolean" jdbcType="BIT" />
+            <arg column="last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
+            <arg column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+            <arg column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        login_account,
+        login_pass,
+        login_salt,
+        user_name,
+        user_head,
+        user_phone,
+        user_email,
+        user_sex,
+        login_status,
+        last_login_time,
+        last_login_ip,
+        is_locked,
+        is_deleted,
+        gmt_create,
+        gmt_modified
+   </sql>
+
+    <!-- 根据用户名查询用户名称 -->
+    <select id="selectUserInfoByUserName" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_user
+        WHERE
+            user_name = #{param1}
+    </select>
+
+    <!-- 根据邮箱查询用户名称 -->
+    <select id="selectUserInfoByEmail" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_user
+        WHERE
+            user_email = #{param1}
+    </select>
+
+    <!-- 根据电话号码查询用户名称 -->
+    <select id="selectUserInfoByPhone" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_user
+        WHERE
+            user_phone = #{param1}
+    </select>
+</mapper>
