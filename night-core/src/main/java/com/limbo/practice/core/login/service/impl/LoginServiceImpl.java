@@ -19,6 +19,12 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginDao loginDao;
 
+    /**
+     * 根据用户名查询用户
+     *
+     * @param username
+     * @return
+     */
     @Override
     public LoginUser getUserInfoByUserName(String username) {
         if (StringUtils.isBlank(username)) {
@@ -28,6 +34,12 @@ public class LoginServiceImpl implements LoginService {
         return user;
     }
 
+    /**
+     * 根据邮箱查询用户
+     *
+     * @param email
+     * @return
+     */
     @Override
     public LoginUser getUserInfoByEmail(String email) {
         if (StringUtils.isBlank(email)) {
@@ -37,6 +49,12 @@ public class LoginServiceImpl implements LoginService {
         return user;
     }
 
+    /**
+     * 根据电话号码查询用户
+     *
+     * @param phone
+     * @return
+     */
     @Override
     public LoginUser getUserInfoByPhone(String phone) {
         if (StringUtils.isBlank(phone)) {
@@ -44,5 +62,30 @@ public class LoginServiceImpl implements LoginService {
         }
         LoginUser user = loginDao.selectUserInfoByPhone(phone);
         return user;
+    }
+
+    /**
+     * 根据登录信息（用户名、邮箱、电话号码）查询用户名称
+     *
+     * @param param
+     * @return
+     */
+    @Override
+    public LoginUser getUserInfoByLoginMessage(String param) {
+        if (StringUtils.isBlank(param)) {
+            return null;
+        }
+        LoginUser user = loginDao.selectUserInfoByLoginMessage(param);
+        return user;
+    }
+
+    /**
+     * 根据主键更新用户登录信息
+     *
+     * @param loginUser
+     */
+    @Override
+    public void updateByPrimaryKeySelective(LoginUser loginUser) {
+        loginDao.updateByPrimaryKeySelective(loginUser);
     }
 }

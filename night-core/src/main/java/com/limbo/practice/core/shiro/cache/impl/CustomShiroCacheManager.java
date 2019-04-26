@@ -1,6 +1,6 @@
 package com.limbo.practice.core.shiro.cache.impl;
 
-import com.sojson.core.shiro.cache.ShiroCacheManager;
+import com.limbo.practice.core.shiro.cache.ShiroCacheManager;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;

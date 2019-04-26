@@ -33,4 +33,19 @@ public interface LoginDao {
      * @return
      */
     LoginUser selectUserInfoByPhone(String phone);
+
+    /**
+     * 根据登录信息（用户名、邮箱、电话号码）查询用户
+     *
+     * @param param
+     * @return
+     */
+    LoginUser selectUserInfoByLoginMessage(String param);
+
+    /**
+     * 根据主键更新用户登录信息
+     *
+     * @param loginUser
+     */
+    int updateByPrimaryKeySelective(LoginUser loginUser);
 }

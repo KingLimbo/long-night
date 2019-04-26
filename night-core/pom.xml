@@ -43,6 +43,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
         <!-- spring核心包 end -->
@@ -97,12 +101,37 @@
         </dependency>
         <!--shiro依赖 end-->
 
-        <!-- redis start -->
+        <!--mybatis 数据访问层 start -->
+        <!-- mybatis核心包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <!-- mybatis/spring包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <!-- 导入Mysql数据库链接jar包 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- 阿里数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <!-- redis缓存 -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
-        <!-- redis end -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+        <!--mybatis 数据访问层 end -->
 
         <!--&lt;!&ndash; Spring 升级4+ 依赖的JSON包 start&ndash;&gt;-->
         <!--<dependency>-->
@@ -153,6 +182,13 @@
                     <include>**/*.xml</include>
                     <include>**/*.properties</include>
                     <include>**/*.ini</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <includes>
+                    <include>common/**</include>
+                    <include>page/**</include>
                 </includes>
             </resource>
         </resources>

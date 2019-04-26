@@ -42,7 +42,7 @@
         gmt_modified
    </sql>
 
-    <!-- 根据用户名查询用户名称 -->
+    <!-- 根据用户名查询用户 -->
     <select id="selectUserInfoByUserName" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
@@ -52,7 +52,7 @@
             user_name = #{param1}
     </select>
 
-    <!-- 根据邮箱查询用户名称 -->
+    <!-- 根据邮箱查询用户 -->
     <select id="selectUserInfoByEmail" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
@@ -62,7 +62,7 @@
             user_email = #{param1}
     </select>
 
-    <!-- 根据电话号码查询用户名称 -->
+    <!-- 根据电话号码查询用户 -->
     <select id="selectUserInfoByPhone" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
@@ -71,4 +71,27 @@
         WHERE
             user_phone = #{param1}
     </select>
+
+    <!-- 根据登录信息（用户名、邮箱、电话号码）查询用户 -->
+    <select id="selectUserInfoByLoginMessage" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_user
+        WHERE
+            user_name = #{param1} OR user_email = #{param1} OR user_phone = #{param1}
+        LIMIT 1
+    </select>
+
+    <!-- 根据主键更新用户登录信息 -->
+    <update id="updateByPrimaryKeySelective">
+        UPDATE
+            sys_user
+        SET
+            last_login_time = '',
+            last_login_ip = '',
+            gmt_modified = ''
+        WHERE
+            id = '123'
+    </update>
 </mapper>

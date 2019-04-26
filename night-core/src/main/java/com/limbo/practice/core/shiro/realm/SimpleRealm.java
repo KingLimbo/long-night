@@ -1,11 +1,16 @@
 package com.limbo.practice.core.shiro.realm;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
+import com.limbo.practice.core.constant.CoreConstant;
+import com.limbo.practice.core.login.domain.LoginUser;
+import com.limbo.practice.core.login.service.LoginService;
+import com.limbo.practice.core.shiro.token.LoginToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 /**
  * 简单的Realm
@@ -14,6 +19,10 @@ import org.apache.shiro.subject.PrincipalCollection;
  * @date 2019/4/25
  */
 public class SimpleRealm extends AuthorizingRealm {
+
+    // 登录处理service
+    @Autowired
+    private LoginService loginService;
 
     /**
      * 授权
@@ -35,9 +44,21 @@ public class SimpleRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        // 取出登录用户名字
-        String username = (String) authenticationToken.getPrincipal();
-
-        return null;
+        LoginToken loginToken = (LoginToken) authenticationToken;
+        // 取出登录用户
+        LoginUser user = loginService.getUserInfoByLoginMessage(loginToken.getUsername());
+        if (null == user) {
+            throw new AccountException("帐号不存在！");
+        // 如果用户的status为禁用。那么就抛出<code>DisabledAccountException</code>
+        } else if (CoreConstant.LOGIN_LOCKE_YES.equals(user.getIsLocked())) {
+            throw new DisabledAccountException("帐号已经禁止登录！");
+        } else {
+            // 更新登录时间 last login time
+            user.setLastLoginTime(new Date());
+            // 更新登录ip地址 last login ip
+            user.setLastLoginIp(loginToken.getHost());
+            loginService.updateByPrimaryKeySelective(user);
+        }
+        return new SimpleAuthenticationInfo(user, user.getLoginPass(), getName());
     }
 }

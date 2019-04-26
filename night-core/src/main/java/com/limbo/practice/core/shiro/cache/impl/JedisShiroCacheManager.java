@@ -1,8 +1,8 @@
 package com.limbo.practice.core.shiro.cache.impl;
 
-import com.sojson.core.shiro.cache.JedisManager;
-import com.sojson.core.shiro.cache.JedisShiroCache;
-import com.sojson.core.shiro.cache.ShiroCacheManager;
+import com.limbo.practice.core.shiro.cache.JedisManager;
+import com.limbo.practice.core.shiro.cache.JedisShiroCache;
+import com.limbo.practice.core.shiro.cache.ShiroCacheManager;
 import org.apache.shiro.cache.Cache;
 
 /**
