@@ -1,6 +1,7 @@
 package com.limbo.practice.core.login.dao;
 
 import com.limbo.practice.core.login.domain.LoginUser;
+import com.limbo.practice.core.mybatis.MybatisDao;
 
 /**
  * 登录DAO
@@ -8,6 +9,7 @@ import com.limbo.practice.core.login.domain.LoginUser;
  * @author limbo
  * @date 2019/4/25
  */
+@MybatisDao
 public interface LoginDao {
 
     /**

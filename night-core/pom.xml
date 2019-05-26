@@ -189,6 +189,7 @@
                 <includes>
                     <include>common/**</include>
                     <include>page/**</include>
+                    <include>WEB-INF/**</include>
                 </includes>
             </resource>
         </resources>
