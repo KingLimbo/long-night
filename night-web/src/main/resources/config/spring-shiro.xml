@@ -17,7 +17,7 @@
         <!-- 引用SecurityManager -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 登录的url -->
-        <property name="loginUrl" value="/page/login.html"/>
+        <property name="loginUrl" value="login"/>
         <!-- 登录成功的url -->
         <property name="successUrl" value="/page/home.html"/>
         <!-- 如果访问不成功则显示的url为 -->
@@ -25,8 +25,10 @@
         <!-- 定义安全的页面及访问规则 -->
         <property name="filterChainDefinitions">
             <value>
-                /one/**=authc
-                /page/login.html=authc
+                /index.jsp=anon
+                /login=anon
+                /page/**=anon
+                /common/**=anon
                 /logout=logout
                 /**=authc
             </value>

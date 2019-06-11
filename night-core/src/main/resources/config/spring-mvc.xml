@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
@@ -15,28 +16,64 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <mvc:resources mapping="/common/**" location="/common/"/>
-    <mvc:resources mapping="/page/**" location="/page/"/>
-    <!-- 这个一定得有，注意了，如果其他配置也有需要这个，已经配置了，那不必了 -->
+    <!-- 配置静态资源路径映射 -->
+    <mvc:resources mapping="/common/**" location="/common/, classpath*:/common/"/>
+    <mvc:resources mapping="/page/**" location="/page/, classpath*:/page/"/>
+
+    <!-- 注册默认的MVC映射处理用到的bean -->
     <mvc:annotation-driven/>
 
-    <!-- 视图解析器 -->
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="order" value="2"></property>
-        <property name="viewClass"
-                  value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/views/"/>
+    <!--===============通用视图解析器 begin===============-->
+    <!-- 配置freeMarker视图解析器（可解析HTML） -->
+    <bean id="viewResolverHtml" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="cache" value="true"/>
+        <property name="suffix" value=".html"/>
+        <property name="order" value="0"/>
+    </bean>
+    <!-- 配置freeMarker视图解析器（可解析FTL） -->
+    <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <!-- 把Freemarker 扩展一下，把相关属性加入进去。。。 -->
+        <property name="viewClass" value="com.limbo.practice.core.freemarker.extend.FreeMarkerViewExtend"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="cache" value="true"/>
+        <property name="suffix" value=".ftl"/>
+        <property name="order" value="0"/>
+    </bean>
+    <!-- 配置freeMarker的模板路径 -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">3600</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="number_format">#.##</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- 配置JSP视图解析器 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="0"></property>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/page"/>
         <property name="suffix" value=".jsp"></property>
     </bean>
-
-    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
     <!--===============通用视图解析器 end===============-->
 
     <!--  上传文件定义大小 -->
     <!--<bean id="multipartResolver"-->
-          <!--class="org.springframework.web.multipart.commons.CommonsMultipartResolver"-->
-          <!--p:defaultEncoding="utf-8">-->
-        <!--<property name="maxUploadSize" value="50048000"/>-->
+    <!--class="org.springframework.web.multipart.commons.CommonsMultipartResolver"-->
+    <!--p:defaultEncoding="utf-8">-->
+    <!--<property name="maxUploadSize" value="50048000"/>-->
     <!--</bean>-->
 </beans>

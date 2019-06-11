@@ -52,7 +52,7 @@
         <!-- protostuff,data版本号 -->
         <protostuff.version>1.6.0</protostuff.version>
         <!-- jstl版本号 -->
-        <jstl.version>1.2.5</jstl.version>
+        <jstl.version>1.2</jstl.version>
         <!-- servlet版本号 -->
         <servlet.version>2.0</servlet.version>
         <!-- taglibs版本号 -->
@@ -70,7 +70,7 @@
         <!--commons.lang 版本号 -->
         <commons.lang.version>2.6</commons.lang.version>
         <!-- freemarker.version 版本号 -->
-        <freemarker.version>2.3.20</freemarker.version>
+        <freemarker.version>2.3.28</freemarker.version>
         <!-- shiro.freemarker.tags 版本号 -->
         <shiro.freemarker.tags.version>0.1</shiro.freemarker.tags.version>
 
@@ -291,6 +291,14 @@
             </dependency>
             <!-- mybatis自动生成表工具 end-->
 
+            <!-- JSP 标准标签库 start-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+            </dependency>
+            <!-- JSP 标准标签库 end-->
+
             <!-- freemarker start -->
             <dependency>
                 <groupId>org.freemarker</groupId>
@@ -325,10 +333,12 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven.clean.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven.resources.version}</version>
                 </plugin>
@@ -398,11 +408,11 @@
                             <artifactId>mysql-connector-java</artifactId>
                             <version>${mysql.connetction.version}</version>
                         </dependency>
-                        <dependency>
-                            <groupId>org.mybatis.generator</groupId>
-                            <artifactId>mybatis-generator-core</artifactId>
-                            <version>${mybatis.generator.version}</version>
-                        </dependency>
+                        <!--<dependency>-->
+                            <!--<groupId>org.mybatis.generator</groupId>-->
+                            <!--<artifactId>mybatis-generator-core</artifactId>-->
+                            <!--<version>${mybatis.generator.version}</version>-->
+                        <!--</dependency>-->
                         <dependency>
                             <groupId>org.mybatis</groupId>
                             <artifactId>mybatis</artifactId>

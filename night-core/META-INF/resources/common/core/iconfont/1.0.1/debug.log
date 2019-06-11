@@ -1,0 +1,5 @@
+[0123/140134:ERROR:http_transport_win.cc(50)] WinHttpSendRequest: �����˰�ȫ����  (0x2F8F)
+[0123/140401:ERROR:process_reader_win.cc(142)] SuspendThread: �ܾ����ʡ� (0x5)
+[0123/140401:ERROR:exception_snapshot_win.cc(87)] thread ID 18496 not found in process
+[0123/140401:WARNING:crash_report_exception_handler.cc(61)] ProcessSnapshotWin::Initialize failed
+[0123/140401:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: �ѳ��Է��������˳��Ĺ��̡�  (0xc000010a)
