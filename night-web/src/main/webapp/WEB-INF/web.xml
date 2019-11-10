@@ -3,7 +3,14 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>Archetype Created Web Application</display-name>
+    <display-name>long-night</display-name>
+
+    <!-- spring添加配置文件 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:config/spring-context.xml</param-value>
+    </context-param>
+
     <!-- shiro 过滤器 start -->
     <filter>
         <filter-name>shiroFilter</filter-name>
@@ -19,6 +26,32 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- shiro 过滤器 end -->
+
+    <!-- 采用listener创建ApplicationContext 实例-->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!-- 配置springmvc servlet -->
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                classpath:config/spring-mvc.xml
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <!-- / 表示所有的请求都要经过此serlvet -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>

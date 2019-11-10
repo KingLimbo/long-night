@@ -1,5 +1,0 @@
-[0123/140134:ERROR:http_transport_win.cc(50)] WinHttpSendRequest: 发生了安全错误  (0x2F8F)
-[0123/140401:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
-[0123/140401:ERROR:exception_snapshot_win.cc(87)] thread ID 18496 not found in process
-[0123/140401:WARNING:crash_report_exception_handler.cc(61)] ProcessSnapshotWin::Initialize failed
-[0123/140401:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: 已尝试访问正在退出的过程。  (0xc000010a)

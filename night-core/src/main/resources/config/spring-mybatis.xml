@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 引入数据库连接配置 -->
+    <import resource="classpath:config/spring-druid.xml"/>
+
+    <!-- 声明SESSION工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- mybatis配置 -->
+        <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+        <!-- mapper路径 -->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/limbo/practice/**/mapper/*.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 自动寻找mapper映射的配置 -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- DAO包名 -->
+        <property name="basePackage" value="com.limbo.practice.**.dao"/>
+        <!-- SESSION工厂 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- DAO的注解class -->
+        <property name="annotationClass" value="com.limbo.practice.core.mybatis.MybatisDao"/>
+    </bean>
+</beans>

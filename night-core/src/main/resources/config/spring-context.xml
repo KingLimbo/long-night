@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- 自动扫描(自动注入) -->
+    <context:component-scan base-package="com.limbo.practice">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <context:annotation-config />
+
+    <!-- 上下文获取工具类（单例模式） -->
+    <bean name="springContextUtil" class="com.limbo.practice.core.utils.SpringContextUtil" scope="singleton"/>
+
+    <import resource="classpath:config/spring-mybatis.xml"/>
+    <import resource="classpath:config/spring-shiro.xml"/>
+    <import resource="classpath:config/spring-mvc.xml"/>
 </beans>

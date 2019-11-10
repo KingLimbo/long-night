@@ -173,6 +173,10 @@
         </dependency>
         <!-- freemarker end -->
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <resources>
@@ -186,10 +190,17 @@
             </resource>
             <resource>
                 <directory>src/main/webapp</directory>
+                <!--<targetPath>/META-INF/resources/</targetPath>-->
                 <includes>
-                    <include>common/**</include>
-                    <include>page/**</include>
+                    <!--<include>common/**</include>-->
+                    <!--<include>page/**</include>-->
+                    <include>WEB-INF/**</include>
+                    <include>META-INF/**</include>
                 </includes>
+                <excludes>
+                    <exclude>common/**</exclude>
+                    <exclude>page/**</exclude>
+                </excludes>
             </resource>
         </resources>
         <testResources>
@@ -198,9 +209,39 @@
             </testResource>
         </testResources>
         <plugins>
+            <!-- mybatis自动生成工具 -->
+            <!--<plugin>-->
+                <!--<groupId>org.mybatis.generator</groupId>-->
+                <!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+
+            <!-- 复制资源插件 -->
             <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- 绑定到某个阶段上 -->
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/classes/META-INF/resources/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/webapp</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>common/**</include>
+                                        <include>page/**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
