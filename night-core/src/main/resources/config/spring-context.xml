@@ -14,7 +14,7 @@
     <context:annotation-config />
 
     <!-- 上下文获取工具类（单例模式） -->
-    <bean name="springContextUtil" class="com.limbo.practice.core.utils.SpringContextUtil" scope="singleton"/>
+    <bean name="springContextUtil" class="com.limbo.practice.core.util.SpringContextUtil" scope="singleton"/>
 
     <import resource="classpath:config/spring-mybatis.xml"/>
     <import resource="classpath:config/spring-shiro.xml"/>

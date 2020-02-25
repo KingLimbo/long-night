@@ -1,8 +1,8 @@
 package com.limbo.practice.core.shiro.cache;
 
-import com.limbo.practice.core.utils.LoggerUtils;
-import com.limbo.practice.core.utils.SerializeUtil;
-import com.limbo.practice.core.utils.StringUtils;
+import com.limbo.practice.core.util.LoggerUtils;
+import com.limbo.practice.core.util.SerializeUtil;
+import com.limbo.practice.core.util.StringUtils;
 import org.apache.shiro.session.Session;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

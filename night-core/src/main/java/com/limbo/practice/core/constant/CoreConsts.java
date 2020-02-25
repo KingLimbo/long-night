@@ -1,16 +1,20 @@
-package com.limbo.practice.core.utils;
+package com.limbo.practice.core.constant;
 
 import java.util.Calendar;
 
-public interface CoreConstans {
-    static final String CONTEXT_PATH = "contextPath";/***项目根路径*/
+public interface CoreConsts {
+
+    // 登录锁定_已锁定
+    public static final Boolean LOGIN_LOCKE_YES = true;
+    // 登录锁定_未锁定
+    public static final Boolean LOGIN_LOCKE_NO = false;
+
+    /***项目根路径*/
+    static final String CONTEXT_PATH = "contextPath";
 
     /***Freemarker 使用的变量 begin**/
-
     static final String TARGET = "target";//标签使用目标
-
     static final String OUT_TAG_NAME = "outTagName";//输出标签Name
-
     /***Freemarker 使用的变量 end**/
 
 
@@ -49,8 +53,6 @@ public interface CoreConstans {
 
     // 版本号，重启的时间
     static String VERSION = String.valueOf(System.currentTimeMillis());
-
-
 
     // 存储到缓存，标识用户的禁止状态，解决在线用户踢出的问题
     final static String  EXECUTE_CHANGE_USER = "SOJSON_EXECUTE_CHANGE_USER";

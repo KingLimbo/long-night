@@ -1,4 +1,4 @@
-package com.limbo.practice.core.utils;
+package com.limbo.practice.core.util;
 
 import java.security.MessageDigest;
 import java.util.Random;

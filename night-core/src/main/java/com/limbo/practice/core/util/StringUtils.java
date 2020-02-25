@@ -1,4 +1,4 @@
-package com.limbo.practice.core.utils;
+package com.limbo.practice.core.util;
 
 import sun.misc.BASE64Decoder;
 
@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
  * String工具
  * 主要对 StringUtils 的一些方法进行重写,达到更方便的使用
  *
- * @author zhou-baicheng
+ * @author limbo
+ * @version 0.0.1v
  */
 public class StringUtils extends org.apache.commons.lang.StringUtils {
 

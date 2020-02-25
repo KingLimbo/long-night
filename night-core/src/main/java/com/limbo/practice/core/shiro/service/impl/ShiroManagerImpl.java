@@ -1,6 +1,6 @@
 package com.limbo.practice.core.shiro.service.impl;
 
-import com.limbo.practice.core.utils.LoggerUtils;
+import com.limbo.practice.core.util.LoggerUtils;
 import com.limbo.practice.core.config.INI4j;
 import com.limbo.practice.core.shiro.service.ShiroManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;

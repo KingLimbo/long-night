@@ -1,6 +1,6 @@
 package com.limbo.practice.core.shiro;
 
-import com.limbo.practice.core.utils.LoggerUtils;
+import com.limbo.practice.core.util.LoggerUtils;
 import com.limbo.practice.core.shiro.session.ShiroSessionRepository;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;

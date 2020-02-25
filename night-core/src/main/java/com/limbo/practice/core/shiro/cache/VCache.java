@@ -1,7 +1,7 @@
 package com.limbo.practice.core.shiro.cache;
 
-import com.limbo.practice.core.utils.SerializeUtil;
-import com.limbo.practice.core.utils.SpringContextUtil;
+import com.limbo.practice.core.util.SerializeUtil;
+import com.limbo.practice.core.util.SpringContextUtil;
 import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;

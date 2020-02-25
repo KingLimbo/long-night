@@ -70,7 +70,7 @@
         <!--commons.lang 版本号 -->
         <commons.lang.version>2.6</commons.lang.version>
         <!-- freemarker.version 版本号 -->
-        <freemarker.version>2.3.28</freemarker.version>
+        <freemarker.version>2.3.23</freemarker.version>
         <!-- shiro.freemarker.tags 版本号 -->
         <shiro.freemarker.tags.version>0.1</shiro.freemarker.tags.version>
 

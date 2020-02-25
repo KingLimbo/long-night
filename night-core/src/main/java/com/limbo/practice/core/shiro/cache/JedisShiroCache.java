@@ -1,7 +1,7 @@
 package com.limbo.practice.core.shiro.cache;
 
-import com.limbo.practice.core.utils.LoggerUtils;
-import com.limbo.practice.core.utils.SerializeUtil;
+import com.limbo.practice.core.util.LoggerUtils;
+import com.limbo.practice.core.util.SerializeUtil;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 

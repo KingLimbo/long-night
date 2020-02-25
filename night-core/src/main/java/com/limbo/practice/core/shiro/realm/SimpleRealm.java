@@ -1,6 +1,6 @@
 package com.limbo.practice.core.shiro.realm;
 
-import com.limbo.practice.core.constant.CoreConstant;
+import com.limbo.practice.core.constant.CoreConsts;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.login.service.LoginService;
 import com.limbo.practice.core.shiro.token.LoginToken;
@@ -50,7 +50,7 @@ public class SimpleRealm extends AuthorizingRealm {
         if (null == user) {
             throw new AccountException("帐号不存在！");
         // 如果用户的status为禁用。那么就抛出<code>DisabledAccountException</code>
-        } else if (CoreConstant.LOGIN_LOCKE_YES.equals(user.getIsLocked())) {
+        } else if (CoreConsts.LOGIN_LOCKE_YES.equals(user.getIsLocked())) {
             throw new DisabledAccountException("帐号已经禁止登录！");
         } else {
             // 更新登录时间 last login time

@@ -1,7 +1,7 @@
 package com.limbo.practice.core.config;
 
 
-import com.limbo.practice.core.utils.LoggerUtils;
+import com.limbo.practice.core.util.LoggerUtils;
 
 import java.io.IOException;
 import java.util.Properties;

@@ -3,7 +3,7 @@ package com.limbo.practice.core.login.service.impl;
 import com.limbo.practice.core.login.dao.LoginDao;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.login.service.LoginService;
-import com.limbo.practice.core.utils.StringUtils;
+import com.limbo.practice.core.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

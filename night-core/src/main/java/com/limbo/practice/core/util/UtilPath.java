@@ -1,4 +1,4 @@
-package com.limbo.practice.core.utils;
+package com.limbo.practice.core.util;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -9,16 +9,8 @@ import java.util.Date;
 /**
  * 静态化路径工具类
  *
- * <p>
- *
- * <p>
- * <p>
- * 区分　责任人　日期　　　　说明<br/>
- * 创建　周柏成　2013-6-11　<br/>
- * <p>
- *
- * @author
- * @version 1.0, 2013-6-11
+ * @author limbo
+ * @version 0.0.1v
  */
 public class UtilPath {
 

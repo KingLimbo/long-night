@@ -1,4 +1,4 @@
-package com.limbo.practice.core.utils;
+package com.limbo.practice.core.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContextAware;
  *
  * @author limbo
  * @version 0.0.1v
- * */
+ */
 public class SpringContextUtil implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
 
@@ -34,8 +34,7 @@ public class SpringContextUtil implements ApplicationContextAware {
         }
     }
 
-    public static <T> T getBean(String name, Class<T> requiredType)
-            throws BeansException {
+    public static <T> T getBean(String name, Class<T> requiredType) throws BeansException {
         return applicationContext.getBean(name, requiredType);
     }
 
@@ -43,18 +42,15 @@ public class SpringContextUtil implements ApplicationContextAware {
         return applicationContext.containsBean(name);
     }
 
-    public static boolean isSingleton(String name)
-            throws NoSuchBeanDefinitionException {
+    public static boolean isSingleton(String name) throws NoSuchBeanDefinitionException {
         return applicationContext.isSingleton(name);
     }
 
-    public static Class<? extends Object> getType(String name)
-            throws NoSuchBeanDefinitionException {
+    public static Class<? extends Object> getType(String name) throws NoSuchBeanDefinitionException {
         return applicationContext.getType(name);
     }
 
-    public static String[] getAliases(String name)
-            throws NoSuchBeanDefinitionException {
+    public static String[] getAliases(String name) throws NoSuchBeanDefinitionException {
         return applicationContext.getAliases(name);
     }
 
