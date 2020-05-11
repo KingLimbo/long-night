@@ -1,16 +1,16 @@
 package com.limbo.practice.core.util;
 
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Cookie工具
  *
  * @author limbo
  * @version 0.0.1v
  */
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class CookieUtil {
 
     /**
@@ -69,8 +69,8 @@ public class CookieUtil {
      * @return boolean
      * @author JIANG FEI Jun 19, 2014 10:12:17 AM
      */
-    public static boolean clearCookie(HttpServletRequest request,
-                                      HttpServletResponse response, String name, String domain) {
+    public static boolean clearCookie(HttpServletRequest request, HttpServletResponse response, String name,
+                                      String domain) {
         boolean bool = false;
         Cookie[] cookies = request.getCookies();
         if (null == cookies || cookies.length == 0) return bool;
@@ -96,8 +96,7 @@ public class CookieUtil {
      * @param name
      * @return String
      */
-    public static String findCookieByName(HttpServletRequest request,
-                                          String name) {
+    public static String findCookieByName(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
         if (null == cookies || cookies.length == 0) return null;
         String string = null;

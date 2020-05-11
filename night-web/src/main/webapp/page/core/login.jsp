@@ -34,14 +34,14 @@
             <input name="__RequestVerificationToken" type="hidden" value="">
             <div class="layui-form-item">
                 <label class="login-icon">
-                    <i class="layui-icon">用户名：</i>
+                    <i class="layui-icon layui-icon-username"></i>
                 </label>
                 <input type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入登录名"
                        class="layui-input">
             </div>
             <div class="layui-form-item">
                 <label class="login-icon">
-                    <i class="layui-icon">密码：</i>
+                    <i class="layui-icon layui-icon-password"></i>
                 </label>
                 <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码"
                        class="layui-input">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="pull-right">
                     <button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="login">
-                        <i class="layui-icon"></i> 登录
+                        <i class="layui-icon"></i> 登录
                     </button>
                 </div>
                 <div class="clear"></div>
@@ -77,15 +77,15 @@
     layui.use(['layer', 'form'], function () {
         var layer = layui.layer,
             $ = layui.jquery,
-            form = layui.form();
+            form = layui.form;
 
         form.verify({
             userName: function (value) {
-                if (value === '')
+                if (value == '')
                     return '请输入用户名';
             },
             password: function (value) {
-                if (value === '')
+                if (value == '')
                     return '请输入密码';
             }
         });
@@ -135,10 +135,10 @@
             if (!res.success) {
                 if (res.data !== undefined)
                     errorCount = res.data.errorCount
-                layer.msg(res.message,{icon:2});
+                layer.msg(res.messages,{icon:2});
             }else
             {
-                layer.msg(res.message,{icon:1},function(index){
+                layer.msg(res.messages,{icon:1},function(index){
                     layer.close(index);
                     location.href='/manage';
                 });

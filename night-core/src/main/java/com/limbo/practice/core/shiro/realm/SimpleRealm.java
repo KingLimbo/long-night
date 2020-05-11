@@ -8,6 +8,8 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -50,15 +52,21 @@ public class SimpleRealm extends AuthorizingRealm {
         if (null == user) {
             throw new AccountException("帐号不存在！");
         // 如果用户的status为禁用。那么就抛出<code>DisabledAccountException</code>
-        } else if (CoreConsts.LOGIN_LOCKE_YES.equals(user.getIsLocked())) {
+        } else if (CoreConsts.LOGIN_LOCKE_YES.equals(user.getLocked())) {
             throw new DisabledAccountException("帐号已经禁止登录！");
         } else {
             // 更新登录时间 last login time
-            user.setLastLoginTime(new Date());
+//            user.setLastLoginTime(new Date());
             // 更新登录ip地址 last login ip
             user.setLastLoginIp(loginToken.getHost());
             loginService.updateByPrimaryKeySelective(user);
         }
-        return new SimpleAuthenticationInfo(user, user.getLoginPass(), getName());
+
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+                user.saveToMemento(),
+                user.getLoginPass(),
+                ByteSource.Util.bytes(user.getUserName() + user.getLoginSalt()),
+                getName());
+        return authenticationInfo;
     }
 }

@@ -5,7 +5,7 @@ import com.limbo.practice.core.base.BaseBO;
 
 import java.util.Date;
 
-public class LoginUser extends BaseBO {
+public class LoginUserMemento extends BaseBO {
 
     // 登录账户
     private String loginAccount;
@@ -34,11 +34,11 @@ public class LoginUser extends BaseBO {
     // Session timeout时长
     private long timeout;
 
-    public LoginUser() {
+    public LoginUserMemento() {
     }
 
-    public LoginUser(Long id, Boolean deleted, Date gmtCreate, Date gmtModified, String loginAccount,
-                     String loginPass, String loginSalt, String userName, String userPhone, String userEmail, String lastLoginIp, Boolean locked, String sessionId, String host, Date startTime, Date lastAccess, long timeout) {
+    public LoginUserMemento(Long id, Boolean deleted, Date gmtCreate, Date gmtModified, String loginAccount,
+                            String loginPass, String loginSalt, String userName, String userPhone, String userEmail, String lastLoginIp, Boolean locked, String sessionId, String host, Date startTime, Date lastAccess, long timeout) {
         super(id, deleted, gmtCreate, gmtModified);
         this.loginAccount = loginAccount;
         this.loginPass = loginPass;
@@ -53,40 +53,6 @@ public class LoginUser extends BaseBO {
         this.startTime = startTime;
         this.lastAccess = lastAccess;
         this.timeout = timeout;
-    }
-
-    /**
-     * 保存到备忘录类
-     *
-     * @return 登录信息备忘录类
-     */
-    public LoginUserMemento saveToMemento(){
-        return new LoginUserMemento(this.id, this.deleted, this.gmtCreate, this.gmtModified, this.loginAccount,
-                this.loginPass, this.loginSalt, this.userName, this.userPhone, this.userEmail, this.lastLoginIp, this.locked, this.sessionId, this.host, this.startTime, this.lastAccess, this.timeout);
-    }
-
-    /**
-     * 从备忘录类中恢复
-     *
-     * @param memento 登录信息备忘录类
-     */
-    public void getFromMemento(LoginUserMemento memento){
-        this.id = memento.getId();
-        this.loginAccount = memento.getLoginAccount();
-        this.loginPass = memento.getLoginPass();
-        this.loginSalt = memento.getLoginSalt();
-        this.userName = memento.getUserName();
-        this.userPhone = memento.getUserPhone();
-        this.userEmail = memento.getUserEmail();
-        this.lastLoginIp = memento.getLastLoginIp();
-        this.locked = memento.getLocked();
-        this.sessionId = memento.getSessionId();
-        this.host = memento.getHost();
-        this.startTime = memento.getStartTime();
-        this.lastAccess = memento.getLastAccess();
-        this.timeout = memento.getTimeout();
-        this.gmtCreate = memento.getGmtCreate();
-        this.gmtModified = memento.getGmtModified();
     }
 
     public String getLoginAccount() {

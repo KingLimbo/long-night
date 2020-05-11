@@ -1,5 +1,6 @@
 package com.limbo.practice.core.shiro.token;
 
+import com.limbo.practice.core.login.domain.LoginUser;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**
@@ -25,15 +26,27 @@ public class LoginToken extends UsernamePasswordToken  implements java.io.Serial
     /**
      * 构造方法
      *
+     * @param user 登录用户
+     * @param rememberMe 记住我标识
+     */
+    public LoginToken(LoginUser user, boolean rememberMe){
+        super(user.getUserName(), user.getLoginPass(), rememberMe, "");
+        this.email = user.getUserEmail();
+        this.phone = user.getUserPhone();
+    }
+    /**
+     * 构造方法
+     *
      * @param username 用户名
      * @param password 密码
      * @param rememberMe 记住我标识
      * @param host ip地址
      */
-    LoginToken(java.lang.String username, java.lang.String password, boolean rememberMe, java.lang.String host){
+    public LoginToken(java.lang.String username, java.lang.String password, boolean rememberMe,
+               java.lang.String host,String email,String phone){
         super(username, password, rememberMe, host);
-        this.email = username;
-        this.phone = username;
+        this.email = email;
+        this.phone = phone;
     }
 
     public java.lang.String getEmail() {

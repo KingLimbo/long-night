@@ -209,11 +209,11 @@
             </testResource>
         </testResources>
         <plugins>
-            <!-- mybatis自动生成工具 -->
-            <!--<plugin>-->
-                <!--<groupId>org.mybatis.generator</groupId>-->
-                <!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
-            <!--</plugin>-->
+             <!--mybatis自动生成工具-->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+            </plugin>
 
             <!-- 复制资源插件 -->
             <plugin>

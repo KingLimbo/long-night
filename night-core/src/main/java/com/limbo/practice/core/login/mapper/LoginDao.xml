@@ -3,24 +3,18 @@
 <mapper namespace="com.limbo.practice.core.login.dao.LoginDao">
 
     <resultMap id="BaseResultMap" type="com.limbo.practice.core.login.domain.LoginUser">
-        <constructor>
-            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
-            <arg column="login_account" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="user_head" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="user_sex" javaType="java.lang.Boolean" jdbcType="BIT" />
-            <arg column="login_status" javaType="java.lang.Boolean" jdbcType="BIT" />
-            <arg column="last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <arg column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
-            <arg column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
-            <arg column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <arg column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-        </constructor>
+        <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+        <result property="loginAccount" column="login_account" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="loginPass" column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="loginSalt" column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userName" column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userPhone" column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userEmail" column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="lastLoginIp" column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="locked" column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="deleted" column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -29,12 +23,8 @@
         login_pass,
         login_salt,
         user_name,
-        user_head,
         user_phone,
         user_email,
-        user_sex,
-        login_status,
-        last_login_time,
         last_login_ip,
         is_locked,
         is_deleted,
@@ -92,6 +82,6 @@
             last_login_ip = '',
             gmt_modified = ''
         WHERE
-            id = '123'
+            id = #{id}
     </update>
 </mapper>

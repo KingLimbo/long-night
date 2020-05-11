@@ -1,4 +1,4 @@
-package com.limbo.practice.core.shiro;
+package com.limbo.practice.core.shiro.session;
 
 import com.limbo.practice.core.util.LoggerUtils;
 import com.limbo.practice.core.shiro.session.ShiroSessionRepository;
@@ -10,20 +10,22 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
+ * shiro操作SessionDAO
+ *
  * @author laif
  * @version 1.0,
  * @date 2019/4/9 17:31
  */
 public class CustomShiroSessionDAO extends AbstractSessionDAO {
 
+    // ShiroSession资源库接口
     private ShiroSessionRepository shiroSessionRepository;
 
     public ShiroSessionRepository getShiroSessionRepository() {
         return shiroSessionRepository;
     }
 
-    public void setShiroSessionRepository(
-            ShiroSessionRepository shiroSessionRepository) {
+    public void setShiroSessionRepository(ShiroSessionRepository shiroSessionRepository) {
         this.shiroSessionRepository = shiroSessionRepository;
     }
 

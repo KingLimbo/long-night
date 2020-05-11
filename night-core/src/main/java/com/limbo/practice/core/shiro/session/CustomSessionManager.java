@@ -1,43 +1,54 @@
 package com.limbo.practice.core.shiro.session;
 
 
+import com.limbo.practice.base.entity.SysUser;
+import com.limbo.practice.core.login.domain.LoginUser;
+import com.limbo.practice.core.login.domain.LoginUserMemento;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.subject.support.DefaultSubjectContext;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
- *
+ * 客户端SESSION管理器
  *
  * @author laif
  * @version 1.0,
  * @date 2019/4/9 17:31
  *
  */
-
 public class CustomSessionManager {
 
     /**
      * session status
      */
     public static final String SESSION_STATUS = "sojson-online-status";
-//    ShiroSessionRepository shiroSessionRepository;
+
+    ShiroSessionRepository shiroSessionRepository;
+
+    CustomShiroSessionDAO customShiroSessionDAO;
 //
-//    CustomShiroSessionDAO customShiroSessionDAO;
-//
-//    /**
-//     * 获取所有的有效Session用户
-//     *
-//     * @return
-//     */
-//    public List<UserOnlineBo> getAllUser() {
-//        //获取所有session
-//        Collection<Session> sessions = customShiroSessionDAO.getActiveSessions();
-//        List<UserOnlineBo> list = new ArrayList<UserOnlineBo>();
-//
-//        for (Session session : sessions) {
-//            UserOnlineBo bo = getSessionBo(session);
-//            if (null != bo) {
-//                list.add(bo);
-//            }
-//        }
-//        return list;
-//    }
+    /**
+     * 获取所有的有效Session用户
+     *
+     * @return
+     */
+    public List<LoginUser> getAllUser() {
+        //获取所有session
+        Collection<Session> sessions = customShiroSessionDAO.getActiveSessions();
+        List<LoginUser> list = new ArrayList<LoginUser>();
+
+        for (Session session : sessions) {
+            LoginUser po = getSessionPo(session);
+            if (null != po) {
+                list.add(po);
+            }
+        }
+        return list;
+    }
 //
 //    /**
 //     * 根据ID查询 SimplePrincipalCollection
@@ -86,47 +97,49 @@ public class CustomSessionManager {
 //        return bo;
 //    }
 //
-//    private UserOnlineBo getSessionBo(Session session) {
-//        //获取session登录信息。
-//        Object obj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-//        if (null == obj) {
-//            return null;
-//        }
-//        //确保是 SimplePrincipalCollection对象。
-//        if (obj instanceof SimplePrincipalCollection) {
-//            SimplePrincipalCollection spc = (SimplePrincipalCollection) obj;
-//            /**
-//             * 获取用户登录的，@link SampleRealm.doGetAuthenticationInfo(...)方法中
-//             * return new SimpleAuthenticationInfo(user,user.getPswd(), getName());的user 对象。
-//             */
-//            obj = spc.getPrimaryPrincipal();
-//            if (null != obj && obj instanceof UUser) {
-//                //存储session + user 综合信息
-//                UserOnlineBo userBo = new UserOnlineBo((UUser) obj);
+    private LoginUser getSessionPo(Session session) {
+        //获取session登录信息。
+        Object obj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+        if (null == obj) {
+            return null;
+        }
+        //确保是 SimplePrincipalCollection对象。
+        if (obj instanceof SimplePrincipalCollection) {
+            SimplePrincipalCollection spc = (SimplePrincipalCollection) obj;
+            /**
+             * 获取用户登录的，@link SampleRealm.doGetAuthenticationInfo(...)方法中
+             * return new SimpleAuthenticationInfo(user,user.getPswd(), getName());的user 对象。
+             */
+            obj = spc.getPrimaryPrincipal();
+            if (null != obj && obj instanceof LoginUserMemento) {
+                //存储session + user 综合信息
+                LoginUser userPo = new LoginUser();
+                // 从备忘录类中恢复
+                userPo.getFromMemento((LoginUserMemento)obj);
 //                //最后一次和系统交互的时间
-//                userBo.setLastAccess(session.getLastAccessTime());
+//                userPo.setLastAccess(session.getLastAccessTime());
 //                //主机的ip地址
-//                userBo.setHost(session.getHost());
+//                userPo.setHost(session.getHost());
 //                //session ID
-//                userBo.setSessionId(session.getId().toString());
+//                userPo.setSessionId(session.getId().toString());
 //                //session最后一次与系统交互的时间
-//                userBo.setLastLoginTime(session.getLastAccessTime());
+//                userPo.setLastLoginTime(session.getLastAccessTime());
 //                //回话到期 ttl(ms)
-//                userBo.setTimeout(session.getTimeout());
+//                userPo.setTimeout(session.getTimeout());
 //                //session创建时间
-//                userBo.setStartTime(session.getStartTimestamp());
+//                userPo.setStartTime(session.getStartTimestamp());
 //                //是否踢出
 //                SessionStatus sessionStatus = (SessionStatus) session.getAttribute(SESSION_STATUS);
 //                boolean status = Boolean.TRUE;
 //                if (null != sessionStatus) {
 //                    status = sessionStatus.getOnlineStatus();
 //                }
-//                userBo.setSessionStatus(status);
-//                return userBo;
-//            }
-//        }
-//        return null;
-//    }
+//                userPo.setSessionStatus(status);
+                return userPo;
+            }
+        }
+        return null;
+    }
 //
 //    /**
 //     * 改变Session状态
@@ -159,7 +172,7 @@ public class CustomSessionManager {
 //        } catch (Exception e) {
 //            LoggerUtils.fmtError(getClass(), e, "改变Session状态错误，sessionId[%s]", sessionIds);
 //            map.put("status", 500);
-//            map.put("message", "改变失败，有可能Session不存在，请刷新再试！");
+//            map.put("messages", "改变失败，有可能Session不存在，请刷新再试！");
 //        }
 //        return map;
 //    }

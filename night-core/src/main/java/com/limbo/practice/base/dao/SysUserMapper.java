@@ -1,9 +1,7 @@
 package com.limbo.practice.base.dao;
 
 import com.limbo.practice.base.entity.SysUser;
-import com.limbo.practice.core.mybatis.MybatisDao;
 
-@MybatisDao
 public interface SysUserMapper {
     int deleteByPrimaryKey(Long id);
 

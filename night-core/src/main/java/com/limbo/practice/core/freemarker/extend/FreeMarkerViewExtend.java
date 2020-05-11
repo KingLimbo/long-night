@@ -24,7 +24,6 @@ public class FreeMarkerViewExtend extends FreeMarkerView {
         } catch (Exception e) {
             LoggerUtils.fmtError(FreeMarkerViewExtend.class, e, "FreeMarkerViewExtend 加载父类出现异常。请检查。");
         }
-        model.put(CoreConsts.CONTEXT_PATH, request.getContextPath());
 
         // 系统时间
         model.put("_time", new Date().getTime());
@@ -35,7 +34,7 @@ public class FreeMarkerViewExtend extends FreeMarkerView {
         model.put("_v", CoreConsts.VERSION);
 
         // base目录。
-        model.put("basePath", request.getContextPath());
+        model.put(CoreConsts.CONTEXT_PATH, request.getContextPath());
 
     }
 }

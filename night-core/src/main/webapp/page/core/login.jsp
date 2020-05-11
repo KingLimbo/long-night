@@ -74,7 +74,7 @@
     layui.use(['layer', 'form'], function () {
         var layer = layui.layer,
             $ = layui.jquery,
-            form = layui.form();
+            form = layui.form
 
         form.verify({
             userName: function (value) {
@@ -129,10 +129,10 @@
             if (!res.success) {
                 if (res.data !== undefined)
                     errorCount = res.data.errorCount
-                layer.msg(res.message,{icon:2});
+                layer.msg(res.messages,{icon:2});
             }else
             {
-                layer.msg(res.message,{icon:1},function(index){
+                layer.msg(res.messages,{icon:1},function(index){
                     layer.close(index);
                     location.href='/manage';
                 });

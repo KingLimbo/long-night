@@ -45,7 +45,7 @@ public class MathUtil {
             messageDigest.reset();
             messageDigest.update(str.getBytes("UTF-8"));
         } catch (Exception e) {
-            LoggerUtils.fmtError(MathUtil.class, e, "MD5转换异常！message：%s", e.getMessage());
+            LoggerUtils.fmtError(MathUtil.class, e, "MD5转换异常！messages：%s", e.getMessage());
         }
 
         byte[] byteArray = messageDigest.digest();

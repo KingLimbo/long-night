@@ -5,6 +5,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * 时间处理工具类
+ *
+ * @version 0.0.1
+ * @author limbo
+ */
 public class DateUtil {
 
     /**
@@ -197,13 +203,12 @@ public class DateUtil {
      * Rolls (up/down) a single unit of time on the given time field.
      *
      * @param isoString
+     * @param fmt  use formating char's
      * @param field     the time field.
      * @param up        Indicates if rolling up or rolling down the field value.
-     * @param expanded  use formating char's
      * @throws ParseException if an unknown field value is given.
      */
-    public static final String roll(String isoString, String fmt, int field,
-                                    boolean up) throws ParseException {
+    public static final String roll(String isoString, String fmt, int field, boolean up) throws ParseException {
 
         Calendar cal = GregorianCalendar.getInstance(TimeZone.getTimeZone(
                 "GMT"));
@@ -236,8 +241,7 @@ public class DateUtil {
      * @param lenient
      * @return
      */
-    public static Date stringToDate(String dateText, String format,
-                                    boolean lenient) {
+    public static Date stringToDate(String dateText, String format, boolean lenient) {
 
         if (dateText == null) {
 
@@ -275,7 +279,7 @@ public class DateUtil {
     /**
      * java.util.Date
      *
-     * @param dateText
+     * @param dateString
      * @param format
      * @return
      */
@@ -287,7 +291,7 @@ public class DateUtil {
     /**
      * java.util.Date
      *
-     * @param dateText
+     * @param dateString
      */
     public static Date stringToDate(String dateString) {
         return stringToDate(dateString, ISO_EXPANDED_DATE_FORMAT, LENIENT_DATE);
@@ -358,7 +362,6 @@ public class DateUtil {
      * 返回固定格式的当前时间
      * yyyy-MM-dd hh:mm:ss
      *
-     * @param date
      * @return
      */
     public static String dateToStringWithTime() {
@@ -395,7 +398,7 @@ public class DateUtil {
 
     /**
      * @param date
-     * @param days
+     * @param mnt
      * @return java.util.Date
      */
     public static Date dateIncreaseByMonth(Date date, int mnt) {
