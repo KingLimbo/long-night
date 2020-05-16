@@ -1,6 +1,7 @@
 package com.limbo.practice.core.shiro.token.manager;
 
 import com.limbo.practice.core.login.domain.LoginUser;
+import com.limbo.practice.core.login.domain.LoginUserMemento;
 import com.limbo.practice.core.shiro.realm.SimpleRealm;
 import com.limbo.practice.core.shiro.token.LoginToken;
 import com.limbo.practice.core.util.SpringContextUtil;
@@ -28,7 +29,9 @@ public class TokenManager {
      * @return
      */
     public static LoginUser getToken() {
-        LoginUser token = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+        LoginUser token = new LoginUser();
+        LoginUserMemento tokenMemento = (LoginUserMemento) SecurityUtils.getSubject().getPrincipal();
+        token.getFromMemento(tokenMemento);
         return token;
     }
 

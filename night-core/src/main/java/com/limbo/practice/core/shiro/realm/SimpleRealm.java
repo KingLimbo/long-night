@@ -50,10 +50,10 @@ public class SimpleRealm extends AuthorizingRealm {
         // 取出登录用户
         LoginUser user = loginService.getUserInfoByLoginMessage(loginToken.getUsername());
         if (null == user) {
-            throw new AccountException("帐号不存在！");
+            throw new UnknownAccountException("帐号不存在！");
         // 如果用户的status为禁用。那么就抛出<code>DisabledAccountException</code>
         } else if (CoreConsts.LOGIN_LOCKE_YES.equals(user.getLocked())) {
-            throw new DisabledAccountException("帐号已经禁止登录！");
+            throw new LockedAccountException("帐号已经禁止登录！");
         } else {
             // 更新登录时间 last login time
 //            user.setLastLoginTime(new Date());

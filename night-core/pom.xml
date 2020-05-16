@@ -181,6 +181,12 @@
     <build>
         <resources>
             <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.xml</include>
@@ -190,10 +196,7 @@
             </resource>
             <resource>
                 <directory>src/main/webapp</directory>
-                <!--<targetPath>/META-INF/resources/</targetPath>-->
                 <includes>
-                    <!--<include>common/**</include>-->
-                    <!--<include>page/**</include>-->
                     <include>WEB-INF/**</include>
                     <include>META-INF/**</include>
                 </includes>

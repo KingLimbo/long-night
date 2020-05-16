@@ -39,7 +39,7 @@
         FROM
             sys_user
         WHERE
-            user_name = #{param1}
+            login_account = #{param1}
     </select>
 
     <!-- 根据邮箱查询用户 -->
@@ -69,7 +69,7 @@
         FROM
             sys_user
         WHERE
-            user_name = #{param1} OR user_email = #{param1} OR user_phone = #{param1}
+            login_account = #{param1} OR user_email = #{param1} OR user_phone = #{param1}
         LIMIT 1
     </select>
 
@@ -78,9 +78,9 @@
         UPDATE
             sys_user
         SET
-            last_login_time = '',
-            last_login_ip = '',
-            gmt_modified = ''
+            last_login_time = NOW(),
+            last_login_ip = #{lastLoginIp},
+            gmt_modified = NOW()
         WHERE
             id = #{id}
     </update>

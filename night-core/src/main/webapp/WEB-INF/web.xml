@@ -4,11 +4,23 @@
 
 <web-app>
     <display-name>long-night</display-name>
-
+    <!-- log4j日志参数 -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:config/log4j.properties</param-value>
+    </context-param>
     <!-- spring添加配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:config/spring-context.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>springmvc.night-core</param-value>
+    </context-param>
+    <context-param>
+        <param-name>log4jRefreshInterval</param-name>
+        <param-value>6000</param-value>
     </context-param>
 
     <!-- shiro 过滤器 start -->
@@ -27,11 +39,16 @@
     </filter-mapping>
     <!-- shiro 过滤器 end -->
 
+    <!-- 日志监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
     <!-- 采用listener创建ApplicationContext 实例-->
     <listener>
-        <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
     </listener>
 
     <!-- 配置springmvc servlet -->

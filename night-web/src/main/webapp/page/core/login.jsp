@@ -30,20 +30,21 @@
         <h1>框架后台管理系统</h1>
     </header>
     <div class="login-main">
+        <h5>JSP</h5>
         <form action="login" class="layui-form" method="post">
             <input name="__RequestVerificationToken" type="hidden" value="">
             <div class="layui-form-item">
                 <label class="login-icon">
                     <i class="layui-icon layui-icon-username"></i>
                 </label>
-                <input type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="这里输入登录名"
+                <input type="text" name="loginAccount" lay-verify="loginAccount" autocomplete="off" placeholder="这里输入登录名"
                        class="layui-input">
             </div>
             <div class="layui-form-item">
                 <label class="login-icon">
                     <i class="layui-icon layui-icon-password"></i>
                 </label>
-                <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码"
+                <input type="password" name="loginPass" lay-verify="loginPass" autocomplete="off" placeholder="这里输入密码"
                        class="layui-input">
             </div>
             <div class="layui-form-item">
@@ -80,11 +81,11 @@
             form = layui.form;
 
         form.verify({
-            userName: function (value) {
+            loginAccount: function (value) {
                 if (value == '')
                     return '请输入用户名';
             },
-            password: function (value) {
+            loginPass: function (value) {
                 if (value == '')
                     return '请输入密码';
             }
