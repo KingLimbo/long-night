@@ -30,7 +30,7 @@ public class LoginToken extends UsernamePasswordToken  implements java.io.Serial
      * @param rememberMe 记住我标识
      */
     public LoginToken(LoginUser user, boolean rememberMe){
-        super(user.getLoginAccount(), user.getLoginPass(), rememberMe, "");
+        super(user.getLoginAccount(), user.getLoginPass(), rememberMe, user.getHost());
         this.email = user.getUserEmail();
         this.phone = user.getUserPhone();
     }

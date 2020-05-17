@@ -1,6 +1,9 @@
 package com.limbo.practice.core.util;
 
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -115,4 +118,14 @@ public class CookieUtil {
         return string;
     }
 
+    /**
+     * 获取SESSION里面的ip
+     *
+     * @return
+     */
+    public static String getIp(){
+        Subject subject = SecurityUtils.getSubject();
+        String host = subject.getSession().getHost();
+        return host;
+    }
 }

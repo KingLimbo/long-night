@@ -3,8 +3,17 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- 密码匹配器 -->
+    <bean id="passwordMatcher" class="org.apache.shiro.authc.credential.Md5CredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5" />
+        <property name="hashIterations" value="3" />
+        <property name="storedCredentialsHexEncoded" value="true" />
+    </bean>
+
     <!-- Realm 授权 认证 -->
-    <bean id="simpleRealm" class="com.limbo.practice.core.shiro.realm.SimpleRealm"/>
+    <bean id="simpleRealm" class="com.limbo.practice.core.shiro.realm.SimpleRealm">
+        <property name="credentialsMatcher" ref="passwordMatcher"/>
+    </bean>
 
     <!-- 配置SecurityManager并指定Realm -->
     <!-- 安全管理器 -->

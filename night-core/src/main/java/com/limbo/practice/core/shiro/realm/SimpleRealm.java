@@ -65,7 +65,7 @@ public class SimpleRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 user.saveToMemento(),
                 user.getLoginPass(),
-                ByteSource.Util.bytes(user.getUserName() + user.getLoginSalt()),
+                ByteSource.Util.bytes(user.getLoginAccount() + user.getLoginSalt()),
                 getName());
         return authenticationInfo;
     }

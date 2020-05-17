@@ -4,6 +4,7 @@ import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.login.domain.LoginUserMemento;
 import com.limbo.practice.core.shiro.realm.SimpleRealm;
 import com.limbo.practice.core.shiro.token.LoginToken;
+import com.limbo.practice.core.util.CookieUtil;
 import com.limbo.practice.core.util.SpringContextUtil;
 import com.limbo.practice.core.shiro.session.CustomSessionManager;
 import org.apache.shiro.SecurityUtils;
@@ -93,6 +94,8 @@ public class TokenManager {
      */
     public static LoginUser login(LoginUser user, Boolean rememberMe) {
         if (null == rememberMe) rememberMe = false;
+        // 设置IP地址
+        user.setHost(CookieUtil.getIp());
         LoginToken token = new LoginToken(user, rememberMe);
         SecurityUtils.getSubject().login(token);
         return getToken();
