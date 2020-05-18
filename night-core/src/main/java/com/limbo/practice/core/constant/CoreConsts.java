@@ -21,6 +21,8 @@ public class CoreConsts {
     public static final Boolean LOGIN_LOCKE_YES = true;
     // 登录锁定_未锁定
     public static final Boolean LOGIN_LOCKE_NO = false;
+    // SALT 固定盐
+    public static final String SALT_CONNECT = "night-core";
 
     /***项目根路径*/
     public static final String CONTEXT_PATH = "ctx";

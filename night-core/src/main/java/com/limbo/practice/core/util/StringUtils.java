@@ -152,7 +152,6 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
 //        }
 //
 //    }
-
     public static String trimToEmpty(Object str) {
         return (isBlank(str) ? "" : str.toString().trim());
     }
@@ -429,4 +428,13 @@ public class StringUtils extends org.apache.commons.lang.StringUtils {
         }
     }
 
+    /**
+     * 获取32位ID
+     *
+     * @return
+     */
+    public static String get32ID(){
+        String uuid =  UUID.randomUUID().toString().replaceAll("-", "");
+        return uuid;
+    }
 }

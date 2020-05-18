@@ -20,10 +20,17 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
+    /**
+     * 访问登录页面
+     * @param loginError
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(){
-
-        return new ModelAndView("/core/login");
+    public ModelAndView login(String loginError){
+        ModelAndView view = new ModelAndView("/core/login");
+        // 设置错误消息
+        view.addObject(CoreConsts.LOGIN_ERROR_KEY, loginError);
+        return view;
     }
 
     /**
@@ -84,6 +91,18 @@ public class LoginController {
         // 获取工程路径
         String context = req.getContextPath();
         TokenManager.getSession().setAttribute(CoreConsts.CONTEXT_PATH, context);
-        return "redirect:/index";
+        return "redirect:/home";
+    }
+
+    /**
+     * 显示首页
+     *
+     * @return
+     */
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView home(){
+        // 初始化页面
+        ModelAndView view = new ModelAndView("/page/index");
+        return view;
     }
 }
