@@ -27,7 +27,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(String loginError){
-        ModelAndView view = new ModelAndView("/core/login");
+        ModelAndView view = new ModelAndView("core/login");
         // 设置错误消息
         view.addObject(CoreConsts.LOGIN_ERROR_KEY, loginError);
         return view;
@@ -102,7 +102,7 @@ public class LoginController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home(){
         // 初始化页面
-        ModelAndView view = new ModelAndView("/page/index");
+        ModelAndView view = new ModelAndView("core/home");
         return view;
     }
 }
