@@ -16,7 +16,7 @@
     </context-param>
     <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>springmvc.night-core</param-value>
+        <param-value>springmvc.night-web</param-value>
     </context-param>
     <context-param>
         <param-name>log4jRefreshInterval</param-name>

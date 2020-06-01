@@ -3,8 +3,16 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- 密码匹配器 -->
+    <bean id="passwordMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5" />
+        <property name="hashIterations" value="3" />
+    </bean>
+
     <!-- Realm 授权 认证 -->
-    <bean id="simpleRealm" class="com.limbo.practice.core.shiro.realm.SimpleRealm"/>
+    <bean id="simpleRealm" class="com.limbo.practice.core.shiro.realm.SimpleRealm">
+        <property name="credentialsMatcher" ref="passwordMatcher"/>
+    </bean>
 
     <!-- 配置SecurityManager并指定Realm -->
     <!-- 安全管理器 -->
@@ -46,9 +54,9 @@
 
     <!-- 以下是两个启用注解的权限控制 Enable Shiro Annotations for Spring-configured beans. the lifecycleBeanProcessor has run: -->
     <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"-->
-          <!--depends-on="lifecycleBeanPostProcessor"/>-->
+    <!--depends-on="lifecycleBeanPostProcessor"/>-->
 
     <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
-        <!--<property name="securityManager" ref="securityManager"/>-->
+    <!--<property name="securityManager" ref="securityManager"/>-->
     <!--</bean>-->
 </beans>

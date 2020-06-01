@@ -244,6 +244,20 @@
                                         <include>common/**</include>
                                         <include>page/**</include>
                                     </includes>
+                                    <excludes>
+                                        <exclude>**/*.woff</exclude>
+                                        <exclude>**/*.eot</exclude>
+                                        <exclude>**/*.ttf</exclude>
+                                    </excludes>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/webapp</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>**/*.woff</include>
+                                        <include>**/*.eot</include>
+                                        <include>**/*.ttf</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
