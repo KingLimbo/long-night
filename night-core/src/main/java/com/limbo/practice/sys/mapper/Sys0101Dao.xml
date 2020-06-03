@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.limbo.practice.sys.dao.Sys0101Dao">
+
+    <resultMap id="BaseResultMap" type="com.limbo.practice.sys.domain.Sys0101VO">
+        <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+        <result property="loginAccount" column="login_account" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="loginPass" column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="loginSalt" column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userName" column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userPhone" column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userEmail" column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="lastLoginIp" column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="locked" column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="deleted" column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        login_account,
+        login_pass,
+        login_salt,
+        user_name,
+        user_phone,
+        user_email,
+        last_login_ip,
+        is_locked,
+        is_deleted,
+        gmt_create,
+        gmt_modified
+   </sql>
+
+    <!-- 根据用户名查询用户 -->
+    <select id="selectUserInfoByUserName" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_user
+        WHERE
+            login_account = #{param1}
+    </select>
+
+    <!-- 根据邮箱查询用户 -->
+    <select id="selectUserInfoByEmail" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_user
+        WHERE
+            user_email = #{param1}
+    </select>
+
+    <!-- 根据电话号码查询用户 -->
+    <select id="selectUserInfoByPhone" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_user
+        WHERE
+            user_phone = #{param1}
+    </select>
+
+    <!-- 根据登录信息（用户名、邮箱、电话号码）查询用户 -->
+    <select id="selectUserInfoByLoginMessage" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            sys_user
+        WHERE
+            login_account = #{param1} OR user_email = #{param1} OR user_phone = #{param1}
+        LIMIT 1
+    </select>
+
+    <!-- 根据主键更新用户登录信息 -->
+    <update id="updateByPrimaryKeySelective">
+        UPDATE
+            sys_user
+        SET
+            last_login_time = NOW(),
+            last_login_ip = #{lastLoginIp},
+            gmt_modified = NOW()
+        WHERE
+            id = #{id}
+    </update>
+</mapper>
