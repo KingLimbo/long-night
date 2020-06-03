@@ -2,8 +2,8 @@ package com.limbo.practice.sys.service.impl;
 
 import com.limbo.practice.core.login.dao.LoginDao;
 import com.limbo.practice.core.login.domain.LoginUser;
-import com.limbo.practice.core.login.service.LoginService;
 import com.limbo.practice.core.util.StringUtils;
+import com.limbo.practice.sys.service.Sys0101Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @date 2019/4/25
  */
 @Service
-public class Sys0101ServiceImpl implements LoginService {
+public class Sys0101ServiceImpl implements Sys0101Service {
 
     @Autowired
     private LoginDao loginDao;
