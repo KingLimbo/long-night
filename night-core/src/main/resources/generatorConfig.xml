@@ -68,38 +68,38 @@
         </javaClientGenerator>
 
 
-        <table tableName="sys_user" domainObjectName="SysUser"
+        <table schema="${jdbc.schema}" tableName="sys_user" domainObjectName="SysUser"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="sys_role" domainObjectName="SysRole"
+        <table schema="${jdbc.schema}" tableName="sys_role" domainObjectName="SysRole"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="sys_menu" domainObjectName="SysMenu"
+        <table schema="${jdbc.schema}" tableName="sys_menu" domainObjectName="SysMenu"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="sys_permission" domainObjectName="SysPermission"
+        <table schema="${jdbc.schema}" tableName="sys_permission" domainObjectName="SysPermission"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="sys_role_user" domainObjectName="SysRoleUser"
+        <table schema="${jdbc.userId}" tableName="sys_role_user" domainObjectName="SysRoleUser"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="sys_role_permission" domainObjectName="SysRolePermission"
+        <table schema="${jdbc.schema}" tableName="sys_role_permission" domainObjectName="SysRolePermission"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="sys_menu" domainObjectName="SysRolePermission"
+        <table schema="${jdbc.schema}" tableName="sys_menu" domainObjectName="SysRolePermission"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
