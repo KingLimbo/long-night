@@ -7,6 +7,12 @@ public class SysRolePermission {
 
     private String menuName;
 
+    private String menuUrl;
+
+    private Boolean menuType;
+
+    private Byte menuSort;
+
     private String menuDescription;
 
     private Boolean isDeleted;
@@ -15,9 +21,12 @@ public class SysRolePermission {
 
     private Date gmtModified;
 
-    public SysRolePermission(Long id, String menuName, String menuDescription, Boolean isDeleted, Date gmtCreate, Date gmtModified) {
+    public SysRolePermission(Long id, String menuName, String menuUrl, Boolean menuType, Byte menuSort, String menuDescription, Boolean isDeleted, Date gmtCreate, Date gmtModified) {
         this.id = id;
         this.menuName = menuName;
+        this.menuUrl = menuUrl;
+        this.menuType = menuType;
+        this.menuSort = menuSort;
         this.menuDescription = menuDescription;
         this.isDeleted = isDeleted;
         this.gmtCreate = gmtCreate;
@@ -42,6 +51,30 @@ public class SysRolePermission {
 
     public void setMenuName(String menuName) {
         this.menuName = menuName == null ? null : menuName.trim();
+    }
+
+    public String getMenuUrl() {
+        return menuUrl;
+    }
+
+    public void setMenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl == null ? null : menuUrl.trim();
+    }
+
+    public Boolean getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(Boolean menuType) {
+        this.menuType = menuType;
+    }
+
+    public Byte getMenuSort() {
+        return menuSort;
+    }
+
+    public void setMenuSort(Byte menuSort) {
+        this.menuSort = menuSort;
     }
 
     public String getMenuDescription() {

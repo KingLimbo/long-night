@@ -21,6 +21,8 @@ public class SysUser {
 
     private Boolean userSex;
 
+    private Boolean userType;
+
     private Boolean loginStatus;
 
     private Date lastLoginTime;
@@ -35,7 +37,7 @@ public class SysUser {
 
     private Date gmtModified;
 
-    public SysUser(Long id, String loginAccount, String loginPass, String loginSalt, String userName, String userHead, String userPhone, String userEmail, Boolean userSex, Boolean loginStatus, Date lastLoginTime, String lastLoginIp, Boolean isLocked, Boolean isDeleted, Date gmtCreate, Date gmtModified) {
+    public SysUser(Long id, String loginAccount, String loginPass, String loginSalt, String userName, String userHead, String userPhone, String userEmail, Boolean userSex, Boolean userType, Boolean loginStatus, Date lastLoginTime, String lastLoginIp, Boolean isLocked, Boolean isDeleted, Date gmtCreate, Date gmtModified) {
         this.id = id;
         this.loginAccount = loginAccount;
         this.loginPass = loginPass;
@@ -45,6 +47,7 @@ public class SysUser {
         this.userPhone = userPhone;
         this.userEmail = userEmail;
         this.userSex = userSex;
+        this.userType = userType;
         this.loginStatus = loginStatus;
         this.lastLoginTime = lastLoginTime;
         this.lastLoginIp = lastLoginIp;
@@ -128,6 +131,14 @@ public class SysUser {
 
     public void setUserSex(Boolean userSex) {
         this.userSex = userSex;
+    }
+
+    public Boolean getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Boolean userType) {
+        this.userType = userType;
     }
 
     public Boolean getLoginStatus() {

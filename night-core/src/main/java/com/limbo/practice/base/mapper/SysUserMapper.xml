@@ -1,42 +1,275 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.limbo.practice.base.dao.SysUserMapper" >
-  <resultMap id="BaseResultMap" type="com.limbo.practice.base.entity.SysUser" >
-    <constructor >
-      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="login_account" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="login_pass" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="login_salt" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="user_head" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="user_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="user_email" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="user_sex" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="login_status" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="last_login_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="last_login_ip" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="is_locked" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="is_deleted" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="gmt_create" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="gmt_modified" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.limbo.practice.base.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.limbo.practice.base.entity.SysUser">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="login_account" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_head" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_sex" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="user_type" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="login_status" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, login_account, login_pass, login_salt, user_name, user_head, user_phone, user_email, 
-    user_sex, login_status, last_login_time, last_login_ip, is_locked, is_deleted, gmt_create, 
-    gmt_modified
+    user_sex, user_type, login_status, last_login_time, last_login_ip, is_locked, is_deleted, 
+    gmt_create, gmt_modified
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_user
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.limbo.practice.base.entity.SysUser" >
+  <insert id="insert" parameterType="com.limbo.practice.base.entity.SysUser">
+    insert into sys_user (id, login_account, login_pass, 
+      login_salt, user_name, user_head, 
+      user_phone, user_email, user_sex, 
+      user_type, login_status, last_login_time, 
+      last_login_ip, is_locked, is_deleted, 
+      gmt_create, gmt_modified)
+    values (#{id,jdbcType=BIGINT}, #{loginAccount,jdbcType=VARCHAR}, #{loginPass,jdbcType=VARCHAR}, 
+      #{loginSalt,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userHead,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userSex,jdbcType=BIT}, 
+      #{userType,jdbcType=BIT}, #{loginStatus,jdbcType=BIT}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginIp,jdbcType=VARCHAR}, #{isLocked,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.limbo.practice.base.entity.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="loginAccount != null">
+        login_account,
+      </if>
+      <if test="loginPass != null">
+        login_pass,
+      </if>
+      <if test="loginSalt != null">
+        login_salt,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userHead != null">
+        user_head,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="loginStatus != null">
+        login_status,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="isLocked != null">
+        is_locked,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="loginAccount != null">
+        #{loginAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPass != null">
+        #{loginPass,jdbcType=VARCHAR},
+      </if>
+      <if test="loginSalt != null">
+        #{loginSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userHead != null">
+        #{userHead,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=BIT},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=BIT},
+      </if>
+      <if test="loginStatus != null">
+        #{loginStatus,jdbcType=BIT},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="isLocked != null">
+        #{isLocked,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.limbo.practice.base.entity.SysUser">
+    update sys_user
+    <set>
+      <if test="loginAccount != null">
+        login_account = #{loginAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPass != null">
+        login_pass = #{loginPass,jdbcType=VARCHAR},
+      </if>
+      <if test="loginSalt != null">
+        login_salt = #{loginSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userHead != null">
+        user_head = #{userHead,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=BIT},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=BIT},
+      </if>
+      <if test="loginStatus != null">
+        login_status = #{loginStatus,jdbcType=BIT},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="isLocked != null">
+        is_locked = #{isLocked,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.limbo.practice.base.entity.SysUser">
+    update sys_user
+    set login_account = #{loginAccount,jdbcType=VARCHAR},
+      login_pass = #{loginPass,jdbcType=VARCHAR},
+      login_salt = #{loginSalt,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_head = #{userHead,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=BIT},
+      user_type = #{userType,jdbcType=BIT},
+      login_status = #{loginStatus,jdbcType=BIT},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      is_locked = #{isLocked,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.limbo.practice.base.entity.SysUser">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="login_account" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_head" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_sex" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="login_status" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, login_account, login_pass, login_salt, user_name, user_head, user_phone, user_email, 
+    user_sex, login_status, last_login_time, last_login_ip, is_locked, is_deleted, gmt_create, 
+    gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.limbo.practice.base.entity.SysUser">
     insert into sys_user (id, login_account, login_pass, 
       login_salt, user_name, user_head, 
       user_phone, user_email, user_sex, 
@@ -50,161 +283,161 @@
       #{isLocked,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModified,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.limbo.practice.base.entity.SysUser" >
+  <insert id="insertSelective" parameterType="com.limbo.practice.base.entity.SysUser">
     insert into sys_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="loginAccount != null" >
+      <if test="loginAccount != null">
         login_account,
       </if>
-      <if test="loginPass != null" >
+      <if test="loginPass != null">
         login_pass,
       </if>
-      <if test="loginSalt != null" >
+      <if test="loginSalt != null">
         login_salt,
       </if>
-      <if test="userName != null" >
+      <if test="userName != null">
         user_name,
       </if>
-      <if test="userHead != null" >
+      <if test="userHead != null">
         user_head,
       </if>
-      <if test="userPhone != null" >
+      <if test="userPhone != null">
         user_phone,
       </if>
-      <if test="userEmail != null" >
+      <if test="userEmail != null">
         user_email,
       </if>
-      <if test="userSex != null" >
+      <if test="userSex != null">
         user_sex,
       </if>
-      <if test="loginStatus != null" >
+      <if test="loginStatus != null">
         login_status,
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null">
         last_login_time,
       </if>
-      <if test="lastLoginIp != null" >
+      <if test="lastLoginIp != null">
         last_login_ip,
       </if>
-      <if test="isLocked != null" >
+      <if test="isLocked != null">
         is_locked,
       </if>
-      <if test="isDeleted != null" >
+      <if test="isDeleted != null">
         is_deleted,
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         gmt_create,
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         gmt_modified,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="loginAccount != null" >
+      <if test="loginAccount != null">
         #{loginAccount,jdbcType=VARCHAR},
       </if>
-      <if test="loginPass != null" >
+      <if test="loginPass != null">
         #{loginPass,jdbcType=VARCHAR},
       </if>
-      <if test="loginSalt != null" >
+      <if test="loginSalt != null">
         #{loginSalt,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null" >
+      <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="userHead != null" >
+      <if test="userHead != null">
         #{userHead,jdbcType=VARCHAR},
       </if>
-      <if test="userPhone != null" >
+      <if test="userPhone != null">
         #{userPhone,jdbcType=VARCHAR},
       </if>
-      <if test="userEmail != null" >
+      <if test="userEmail != null">
         #{userEmail,jdbcType=VARCHAR},
       </if>
-      <if test="userSex != null" >
+      <if test="userSex != null">
         #{userSex,jdbcType=BIT},
       </if>
-      <if test="loginStatus != null" >
+      <if test="loginStatus != null">
         #{loginStatus,jdbcType=BIT},
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null">
         #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastLoginIp != null" >
+      <if test="lastLoginIp != null">
         #{lastLoginIp,jdbcType=VARCHAR},
       </if>
-      <if test="isLocked != null" >
+      <if test="isLocked != null">
         #{isLocked,jdbcType=BIT},
       </if>
-      <if test="isDeleted != null" >
+      <if test="isDeleted != null">
         #{isDeleted,jdbcType=BIT},
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.limbo.practice.base.entity.SysUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.limbo.practice.base.entity.SysUser">
     update sys_user
-    <set >
-      <if test="loginAccount != null" >
+    <set>
+      <if test="loginAccount != null">
         login_account = #{loginAccount,jdbcType=VARCHAR},
       </if>
-      <if test="loginPass != null" >
+      <if test="loginPass != null">
         login_pass = #{loginPass,jdbcType=VARCHAR},
       </if>
-      <if test="loginSalt != null" >
+      <if test="loginSalt != null">
         login_salt = #{loginSalt,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null" >
+      <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="userHead != null" >
+      <if test="userHead != null">
         user_head = #{userHead,jdbcType=VARCHAR},
       </if>
-      <if test="userPhone != null" >
+      <if test="userPhone != null">
         user_phone = #{userPhone,jdbcType=VARCHAR},
       </if>
-      <if test="userEmail != null" >
+      <if test="userEmail != null">
         user_email = #{userEmail,jdbcType=VARCHAR},
       </if>
-      <if test="userSex != null" >
+      <if test="userSex != null">
         user_sex = #{userSex,jdbcType=BIT},
       </if>
-      <if test="loginStatus != null" >
+      <if test="loginStatus != null">
         login_status = #{loginStatus,jdbcType=BIT},
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null">
         last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastLoginIp != null" >
+      <if test="lastLoginIp != null">
         last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       </if>
-      <if test="isLocked != null" >
+      <if test="isLocked != null">
         is_locked = #{isLocked,jdbcType=BIT},
       </if>
-      <if test="isDeleted != null" >
+      <if test="isDeleted != null">
         is_deleted = #{isDeleted,jdbcType=BIT},
       </if>
-      <if test="gmtCreate != null" >
+      <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModified != null" >
+      <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.limbo.practice.base.entity.SysUser" >
+  <update id="updateByPrimaryKey" parameterType="com.limbo.practice.base.entity.SysUser">
     update sys_user
     set login_account = #{loginAccount,jdbcType=VARCHAR},
       login_pass = #{loginPass,jdbcType=VARCHAR},
