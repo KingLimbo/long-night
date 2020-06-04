@@ -91,10 +91,6 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-web</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-quartz</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
@@ -148,12 +144,15 @@
         <!--</dependency>-->
         <!--&lt;!&ndash; /Spring 升级4+ 依赖的JSON包 end&ndash;&gt;-->
 
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jsp-api</artifactId>
             <!--<version>2.0</version>-->
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
         </dependency>
         <!-- 高度重用的Util类 -->
         <dependency>
@@ -173,10 +172,13 @@
         </dependency>
         <!-- freemarker end -->
 
+        <!-- mybatis分页插件 start -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
         </dependency>
+        <!-- mybatis分页插件 end -->
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

@@ -1,5 +1,6 @@
 package com.limbo.practice.sys.controller;
 
+import com.limbo.practice.core.base.BaseController;
 import com.limbo.practice.core.constant.CoreConsts;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.shiro.token.manager.TokenManager;
@@ -14,8 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ *
+ */
 @Controller
-public class Sys0101Controller {
+public class Sys0101Controller extends BaseController {
 
 
 }
