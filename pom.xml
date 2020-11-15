@@ -13,7 +13,6 @@
         <module>night-web</module>
         <module>night-service</module>
         <module>night-core</module>
-        <module>night-dao</module>
     </modules>
 
     <properties>
@@ -322,7 +321,6 @@
             </dependency>
             <!-- mybatis分页插件 end -->
         </dependencies>
-
     </dependencyManagement>
 
     <build>
