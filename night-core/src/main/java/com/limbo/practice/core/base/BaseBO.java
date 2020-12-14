@@ -10,15 +10,25 @@ import java.util.Date;
  * @date : 2020/4/28
  */
 public class BaseBO implements Serializable {
-    // 设置序列化ID
+    /**
+     * 设置序列化ID
+     */
     protected static final long serialVersionUID = 1428L;
-    // 主键ID
+    /**
+     * 主键ID
+     */
     protected Long id;
-    // 是否删除
+    /**
+     * 是否删除
+     */
     protected Boolean deleted;
-    // 创建时间
+    /**
+     * 创建时间
+     */
     protected Date gmtCreate;
-    // 创建者
+    /**
+     * 创建者
+     */
     protected Date gmtModified;
 
     public BaseBO() {

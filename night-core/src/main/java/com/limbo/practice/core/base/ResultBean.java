@@ -8,13 +8,19 @@ package com.limbo.practice.core.base;
  */
 public class ResultBean {
 
-    // 处理状态
+    /**
+     * 处理状态
+     */
     private String resultFlg;
 
-    // 处理数据
+    /**
+     * 处理数据
+     */
     private Object resultObject;
 
-    // 处理消息
+    /**
+     * 处理消息
+     */
     private String message;
 
     public String getResultFlg() {
