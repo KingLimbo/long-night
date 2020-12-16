@@ -10,7 +10,6 @@ import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
@@ -28,7 +27,6 @@ public class ShiroManagerImpl implements ShiroManager {
     // 注意/r/n前不能有空格
     private static final String CRLF = "\r\n";
 
-    @Resource
     @Autowired
     private ShiroFilterFactoryBean shiroFilterFactoryBean;
 

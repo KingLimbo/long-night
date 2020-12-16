@@ -218,12 +218,6 @@
             </testResource>
         </testResources>
         <plugins>
-             <!--mybatis自动生成工具-->
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-            </plugin>
-
             <!-- 复制资源插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -265,6 +259,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
