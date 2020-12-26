@@ -81,7 +81,8 @@
         <shiro.freemarker.tags.version>0.1</shiro.freemarker.tags.version>
         <!-- pagehelper 版本号 -->
         <pagehelper.version>5.1.4</pagehelper.version>
-
+        <!-- rapid.generator 版本号 -->
+        <rapid.generator.version>4.0.6</rapid.generator.version>
 
         <!--maven-clean版本号-->
         <maven.clean.version>3.1.0</maven.clean.version>
@@ -378,6 +379,13 @@
                 <version>${pagehelper.version}</version>
             </dependency>
             <!-- mybatis分页插件 end -->
+
+            <!--base自动生成框架-->
+            <dependency>
+                <groupId>com.googlecode.rapid-framework</groupId>
+                <artifactId>rapid-generator</artifactId>
+                <version>${rapid.generator.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
