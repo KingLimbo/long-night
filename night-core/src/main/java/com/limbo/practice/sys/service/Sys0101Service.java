@@ -1,6 +1,6 @@
 package com.limbo.practice.sys.service;
 
-import com.limbo.practice.core.base.BaseListService;
+import com.limbo.practice.core.base.BaseService;
 
 /**
  * 登录服务Service
@@ -8,7 +8,7 @@ import com.limbo.practice.core.base.BaseListService;
  * @author limbo
  * @date 2019/4/25
  */
-public interface Sys0101Service<T>  extends BaseListService<T> {
+public interface Sys0101Service<T>  extends BaseService<T> {
 
 
 }

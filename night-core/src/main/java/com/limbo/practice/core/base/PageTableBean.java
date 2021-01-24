@@ -10,15 +10,24 @@ import java.util.List;
  */
 public class PageTableBean {
 
+    /**
+     * 反馈编号
+     */
     private Integer code;
 
-    // 数量
+    /**
+     * 数量
+     */
     private Long count;
 
-    // 消息
+    /**
+     * 消息
+     */
     private String msg;
 
-    // 数据集
+    /**
+     * 数据集
+     */
     private List<?> data;
 
     public PageTableBean() {

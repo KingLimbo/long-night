@@ -22,6 +22,7 @@
     <meta name="description" content="scclui为轻量级的网站后台管理系统模版。">
 
     <link rel="stylesheet" href="common/core/layui/css/layui.css">
+    <link rel="stylesheet" href="common/core/layui/css/layui-icon.css">
     <link rel="stylesheet" href="common/core/css/sccl.css">
 </head>
 <body class="login-bg">
@@ -30,7 +31,6 @@
         <h1>框架后台管理系统</h1>
     </header>
     <div class="login-main">
-        <h5>JSP</h5>
         <form action="login" class="layui-form" method="post">
             <input name="__RequestVerificationToken" type="hidden" value="">
             <div class="layui-form-item">
@@ -64,7 +64,7 @@
         </form>
     </div>
     <footer>
-        <p>xuan © www.mycodes.net</p>
+        <p>limbo © www.limbo.top</p>
     </footer>
 </div>
 <script type="text/html" id="code-temp">
@@ -78,7 +78,7 @@
     layui.use(['layer', 'form'], function () {
         var layer = layui.layer,
             $ = layui.jquery,
-            form = layui.form;
+            form = layui.form();
 
         form.verify({
             loginAccount: function (value) {

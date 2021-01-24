@@ -78,14 +78,4 @@ public class LoginServiceImpl implements LoginService {
         LoginUser user = loginDao.selectUserInfoByLoginMessage(param);
         return user;
     }
-
-    /**
-     * 根据主键更新用户登录信息
-     *
-     * @param loginUser
-     */
-    @Override
-    public void updateByPrimaryKeySelective(LoginUser loginUser) {
-        loginDao.updateByPrimaryKeySelective(loginUser);
-    }
 }

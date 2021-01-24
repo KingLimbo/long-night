@@ -41,11 +41,4 @@ public interface LoginService {
      * @return
      */
     LoginUser getUserInfoByLoginMessage(String param);
-
-    /**
-     * 根据主键更新用户登录信息
-     *
-     * @param loginUser
-     */
-    void updateByPrimaryKeySelective(LoginUser loginUser);
 }

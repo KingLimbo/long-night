@@ -5,7 +5,7 @@ package ${basepackage}.${sysKey}.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.eims.common.controller.BaseController;
+import ${basepackage}.${sysKey}.controller.BaseController;
 import ${basepackage}.${sysKey}.dao.${table.className}Dao;
 import ${basepackage}.${sysKey}.entity.${table.className};
 

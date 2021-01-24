@@ -4,7 +4,7 @@ package ${basepackage}.${sysKey}.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.eims.common.service.impl.CrudService;
+import ${basepackage}.${sysKey}.service.impl.CrudService;
 import ${basepackage}.${sysKey}.dao.${table.className}Dao;
 import ${basepackage}.${sysKey}.entity.${table.className};
 import ${basepackage}.${sysKey}.service.I${table.className}Service;

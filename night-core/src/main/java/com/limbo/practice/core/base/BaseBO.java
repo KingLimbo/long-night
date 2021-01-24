@@ -10,6 +10,7 @@ import java.util.Date;
  * @date : 2020/4/28
  */
 public class BaseBO implements Serializable {
+
     /**
      * 设置序列化ID
      */

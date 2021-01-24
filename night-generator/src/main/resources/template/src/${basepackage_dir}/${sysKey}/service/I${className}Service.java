@@ -2,7 +2,7 @@
 <#include "/java_copyright.include">
 package ${basepackage}.${sysKey}.service;
 
-import com.eims.common.service.ICrudService;
+import ${basepackage}.${sysKey}.service.ICrudService;
 
 /**
 *

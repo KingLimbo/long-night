@@ -1,5 +1,6 @@
 package com.limbo.practice.sys.service.impl;
 
+import com.limbo.practice.core.base.BaseSimpleServiceImpl;
 import com.limbo.practice.core.base.PageTableBean;
 import com.limbo.practice.sys.dao.Sys0101Dao;
 import com.limbo.practice.sys.domain.Sys0101VO;
@@ -15,11 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
  * @date 2019/4/25
  */
 @Service
-public class Sys0101ServiceImpl implements Sys0101Service<Sys0101VO> {
+public class Sys0101ServiceImpl extends BaseSimpleServiceImpl<Sys0101VO> implements Sys0101Service<Sys0101VO> {
 
     @Autowired
     private Sys0101Dao sys0101Dao;
-
 
     /**
      * 页面初始化
@@ -43,14 +43,4 @@ public class Sys0101ServiceImpl implements Sys0101Service<Sys0101VO> {
         return null;
     }
 
-    /**
-     * 删除
-     *
-     * @param vo 页面参数
-     * @return
-     */
-    @Override
-    public PageTableBean delete(Sys0101VO vo) {
-        return null;
-    }
 }

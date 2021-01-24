@@ -18,6 +18,7 @@ public class MyGenerator {
         String templatePath = ClassLoader.getSystemResource("template").getPath();
         g.getGenerator().addTemplateRootDir(templatePath);
         String all = GeneratorProperties.getProperty(GENERATOR_ALL_KEY);
+        g.deleteOutRootDir();
         if (BOOLEAN_TRUE.equals(all)) {
             g.generateByAllTable();
         } else {

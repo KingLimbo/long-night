@@ -94,8 +94,6 @@ public class TokenManager {
      */
     public static LoginUser login(LoginUser user, Boolean rememberMe) {
         if (null == rememberMe) rememberMe = false;
-        // 设置IP地址
-        user.setHost(CookieUtil.getIp());
         LoginToken token = new LoginToken(user, rememberMe);
         SecurityUtils.getSubject().login(token);
         return getToken();

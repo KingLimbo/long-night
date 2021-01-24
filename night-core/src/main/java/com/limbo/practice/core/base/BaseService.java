@@ -3,12 +3,13 @@ package com.limbo.practice.core.base;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 基础清单Service接口
+ * 详情基础Service接口
  *
+ * @param <T>
  * @author : limbo
- * @date : 2020/6/4
+ * @date : 2019/11/16
  */
-public interface BaseListService<T> {
+public interface BaseService<T> {
 
     /**
      * 页面初始化
@@ -19,12 +20,12 @@ public interface BaseListService<T> {
     ModelAndView init(T vo);
 
     /**
-     * 页面初始查询
+     * 页面数据保存
      *
      * @param vo 页面参数
      * @return
      */
-    PageTableBean queryList(T vo);
+    ResultBean save(T vo);
 
     /**
      * 删除
@@ -32,5 +33,13 @@ public interface BaseListService<T> {
      * @param vo 页面参数
      * @return
      */
-    PageTableBean delete(T vo);
+    ResultBean delete(T vo);
+
+    /**
+     * 页面初始查询
+     *
+     * @param vo 页面参数
+     * @return
+     */
+    PageTableBean queryList(T vo);
 }

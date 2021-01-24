@@ -8,11 +8,8 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 /**
  * 简单的Realm
@@ -22,7 +19,9 @@ import java.util.Date;
  */
 public class SimpleRealm extends AuthorizingRealm {
 
-    // 登录处理service
+    /**
+     * 登录处理service
+     */
     @Autowired
     private LoginService loginService;
 
@@ -58,8 +57,8 @@ public class SimpleRealm extends AuthorizingRealm {
             // 更新登录时间 last login time
 //            user.setLastLoginTime(new Date());
             // 更新登录ip地址 last login ip
-            user.setLastLoginIp(loginToken.getHost());
-            loginService.updateByPrimaryKeySelective(user);
+//            user.setLastLoginIp(loginToken.getHost());
+//            loginService.updateByPrimaryKeySelective(user);
         }
 
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(

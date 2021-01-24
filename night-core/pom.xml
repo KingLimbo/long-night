@@ -79,6 +79,12 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- 日志文件管理包 end-->
 
@@ -129,21 +135,6 @@
         </dependency>
         <!--mybatis 数据访问层 end -->
 
-        <!--&lt;!&ndash; Spring 升级4+ 依赖的JSON包 start&ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-databind</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-core</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-annotations</artifactId>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; /Spring 升级4+ 依赖的JSON包 end&ndash;&gt;-->
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jsp-api</artifactId>
@@ -180,6 +171,10 @@
         <!-- mybatis分页插件 end -->
 
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
@@ -200,17 +195,6 @@
                     <include>**/*.ini</include>
                 </includes>
             </resource>
-            <resource>
-                <directory>src/main/webapp</directory>
-                <includes>
-                    <include>WEB-INF/**</include>
-                    <include>META-INF/**</include>
-                </includes>
-                <excludes>
-                    <exclude>common/**</exclude>
-                    <exclude>page/**</exclude>
-                </excludes>
-            </resource>
         </resources>
         <testResources>
             <testResource>
@@ -222,6 +206,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -240,20 +233,6 @@
                                         <include>common/**</include>
                                         <include>page/**</include>
                                     </includes>
-                                    <excludes>
-                                        <exclude>**/*.woff</exclude>
-                                        <exclude>**/*.eot</exclude>
-                                        <exclude>**/*.ttf</exclude>
-                                    </excludes>
-                                </resource>
-                                <resource>
-                                    <directory>src/main/webapp</directory>
-                                    <filtering>false</filtering>
-                                    <includes>
-                                        <include>**/*.woff</include>
-                                        <include>**/*.eot</include>
-                                        <include>**/*.ttf</include>
-                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -263,10 +242,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -3,8 +3,9 @@
 <#assign baseProps = ["id","createUser","createDate","updateUser","updateDate","delFlag"]>
 package ${basepackage}.${sysKey}.entity.po;
 
-import com.eims.common.entity.DataEntity;
-
+import ${basepackage}.${sysKey}.entity.DataEntity;
+import lombok.Getter;
+import lombok.Setter;
 /**
 *
 * @ProjectName: long-night
@@ -18,7 +19,8 @@ import com.eims.common.entity.DataEntity;
 *
 * version V1.0
 */
-
+@Getter
+@Setter
 public class ${table.className}Po<T> extends DataEntity<T>{
 
     /**
@@ -32,7 +34,7 @@ public class ${table.className}Po<T> extends DataEntity<T>{
      * ${column.columnAlias!}
      * db_column: ${column.sqlName}
      */
-    private ${column.javaType} ${column.columnNameLower};
+    private ${column.javaType} <@getName itemColumn=column/>;
     </#if>
     </#list>
 
@@ -43,16 +45,4 @@ public class ${table.className}Po<T> extends DataEntity<T>{
     public ${table.className}Po(String id){
         super(id);
     }
-    <#list table.columns as column>
-    <#if (baseProps?seq_index_of(column.columnNameLower)) == -1>
-
-    public void set${column.columnName}(${column.javaType} value) {
-        this.${column.columnNameLower} = value;
-    }
-
-    public ${column.javaType} get${column.columnName}() {
-        return this.${column.columnNameLower};
-    }
-    </#if>
-    </#list>
 }

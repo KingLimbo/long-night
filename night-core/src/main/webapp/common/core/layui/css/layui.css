@@ -1,7 +1,7 @@
 /**
  
  @Name: layui
- @Author: 贤心
+ @Author: limbo
  @Site: http://www.layui.com
  
  */
@@ -27,23 +27,6 @@ pre{white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; w
 ::-webkit-scrollbar-thumb{border-radius: 0; background-color: rgba(0,0,0,.3);}
 ::-webkit-scrollbar-thumb:vertical:hover{background-color: rgba(0,0,0,.35);}
 ::-webkit-scrollbar-thumb:vertical:active{background-color: rgba(0,0,0,.38);}
-
-/** 图标字体 **/
-@font-face {font-family: 'iconfont';
-  src: url('../font/iconfont.eot');
-  src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
-  url('../font/iconfont.woff') format('woff'),
-  url('../font/iconfont.ttf') format('truetype'),
-  url('../font/iconfont.svg#iconfont') format('svg');
-}
-                    
-.layui-icon{
-  font-family:"layui-icon" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 /** 初始化全局标签 **/
 body{line-height: 24px; font: 14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif;}
@@ -440,6 +423,3 @@ body .layui-util-face  .layui-layer-content{padding:0; background-color:#fff; co
   .layui-form-item .layui-input-inline+.layui-form-mid{margin-left: 110px; top: -5px;}
   .layui-form-item .layui-form-checkbox{display: block; margin-right: 0; margin-bottom: 10px;}
 }
-
-
-

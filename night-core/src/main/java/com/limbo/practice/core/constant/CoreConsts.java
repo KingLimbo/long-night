@@ -24,7 +24,9 @@ public class CoreConsts {
     // SALT 固定盐
     public static final String SALT_CONNECT = "night-core";
 
-    /***项目根路径*/
+    /**
+     * 项目根路径
+     */
     public static final String CONTEXT_PATH = "ctx";
 
     /**

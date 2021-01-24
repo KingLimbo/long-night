@@ -1,44 +1,54 @@
 <#include "/macro.include"/>
 <#assign tableName = table.sqlName>
+<#macro getName itemColumn><#if itemColumn.sqlName?length gt 3 && itemColumn.sqlName?substring(0, 3) = "is_">${(itemColumn.columnName?substring(2))?uncap_first}<#else>${itemColumn.columnNameLower}</#if></#macro>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${basepackage}.${sysKey}.dao.${table.className}Dao">
-    
-    <sql id="${table.className?uncap_first}Columns">
+
+    <resultMap id="BaseResultMap" type="${basepackage}.${sysKey}.entity.${table.className}">
+        <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+        <#list table.columns as column>
+            <#if column.sqlName != "id">
+        <result property="<@getName itemColumn=column/>" column="${column.sqlName}" javaType="${column.javaType}" jdbcType="${column.sqlTypeName}" />
+            </#if>
+        </#list>
+    </resultMap>
+
+    <sql id="Base_Column_List">
     <#list table.columns as column>
-        a.${column.sqlName} as ${column.columnNameLower}<#if column_has_next>,</#if>
+        ${column.sqlName}<#if column_has_next>,</#if>
     </#list>
+    </sql>
+
+    <sql id="Base_Where_List">
+        <where>
+        <#list table.columns as column>
+        <if test="<@getName itemColumn=column/> != null and <@getName itemColumn=column/> != '' ">
+            AND ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}}
+        </if>
+        </#list>
+        </where>
     </sql>
     
     <select id="getById" resultType="${table.className}">
         SELECT
-            <include refid="${table.className?uncap_first}Columns"/>
-        FROM ${tableName}  a
-        WHERE a.id = ${"#"}{id}
+            <include refid="Base_Column_List"/>
+        FROM ${tableName}
+        WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </select>
     
     <select id="get" resultType="${table.className}">
         SELECT
-            <include refid="${table.className?uncap_first}Columns"/>
-        FROM ${tableName}  a
-        WHERE 1=1
-        <#list table.columns as column>
-        <if test="${column.columnNameLower} != null and ${column.columnNameLower} != '' ">
-            AND a.${column.sqlName} = ${"#"}{${column.columnNameLower}}
-        </if>
-        </#list>
+            <include refid="Base_Column_List"/>
+        FROM ${tableName}
+        <include refid="Base_Where_List"/>
     </select>
     
     <select id="findList" resultType="${table.className}">
         SELECT
-            <include refid="${table.className?uncap_first}Columns"/>
-        FROM ${tableName}  a
-        WHERE 1=1
-        <#list table.columns as column>
-        <if test="${column.columnNameLower} != null and ${column.columnNameLower} != '' ">
-            AND a.${column.sqlName} = ${"#"}{${column.columnNameLower}}
-        </if>
-        </#list>
+            <include refid="Base_Column_List"/>
+        FROM ${tableName}
+        <include refid="Base_Where_List"/>
     </select>
     
     <insert id="insert">
@@ -48,28 +58,27 @@
         </#list>
         ) VALUES (
         <#list table.columns as column>        
-            ${"#"}{${column.columnNameLower}} <#if column_has_next>,</#if>
-        </#list> 
-        )
+            ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}} <#if column_has_next>,</#if>
+        </#list>
     </insert>
     
     <update id="update">
         UPDATE ${tableName} SET 
         <#list table.notPkColumns as column>
-            ${column.sqlName} = ${"#"}{${column.columnNameLower}} <#if column_has_next>,</#if>
+            ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}} <#if column_has_next>,</#if>
         </#list>
-        WHERE id = ${"#"}{id}
+        WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </update>
     
     <update id="logicDelete">
-        UPDATE ${tableName} SET 
-            del_flag = ${"#"}{delFlag}
-        WHERE id = ${"#"}{id}
+        UPDATE ${tableName} SET
+            is_deleted = ${"#"}{deleted}
+        WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </update>
     
     <delete id="delete">
         DELETE FROM ${tableName}
-        WHERE id = ${"#"}{id}
+        WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </delete>
     
 </mapper>

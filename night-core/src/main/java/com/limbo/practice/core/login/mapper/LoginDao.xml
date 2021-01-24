@@ -10,7 +10,6 @@
         <result property="userName" column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
         <result property="userPhone" column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
         <result property="userEmail" column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
-        <result property="lastLoginIp" column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
         <result property="locked" column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
         <result property="deleted" column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
         <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -25,7 +24,6 @@
         user_name,
         user_phone,
         user_email,
-        last_login_ip,
         is_locked,
         is_deleted,
         gmt_create,
@@ -73,15 +71,4 @@
         LIMIT 1
     </select>
 
-    <!-- 根据主键更新用户登录信息 -->
-    <update id="updateByPrimaryKeySelective">
-        UPDATE
-            sys_user
-        SET
-            last_login_time = NOW(),
-            last_login_ip = #{lastLoginIp},
-            gmt_modified = NOW()
-        WHERE
-            id = #{id}
-    </update>
 </mapper>

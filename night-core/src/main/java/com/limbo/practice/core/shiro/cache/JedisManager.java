@@ -16,7 +16,7 @@ import java.util.Set;
  * Redis Manager Utils
  *
  * @author laif
- * @version 1.0,
+ * @version 1.0
  * @date 2019/4/9 17:31
  *
  */

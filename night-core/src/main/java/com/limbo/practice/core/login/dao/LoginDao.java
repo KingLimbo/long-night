@@ -43,11 +43,4 @@ public interface LoginDao {
      * @return
      */
     LoginUser selectUserInfoByLoginMessage(String param);
-
-    /**
-     * 根据主键更新用户登录信息
-     *
-     * @param loginUser
-     */
-    int updateByPrimaryKeySelective(LoginUser loginUser);
 }

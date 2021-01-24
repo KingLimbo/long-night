@@ -1,7 +1,7 @@
 package com.limbo.practice.core.shiro.session;
 
 
-import com.limbo.practice.base.entity.SysUser;
+//import com.limbo.practice.base.entity.SysUser;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.login.domain.LoginUserMemento;
 import org.apache.shiro.session.Session;

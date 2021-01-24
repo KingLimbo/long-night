@@ -76,10 +76,10 @@
     <!-- 配置如果没有权限，则跳转到的页面 -->
     <error-page>
         <exception-type>org.apache.shiro.authz.AuthorizationException</exception-type>
-        <location>/404.jsp</location>
+        <location>/comm/404.jsp</location>
     </error-page>
     <error-page>
         <exception-type>org.apache.shiro.authz.UnauthorizedException</exception-type>
-        <location>/500.jsp</location>
+        <location>/comm/500.jsp</location>
     </error-page>
 </web-app>
