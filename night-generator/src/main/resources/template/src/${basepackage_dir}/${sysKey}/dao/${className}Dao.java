@@ -1,8 +1,8 @@
 <#include "/java_copyright.include">
 package ${basepackage}.${sysKey}.dao;
 
-import com.eims.kernel.persistence.annotation.MyBatisDao;
-import com.eims.kernel.persistence.dao.CrudDao;
+import com.limbo.practice.core.mybatis.MybatisDao;
+import com.limbo.practice.core.base.BaseDao;
 import ${basepackage}.${sysKey}.entity.${table.className};
 
 /**
@@ -19,7 +19,7 @@ import ${basepackage}.${sysKey}.entity.${table.className};
 * version V1.0
 */
 
-@MyBatisDao
-public interface ${table.className}Dao extends CrudDao<${table.className}> {
+@MybatisDao
+public interface ${table.className}Dao extends BaseDao<${table.className}> {
 
 }

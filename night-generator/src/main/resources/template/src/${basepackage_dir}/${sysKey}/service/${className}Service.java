@@ -2,7 +2,7 @@
 <#include "/java_copyright.include">
 package ${basepackage}.${sysKey}.service;
 
-import ${basepackage}.${sysKey}.service.ICrudService;
+import ${basepackage}.core.base.BaseService;
 
 /**
 *
@@ -17,7 +17,7 @@ import ${basepackage}.${sysKey}.service.ICrudService;
 *
 * version V1.0
 */
-public interface I${table.className}Service<D,T> extends ICrudService<D,T> {
+public interface ${table.className}Service<D,T> extends BaseService<D,T> {
 
 
 }

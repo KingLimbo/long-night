@@ -5,11 +5,11 @@ package ${basepackage}.${sysKey}.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import ${basepackage}.${sysKey}.controller.BaseController;
+import com.limbo.practice.core.base.BaseController;
 import ${basepackage}.${sysKey}.dao.${table.className}Dao;
 import ${basepackage}.${sysKey}.entity.${table.className};
 
-import ${basepackage}.${sysKey}.service.I${table.className}Service;
+import ${basepackage}.${sysKey}.service.${table.className}Service;
 
 /**
 *
@@ -28,5 +28,5 @@ import ${basepackage}.${sysKey}.service.I${table.className}Service;
 @Controller
 public class ${table.className}Controller extends BaseController {
     @Autowired
-    private I${table.className}Service<${table.className}Dao,${table.className}>  ${table.className?uncap_first}Service;
+    private ${table.className}Service<${table.className}Dao,${table.className}>  ${table.className?uncap_first}ServiceImpl;
 }

@@ -4,10 +4,10 @@ package ${basepackage}.${sysKey}.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import ${basepackage}.${sysKey}.service.impl.CrudService;
+import ${basepackage}.core.base.BaseServiceImpl;
 import ${basepackage}.${sysKey}.dao.${table.className}Dao;
 import ${basepackage}.${sysKey}.entity.${table.className};
-import ${basepackage}.${sysKey}.service.I${table.className}Service;
+import ${basepackage}.${sysKey}.service.${table.className}Service;
 
 /**
 *
@@ -24,6 +24,6 @@ import ${basepackage}.${sysKey}.service.I${table.className}Service;
 */
 
 @Service
-public class ${table.className}Service extends CrudService<${table.className}Dao,${table.className}> implements I${table.className}Service<${table.className}Dao,${table.className}> {
+public class ${table.className}ServiceImpl extends BaseServiceImpl<${table.className}Dao,${table.className}> implements ${table.className}Service<${table.className}Dao,${table.className}> {
 
 }

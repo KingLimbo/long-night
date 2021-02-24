@@ -1,9 +1,9 @@
 <#include "/macro.include"/>
 <#include "/java_copyright.include">
-<#assign baseProps = ["id","createUser","createDate","updateUser","updateDate","delFlag"]>
+<#assign baseProps = ["id","gmtCreate","gmtModified","isDeleted"]>
 package ${basepackage}.${sysKey}.entity.po;
 
-import ${basepackage}.${sysKey}.entity.DataEntity;
+import ${basepackage}.core.base.BaseBO;
 import lombok.Getter;
 import lombok.Setter;
 /**
@@ -21,7 +21,7 @@ import lombok.Setter;
 */
 @Getter
 @Setter
-public class ${table.className}Po<T> extends DataEntity<T>{
+public class ${table.className}Po extends BaseBO{
 
     /**
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)
@@ -42,7 +42,13 @@ public class ${table.className}Po<T> extends DataEntity<T>{
         super();
     }
 
-    public ${table.className}Po(String id){
-        super(id);
+    public ${table.className}Po(<#list table.columns as column>${column.javaType} <@getName itemColumn=column/><#if column_has_next>,</#if></#list>){
+        super(id, deleted, gmtCreate, gmtModified);
+        <#list table.columns as column>
+        <#if (baseProps?seq_index_of(column.columnNameLower)) == -1>
+        this.<@getName itemColumn=column/> = <@getName itemColumn=column/>;
+        </#if>
+        </#list>
     }
+
 }

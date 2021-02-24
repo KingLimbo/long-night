@@ -8,9 +8,9 @@
     <resultMap id="BaseResultMap" type="${basepackage}.${sysKey}.entity.${table.className}">
         <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
         <#list table.columns as column>
-            <#if column.sqlName != "id">
+        <#if column.sqlName != "id">
         <result property="<@getName itemColumn=column/>" column="${column.sqlName}" javaType="${column.javaType}" jdbcType="${column.sqlTypeName}" />
-            </#if>
+        </#if>
         </#list>
     </resultMap>
 
@@ -42,9 +42,10 @@
             <include refid="Base_Column_List"/>
         FROM ${tableName}
         <include refid="Base_Where_List"/>
+        LIMIT 1
     </select>
     
-    <select id="findList" resultType="${table.className}">
+    <select id="list" resultType="${table.className}">
         SELECT
             <include refid="Base_Column_List"/>
         FROM ${tableName}
@@ -60,6 +61,7 @@
         <#list table.columns as column>        
             ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}} <#if column_has_next>,</#if>
         </#list>
+        )
     </insert>
     
     <update id="update">
@@ -69,10 +71,20 @@
         </#list>
         WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </update>
+
+    <update id="updateActive">
+        UPDATE ${tableName} SET
+        <#list table.notPkColumns as column>
+        <if test="<@getName itemColumn=column/> != null and <@getName itemColumn=column/> != '' ">
+            ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}} <#if column_has_next>,</#if>
+        </if>
+        </#list>
+        WHERE id = ${"#"}{id, jdbcType=BIGINT}
+    </update>
     
     <update id="logicDelete">
         UPDATE ${tableName} SET
-            is_deleted = ${"#"}{deleted}
+            is_deleted = "1"
         WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </update>
     

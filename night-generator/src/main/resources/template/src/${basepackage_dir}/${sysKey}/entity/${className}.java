@@ -18,7 +18,7 @@ import ${basepackage}.${sysKey}.entity.po.${table.className}Po;
 * version V1.0
 */
 
-public class ${table.className} extends ${table.className}Po<${table.className}>{
+public class ${table.className} extends ${table.className}Po{
 
     /**
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)
