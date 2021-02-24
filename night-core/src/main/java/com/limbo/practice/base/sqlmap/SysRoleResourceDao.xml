@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.limbo.practice.base.dao.SysRoleResourceDao">
+
+    <resultMap id="BaseResultMap" type="com.limbo.practice.base.entity.SysRoleResource">
+        <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+        <result property="roleId" column="role_id" javaType="java.lang.Long" jdbcType="BIGINT UNSIGNED" />
+        <result property="resourceId" column="resource_id" javaType="java.lang.Long" jdbcType="BIGINT UNSIGNED" />
+        <result property="deleted" column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="DATETIME" />
+        <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="DATETIME" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        role_id,
+        resource_id,
+        is_deleted,
+        gmt_create,
+        gmt_modified
+    </sql>
+
+    <sql id="Base_Where_List">
+        <where>
+        <if test="id != null and id != '' ">
+            AND id = #{id, jdbcType=BIGINT UNSIGNED}
+        </if>
+        <if test="roleId != null and roleId != '' ">
+            AND role_id = #{roleId, jdbcType=BIGINT UNSIGNED}
+        </if>
+        <if test="resourceId != null and resourceId != '' ">
+            AND resource_id = #{resourceId, jdbcType=BIGINT UNSIGNED}
+        </if>
+        <if test="deleted != null and deleted != '' ">
+            AND is_deleted = #{deleted, jdbcType=BIT}
+        </if>
+        <if test="gmtCreate != null and gmtCreate != '' ">
+            AND gmt_create = #{gmtCreate, jdbcType=DATETIME}
+        </if>
+        <if test="gmtModified != null and gmtModified != '' ">
+            AND gmt_modified = #{gmtModified, jdbcType=DATETIME}
+        </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultType="SysRoleResource">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM sys_role_resource
+        WHERE id = #{id, jdbcType=BIGINT}
+    </select>
+    
+    <select id="get" resultType="SysRoleResource">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM sys_role_resource
+        <include refid="Base_Where_List"/>
+        LIMIT 1
+    </select>
+    
+    <select id="list" resultType="SysRoleResource">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM sys_role_resource
+        <include refid="Base_Where_List"/>
+    </select>
+    
+    <insert id="insert">
+        INSERT INTO sys_role_resource(
+            id ,
+            role_id ,
+            resource_id ,
+            is_deleted ,
+            gmt_create ,
+            gmt_modified 
+        ) VALUES (
+            #{id, jdbcType=BIGINT UNSIGNED} ,
+            #{roleId, jdbcType=BIGINT UNSIGNED} ,
+            #{resourceId, jdbcType=BIGINT UNSIGNED} ,
+            #{deleted, jdbcType=BIT} ,
+            #{gmtCreate, jdbcType=DATETIME} ,
+            #{gmtModified, jdbcType=DATETIME} 
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE sys_role_resource SET 
+            role_id = #{roleId, jdbcType=BIGINT UNSIGNED} ,
+            resource_id = #{resourceId, jdbcType=BIGINT UNSIGNED} ,
+            is_deleted = #{deleted, jdbcType=BIT} ,
+            gmt_create = #{gmtCreate, jdbcType=DATETIME} ,
+            gmt_modified = #{gmtModified, jdbcType=DATETIME} 
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <update id="updateActive">
+        UPDATE sys_role_resource SET
+        <if test="roleId != null and roleId != '' ">
+            role_id = #{roleId, jdbcType=BIGINT UNSIGNED} ,
+        </if>
+        <if test="resourceId != null and resourceId != '' ">
+            resource_id = #{resourceId, jdbcType=BIGINT UNSIGNED} ,
+        </if>
+        <if test="deleted != null and deleted != '' ">
+            is_deleted = #{deleted, jdbcType=BIT} ,
+        </if>
+        <if test="gmtCreate != null and gmtCreate != '' ">
+            gmt_create = #{gmtCreate, jdbcType=DATETIME} ,
+        </if>
+        <if test="gmtModified != null and gmtModified != '' ">
+            gmt_modified = #{gmtModified, jdbcType=DATETIME} 
+        </if>
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+    
+    <update id="logicDelete">
+        UPDATE sys_role_resource SET
+            is_deleted = "1"
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM sys_role_resource
+        WHERE id = #{id, jdbcType=BIGINT}
+    </delete>
+    
+</mapper>

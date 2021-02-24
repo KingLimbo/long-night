@@ -85,6 +85,8 @@
         <rapid.generator.version>4.0.6</rapid.generator.version>
         <!-- lombok 版本号 -->
         <lombok.version>1.16.18</lombok.version>
+        <!-- hutool 版本号 -->
+        <hutool.version>5.5.8</hutool.version>
 
         <!--maven-clean版本号-->
         <maven.clean.version>3.1.0</maven.clean.version>
@@ -347,6 +349,13 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

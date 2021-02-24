@@ -88,4 +88,9 @@ public class CoreConsts {
 
     // 存储到缓存，标识用户的禁止状态，解决在线用户踢出的问题
     public static final String EXECUTE_CHANGE_USER = "SOJSON_EXECUTE_CHANGE_USER";
+
+    /**
+     * 核心包
+     */
+    public static final String CORE_PACKAGE = "com.limbo.practice";
 }

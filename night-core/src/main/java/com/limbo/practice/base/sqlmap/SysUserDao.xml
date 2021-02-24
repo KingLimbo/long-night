@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.limbo.practice.base.dao.SysUserDao">
+
+    <resultMap id="BaseResultMap" type="com.limbo.practice.base.entity.SysUser">
+        <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+        <result property="loginAccount" column="login_account" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="loginPass" column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="loginSalt" column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userName" column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userHead" column="user_head" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userPhone" column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userEmail" column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result property="userSex" column="user_sex" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="userType" column="user_type" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="locked" column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="deleted" column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+        <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="DATETIME" />
+        <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="DATETIME" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        login_account,
+        login_pass,
+        login_salt,
+        user_name,
+        user_head,
+        user_phone,
+        user_email,
+        user_sex,
+        user_type,
+        is_locked,
+        is_deleted,
+        gmt_create,
+        gmt_modified
+    </sql>
+
+    <sql id="Base_Where_List">
+        <where>
+        <if test="id != null and id != '' ">
+            AND id = #{id, jdbcType=BIGINT UNSIGNED}
+        </if>
+        <if test="loginAccount != null and loginAccount != '' ">
+            AND login_account = #{loginAccount, jdbcType=VARCHAR}
+        </if>
+        <if test="loginPass != null and loginPass != '' ">
+            AND login_pass = #{loginPass, jdbcType=VARCHAR}
+        </if>
+        <if test="loginSalt != null and loginSalt != '' ">
+            AND login_salt = #{loginSalt, jdbcType=VARCHAR}
+        </if>
+        <if test="userName != null and userName != '' ">
+            AND user_name = #{userName, jdbcType=VARCHAR}
+        </if>
+        <if test="userHead != null and userHead != '' ">
+            AND user_head = #{userHead, jdbcType=VARCHAR}
+        </if>
+        <if test="userPhone != null and userPhone != '' ">
+            AND user_phone = #{userPhone, jdbcType=VARCHAR}
+        </if>
+        <if test="userEmail != null and userEmail != '' ">
+            AND user_email = #{userEmail, jdbcType=VARCHAR}
+        </if>
+        <if test="userSex != null and userSex != '' ">
+            AND user_sex = #{userSex, jdbcType=BIT}
+        </if>
+        <if test="userType != null and userType != '' ">
+            AND user_type = #{userType, jdbcType=BIT}
+        </if>
+        <if test="locked != null and locked != '' ">
+            AND is_locked = #{locked, jdbcType=BIT}
+        </if>
+        <if test="deleted != null and deleted != '' ">
+            AND is_deleted = #{deleted, jdbcType=BIT}
+        </if>
+        <if test="gmtCreate != null and gmtCreate != '' ">
+            AND gmt_create = #{gmtCreate, jdbcType=DATETIME}
+        </if>
+        <if test="gmtModified != null and gmtModified != '' ">
+            AND gmt_modified = #{gmtModified, jdbcType=DATETIME}
+        </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultType="SysUser">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM sys_user
+        WHERE id = #{id, jdbcType=BIGINT}
+    </select>
+    
+    <select id="get" resultType="SysUser">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM sys_user
+        <include refid="Base_Where_List"/>
+        LIMIT 1
+    </select>
+    
+    <select id="list" resultType="SysUser">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM sys_user
+        <include refid="Base_Where_List"/>
+    </select>
+    
+    <insert id="insert">
+        INSERT INTO sys_user(
+            id ,
+            login_account ,
+            login_pass ,
+            login_salt ,
+            user_name ,
+            user_head ,
+            user_phone ,
+            user_email ,
+            user_sex ,
+            user_type ,
+            is_locked ,
+            is_deleted ,
+            gmt_create ,
+            gmt_modified 
+        ) VALUES (
+            #{id, jdbcType=BIGINT UNSIGNED} ,
+            #{loginAccount, jdbcType=VARCHAR} ,
+            #{loginPass, jdbcType=VARCHAR} ,
+            #{loginSalt, jdbcType=VARCHAR} ,
+            #{userName, jdbcType=VARCHAR} ,
+            #{userHead, jdbcType=VARCHAR} ,
+            #{userPhone, jdbcType=VARCHAR} ,
+            #{userEmail, jdbcType=VARCHAR} ,
+            #{userSex, jdbcType=BIT} ,
+            #{userType, jdbcType=BIT} ,
+            #{locked, jdbcType=BIT} ,
+            #{deleted, jdbcType=BIT} ,
+            #{gmtCreate, jdbcType=DATETIME} ,
+            #{gmtModified, jdbcType=DATETIME} 
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE sys_user SET 
+            login_account = #{loginAccount, jdbcType=VARCHAR} ,
+            login_pass = #{loginPass, jdbcType=VARCHAR} ,
+            login_salt = #{loginSalt, jdbcType=VARCHAR} ,
+            user_name = #{userName, jdbcType=VARCHAR} ,
+            user_head = #{userHead, jdbcType=VARCHAR} ,
+            user_phone = #{userPhone, jdbcType=VARCHAR} ,
+            user_email = #{userEmail, jdbcType=VARCHAR} ,
+            user_sex = #{userSex, jdbcType=BIT} ,
+            user_type = #{userType, jdbcType=BIT} ,
+            is_locked = #{locked, jdbcType=BIT} ,
+            is_deleted = #{deleted, jdbcType=BIT} ,
+            gmt_create = #{gmtCreate, jdbcType=DATETIME} ,
+            gmt_modified = #{gmtModified, jdbcType=DATETIME} 
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <update id="updateActive">
+        UPDATE sys_user SET
+        <if test="loginAccount != null and loginAccount != '' ">
+            login_account = #{loginAccount, jdbcType=VARCHAR} ,
+        </if>
+        <if test="loginPass != null and loginPass != '' ">
+            login_pass = #{loginPass, jdbcType=VARCHAR} ,
+        </if>
+        <if test="loginSalt != null and loginSalt != '' ">
+            login_salt = #{loginSalt, jdbcType=VARCHAR} ,
+        </if>
+        <if test="userName != null and userName != '' ">
+            user_name = #{userName, jdbcType=VARCHAR} ,
+        </if>
+        <if test="userHead != null and userHead != '' ">
+            user_head = #{userHead, jdbcType=VARCHAR} ,
+        </if>
+        <if test="userPhone != null and userPhone != '' ">
+            user_phone = #{userPhone, jdbcType=VARCHAR} ,
+        </if>
+        <if test="userEmail != null and userEmail != '' ">
+            user_email = #{userEmail, jdbcType=VARCHAR} ,
+        </if>
+        <if test="userSex != null and userSex != '' ">
+            user_sex = #{userSex, jdbcType=BIT} ,
+        </if>
+        <if test="userType != null and userType != '' ">
+            user_type = #{userType, jdbcType=BIT} ,
+        </if>
+        <if test="locked != null and locked != '' ">
+            is_locked = #{locked, jdbcType=BIT} ,
+        </if>
+        <if test="deleted != null and deleted != '' ">
+            is_deleted = #{deleted, jdbcType=BIT} ,
+        </if>
+        <if test="gmtCreate != null and gmtCreate != '' ">
+            gmt_create = #{gmtCreate, jdbcType=DATETIME} ,
+        </if>
+        <if test="gmtModified != null and gmtModified != '' ">
+            gmt_modified = #{gmtModified, jdbcType=DATETIME} 
+        </if>
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+    
+    <update id="logicDelete">
+        UPDATE sys_user SET
+            is_deleted = "1"
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM sys_user
+        WHERE id = #{id, jdbcType=BIGINT}
+    </delete>
+    
+</mapper>

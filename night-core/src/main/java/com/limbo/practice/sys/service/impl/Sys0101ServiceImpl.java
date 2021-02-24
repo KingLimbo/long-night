@@ -1,6 +1,6 @@
 package com.limbo.practice.sys.service.impl;
 
-import com.limbo.practice.core.base.BaseSimpleServiceImpl;
+import com.limbo.practice.core.base.BaseServiceImpl;
 import com.limbo.practice.core.base.PageTableBean;
 import com.limbo.practice.sys.dao.Sys0101Dao;
 import com.limbo.practice.sys.domain.Sys0101VO;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @date 2019/4/25
  */
 @Service
-public class Sys0101ServiceImpl extends BaseSimpleServiceImpl<Sys0101VO> implements Sys0101Service<Sys0101VO> {
+public class Sys0101ServiceImpl extends BaseServiceImpl<Sys0101Dao, Sys0101VO> implements Sys0101Service<Sys0101Dao, Sys0101VO> {
 
     @Autowired
     private Sys0101Dao sys0101Dao;

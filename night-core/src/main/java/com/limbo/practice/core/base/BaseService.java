@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author : limbo
  * @date : 2019/11/16
  */
-public interface BaseService<T> {
+public interface BaseService<D,T> {
 
     /**
      * 页面初始化
