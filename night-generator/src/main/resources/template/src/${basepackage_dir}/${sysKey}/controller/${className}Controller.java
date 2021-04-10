@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import com.limbo.practice.core.base.BaseController;
 import ${basepackage}.${sysKey}.dao.${table.className}Dao;
 import ${basepackage}.${sysKey}.entity.${table.className};
-
-import ${basepackage}.${sysKey}.service.${table.className}Service;
+import javax.annotation.PostConstruct;
+import $
+import javax.annotation.PostConstruct;{basepackage}.${sysKey}.service.${table.className}Service;
 
 /**
 *
@@ -26,7 +27,13 @@ import ${basepackage}.${sysKey}.service.${table.className}Service;
 */
 
 @Controller
-public class ${table.className}Controller extends BaseController {
+public class ${table.className}Controller extends BaseController<${table.className}, ${table.className}Dao> {
+
     @Autowired
-    private ${table.className}Service<${table.className}Dao,${table.className}>  ${table.className?uncap_first}ServiceImpl;
+    private ${table.className}Service<${table.className}, ${table.className}Dao>  ${table.className?uncap_first}ServiceImpl;
+
+    @PostConstruct
+    public void initService(){
+        setService(sysResourceServiceImpl);
+    }
 }

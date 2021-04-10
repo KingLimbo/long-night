@@ -21,7 +21,7 @@ import lombok.Setter;
 */
 @Getter
 @Setter
-public class ${table.className}Po extends BaseBO{
+public class ${table.className}Po extends BaseBO {
 
     /**
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)

@@ -17,7 +17,7 @@ import ${basepackage}.core.base.BaseService;
 *
 * version V1.0
 */
-public interface ${table.className}Service<D,T> extends BaseService<D,T> {
+public interface ${table.className}Service<T, D> extends BaseService<T, D> {
 
 
 }

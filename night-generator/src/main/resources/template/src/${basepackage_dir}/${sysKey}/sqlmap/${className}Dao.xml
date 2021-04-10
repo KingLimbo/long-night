@@ -1,6 +1,7 @@
 <#include "/macro.include"/>
 <#assign tableName = table.sqlName>
 <#macro getName itemColumn><#if itemColumn.sqlName?length gt 3 && itemColumn.sqlName?substring(0, 3) = "is_">${(itemColumn.columnName?substring(2))?uncap_first}<#else>${itemColumn.columnNameLower}</#if></#macro>
+<#macro get4JdbcType itemColumn><#if itemColumn.sqlTypeName?contains("UNSIGNED")><#if itemColumn.sqlTypeName?contains("BIGINT")>${itemColumn.sqlTypeName?substring(0, 6)}<#else>${itemColumn.sqlTypeName?substring(0, 7)}</#if><#elseif itemColumn.sqlTypeName="DATETIME">DATE<#else>${itemColumn.sqlTypeName}</#if></#macro>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${basepackage}.${sysKey}.dao.${table.className}Dao">
@@ -9,7 +10,7 @@
         <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
         <#list table.columns as column>
         <#if column.sqlName != "id">
-        <result property="<@getName itemColumn=column/>" column="${column.sqlName}" javaType="${column.javaType}" jdbcType="${column.sqlTypeName}" />
+        <result property="<@getName itemColumn=column/>" column="${column.sqlName}" javaType="${column.javaType}" jdbcType="<@get4JdbcType itemColumn=column/>" />
         </#if>
         </#list>
     </resultMap>
@@ -24,20 +25,20 @@
         <where>
         <#list table.columns as column>
         <if test="<@getName itemColumn=column/> != null and <@getName itemColumn=column/> != '' ">
-            AND ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}}
+            AND ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>}
         </if>
         </#list>
         </where>
     </sql>
     
-    <select id="getById" resultType="${table.className}">
+    <select id="getById" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
         FROM ${tableName}
         WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </select>
     
-    <select id="get" resultType="${table.className}">
+    <select id="get" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
         FROM ${tableName}
@@ -45,7 +46,7 @@
         LIMIT 1
     </select>
     
-    <select id="list" resultType="${table.className}">
+    <select id="list" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
         FROM ${tableName}
@@ -53,21 +54,34 @@
     </select>
     
     <insert id="insert">
-        INSERT INTO ${tableName}(
+        INSERT IGNORE INTO ${tableName}(
          <#list table.columns as column>
             ${column.sqlName} <#if column_has_next>,</#if>
         </#list>
         ) VALUES (
         <#list table.columns as column>        
-            ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}} <#if column_has_next>,</#if>
+            ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if>
         </#list>
         )
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT IGNORE INTO ${tableName}(
+         <#list table.columns as column>
+            ${column.sqlName} <#if column_has_next>,</#if>
+        </#list>
+        ) VALUES
+        <foreach collection="beans" open="(" close=")"  item="bean" separator="),(">
+        <#list table.columns as column>
+            ${"#"}{bean.<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if>
+        </#list>
+        </foreach>
     </insert>
     
     <update id="update">
         UPDATE ${tableName} SET 
         <#list table.notPkColumns as column>
-            ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}} <#if column_has_next>,</#if>
+            ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if>
         </#list>
         WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </update>
@@ -76,7 +90,7 @@
         UPDATE ${tableName} SET
         <#list table.notPkColumns as column>
         <if test="<@getName itemColumn=column/> != null and <@getName itemColumn=column/> != '' ">
-            ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=${column.sqlTypeName}} <#if column_has_next>,</#if>
+            ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if>
         </if>
         </#list>
         WHERE id = ${"#"}{id, jdbcType=BIGINT}

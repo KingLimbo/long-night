@@ -24,6 +24,6 @@ import ${basepackage}.${sysKey}.service.${table.className}Service;
 */
 
 @Service
-public class ${table.className}ServiceImpl extends BaseServiceImpl<${table.className}Dao,${table.className}> implements ${table.className}Service<${table.className}Dao,${table.className}> {
+public class ${table.className}ServiceImpl extends BaseServiceImpl<${table.className}, ${table.className}Dao> implements ${table.className}Service<${table.className}, ${table.className}Dao> {
 
 }
