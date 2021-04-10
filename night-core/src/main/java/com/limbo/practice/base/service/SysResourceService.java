@@ -19,7 +19,7 @@ import com.limbo.practice.core.base.BaseService;
 *
 * version V1.0
 */
-public interface SysResourceService<D,T> extends BaseService<D,T> {
+public interface SysResourceService<T, D> extends BaseService<T, D> {
 
     void scanApiResource();
 }

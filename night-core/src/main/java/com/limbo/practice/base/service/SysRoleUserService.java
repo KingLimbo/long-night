@@ -19,7 +19,7 @@ import com.limbo.practice.core.base.BaseService;
 *
 * version V1.0
 */
-public interface SysRoleUserService<D,T> extends BaseService<D,T> {
+public interface SysRoleUserService<T, D> extends BaseService<T, D> {
 
 
 }

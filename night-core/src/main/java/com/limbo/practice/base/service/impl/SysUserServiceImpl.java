@@ -4,12 +4,11 @@
 
 package com.limbo.practice.base.service.impl;
 
-import org.springframework.stereotype.Service;
-
-import com.limbo.practice.core.base.BaseServiceImpl;
 import com.limbo.practice.base.dao.SysUserDao;
 import com.limbo.practice.base.entity.SysUser;
 import com.limbo.practice.base.service.SysUserService;
+import com.limbo.practice.core.base.BaseServiceImpl;
+import org.springframework.stereotype.Service;
 
 /**
 *
@@ -26,6 +25,6 @@ import com.limbo.practice.base.service.SysUserService;
 */
 
 @Service
-public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao,SysUser> implements SysUserService<SysUserDao,SysUser> {
+public class SysUserServiceImpl extends BaseServiceImpl<SysUser, SysUserDao> implements SysUserService<SysUser, SysUserDao> {
 
 }

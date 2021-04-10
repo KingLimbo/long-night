@@ -5,6 +5,7 @@
 package com.limbo.practice.base.entity.po;
 
 import com.limbo.practice.core.base.BaseBO;
+import com.limbo.practice.core.enums.ResourceTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 /**
@@ -57,7 +58,7 @@ public class SysResourcePo extends BaseBO{
      * 资源类型 说明：0 表示菜单，1 表示资源
      * db_column: type
      */
-    private Boolean type;
+    private ResourceTypeEnum type;
 
     /**
      * 资源路由
@@ -93,7 +94,7 @@ public class SysResourcePo extends BaseBO{
         super();
     }
 
-    public SysResourcePo(Long id, Long parentId, String name, String url, String urlType, Boolean type, String route, Integer sort, String parents, String description, Boolean autoGeneration, Boolean deleted, java.util.Date gmtCreate, java.util.Date gmtModified){
+    public SysResourcePo(Long id, Long parentId, String name, String url, String urlType, ResourceTypeEnum type, String route, Integer sort, String parents, String description, Boolean autoGeneration, Boolean deleted, java.util.Date gmtCreate, java.util.Date gmtModified){
         super(id, deleted, gmtCreate, gmtModified);
         this.parentId = parentId;
         this.name = name;

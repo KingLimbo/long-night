@@ -8,8 +8,8 @@
         <result property="description" column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
         <result property="autoGeneration" column="is_auto_generation" javaType="java.lang.Boolean" jdbcType="BIT" />
         <result property="deleted" column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
-        <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="DATETIME" />
-        <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="DATETIME" />
+        <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="DATE" />
+        <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="DATE" />
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -25,7 +25,7 @@
     <sql id="Base_Where_List">
         <where>
         <if test="id != null and id != '' ">
-            AND id = #{id, jdbcType=BIGINT UNSIGNED}
+            AND id = #{id, jdbcType=BIGINT}
         </if>
         <if test="name != null and name != '' ">
             AND name = #{name, jdbcType=VARCHAR}
@@ -40,22 +40,22 @@
             AND is_deleted = #{deleted, jdbcType=BIT}
         </if>
         <if test="gmtCreate != null and gmtCreate != '' ">
-            AND gmt_create = #{gmtCreate, jdbcType=DATETIME}
+            AND gmt_create = #{gmtCreate, jdbcType=DATE}
         </if>
         <if test="gmtModified != null and gmtModified != '' ">
-            AND gmt_modified = #{gmtModified, jdbcType=DATETIME}
+            AND gmt_modified = #{gmtModified, jdbcType=DATE}
         </if>
         </where>
     </sql>
     
-    <select id="getById" resultType="SysRole">
+    <select id="getById" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
         FROM sys_role
         WHERE id = #{id, jdbcType=BIGINT}
     </select>
     
-    <select id="get" resultType="SysRole">
+    <select id="get" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
         FROM sys_role
@@ -63,7 +63,7 @@
         LIMIT 1
     </select>
     
-    <select id="list" resultType="SysRole">
+    <select id="list" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
         FROM sys_role
@@ -71,7 +71,7 @@
     </select>
     
     <insert id="insert">
-        INSERT INTO sys_role(
+        INSERT IGNORE INTO sys_role(
             id ,
             name ,
             description ,
@@ -80,14 +80,35 @@
             gmt_create ,
             gmt_modified 
         ) VALUES (
-            #{id, jdbcType=BIGINT UNSIGNED} ,
+            #{id, jdbcType=BIGINT} ,
             #{name, jdbcType=VARCHAR} ,
             #{description, jdbcType=VARCHAR} ,
             #{autoGeneration, jdbcType=BIT} ,
             #{deleted, jdbcType=BIT} ,
-            #{gmtCreate, jdbcType=DATETIME} ,
-            #{gmtModified, jdbcType=DATETIME} 
+            #{gmtCreate, jdbcType=DATE} ,
+            #{gmtModified, jdbcType=DATE} 
         )
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT IGNORE INTO sys_role(
+            id ,
+            name ,
+            description ,
+            is_auto_generation ,
+            is_deleted ,
+            gmt_create ,
+            gmt_modified 
+        ) VALUES
+        <foreach collection="beans" open="(" close=")"  item="bean" separator="),(">
+            #{bean.id, jdbcType=BIGINT} ,
+            #{bean.name, jdbcType=VARCHAR} ,
+            #{bean.description, jdbcType=VARCHAR} ,
+            #{bean.autoGeneration, jdbcType=BIT} ,
+            #{bean.deleted, jdbcType=BIT} ,
+            #{bean.gmtCreate, jdbcType=DATE} ,
+            #{bean.gmtModified, jdbcType=DATE} 
+        </foreach>
     </insert>
     
     <update id="update">
@@ -96,8 +117,8 @@
             description = #{description, jdbcType=VARCHAR} ,
             is_auto_generation = #{autoGeneration, jdbcType=BIT} ,
             is_deleted = #{deleted, jdbcType=BIT} ,
-            gmt_create = #{gmtCreate, jdbcType=DATETIME} ,
-            gmt_modified = #{gmtModified, jdbcType=DATETIME} 
+            gmt_create = #{gmtCreate, jdbcType=DATE} ,
+            gmt_modified = #{gmtModified, jdbcType=DATE} 
         WHERE id = #{id, jdbcType=BIGINT}
     </update>
 
@@ -116,10 +137,10 @@
             is_deleted = #{deleted, jdbcType=BIT} ,
         </if>
         <if test="gmtCreate != null and gmtCreate != '' ">
-            gmt_create = #{gmtCreate, jdbcType=DATETIME} ,
+            gmt_create = #{gmtCreate, jdbcType=DATE} ,
         </if>
         <if test="gmtModified != null and gmtModified != '' ">
-            gmt_modified = #{gmtModified, jdbcType=DATETIME} 
+            gmt_modified = #{gmtModified, jdbcType=DATE} 
         </if>
         WHERE id = #{id, jdbcType=BIGINT}
     </update>

@@ -2,6 +2,8 @@ package com.limbo.practice.core.base;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 /**
  * 详情基础Service接口
  *
@@ -9,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author : limbo
  * @date : 2019/11/16
  */
-public interface BaseService<D,T> {
+public interface BaseService<T, D> {
 
     /**
      * 页面初始化
@@ -30,10 +32,10 @@ public interface BaseService<D,T> {
     /**
      * 删除
      *
-     * @param vo 页面参数
+     * @param id
      * @return
      */
-    ResultBean delete(T vo);
+    ResultBean delete(Long id);
 
     /**
      * 页面初始查询
@@ -42,4 +44,20 @@ public interface BaseService<D,T> {
      * @return
      */
     PageTableBean queryList(T vo);
+
+    /**
+     * 插入数据
+     *
+     * @param bean
+     * @return
+     */
+    int insertDb(T bean);
+
+    /**
+     * 批量插入数据
+     *
+     * @param beanList
+     * @return
+     */
+    int insertBatch(List<T> beanList);
 }

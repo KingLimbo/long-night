@@ -1,6 +1,9 @@
 package com.limbo.practice.core.base;
 
-public abstract class BaseEnum {
-    public int value;
-    public String name;
+/**
+ * 基础ENUM
+ */
+public interface BaseEnum {
+
+    int getValue();
 }

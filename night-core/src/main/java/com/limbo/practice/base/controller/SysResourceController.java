@@ -4,16 +4,24 @@
 
 package com.limbo.practice.base.controller;
 
-import com.limbo.practice.core.annotation.ApiResources;
-import com.limbo.practice.core.constant.RoleNameEnum;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import com.limbo.practice.core.base.BaseController;
 import com.limbo.practice.base.dao.SysResourceDao;
 import com.limbo.practice.base.entity.SysResource;
-
 import com.limbo.practice.base.service.SysResourceService;
+import com.limbo.practice.comm.service.SysInitService;
+import com.limbo.practice.core.annotation.ApiResources;
+import com.limbo.practice.core.base.BaseController;
+import com.limbo.practice.core.enums.RoleNameEnum;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.PostConstruct;
 
 /**
 *
@@ -28,9 +36,34 @@ import com.limbo.practice.base.service.SysResourceService;
 *
 * version V1.0
 */
+@Api(tags = "系统菜单资源")
 @ApiResources(roleName = RoleNameEnum.ADMIN)
 @Controller
-public class SysResourceController extends BaseController {
+@RequestMapping("/sys-resource")
+public class SysResourceController extends BaseController<SysResource, SysResourceDao> {
+
     @Autowired
-    private SysResourceService<SysResourceDao,SysResource>  sysResourceServiceImpl;
+    private SysResourceService<SysResource, SysResourceDao> sysResourceServiceImpl;
+
+    @Autowired
+    private SysInitService sysInitService;
+
+    @PostConstruct
+    public void initService(){
+        setService(sysResourceServiceImpl);
+    }
+
+    @GetMapping("/init/{json}")
+    @ApiOperation("初始化")
+    public ModelAndView init(@ApiParam("初始化json") @PathVariable("json") String json){
+        return new ModelAndView();
+    }
+
+
+    @GetMapping("/init-sys-resource")
+    @ApiOperation("初始化系统资源")
+    public void initSysResource(){
+        sysInitService.initRole();
+        sysInitService.initMenuLevel();
+    }
 }

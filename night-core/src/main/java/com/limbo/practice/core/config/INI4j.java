@@ -18,6 +18,7 @@ public class INI4j {
      * 用linked hash map 来保持有序的读取
      */
     final LinkedHashMap<String, LinkedHashMap<String, String>> coreMap = new LinkedHashMap<String, LinkedHashMap<String, String>>();
+
     /**
      * 当前Section的引用
      */

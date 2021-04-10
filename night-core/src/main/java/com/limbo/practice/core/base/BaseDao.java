@@ -1,5 +1,7 @@
 package com.limbo.practice.core.base;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ public interface BaseDao<T> {
      * @param bean
      * @return
      */
-    T get(T bean);
+     T get(T bean);
 
     /**
      * 根据bean获取数据集合
@@ -31,7 +33,7 @@ public interface BaseDao<T> {
      * @param bean
      * @return
      */
-    List<T> list(T bean);
+     List<T> list(T bean);
 
     /**
      * 插入数据
@@ -39,7 +41,15 @@ public interface BaseDao<T> {
      * @param bean
      * @return
      */
-    int insert(T bean);
+     int insert(T bean);
+
+    /**
+     * 批量插入数据
+     *
+     * @param beans
+     * @return
+     */
+     int insertBatch(@Param("beans") List<T> beans);
 
     /**
      * 更新数据
@@ -47,7 +57,7 @@ public interface BaseDao<T> {
      * @param bean
      * @return
      */
-    int update(T bean);
+     int update(T bean);
 
     /**
      * 更新数据,只更新设置的数据
@@ -55,7 +65,7 @@ public interface BaseDao<T> {
      * @param bean
      * @return
      */
-    int updateActive(T bean);
+     int updateActive(T bean);
 
     /**
      * 逻辑删除
@@ -63,7 +73,7 @@ public interface BaseDao<T> {
      * @param id
      * @return
      */
-    int logicDelete(Long id);
+     int logicDelete(Long id);
 
     /**
      * 物理删除
@@ -71,5 +81,5 @@ public interface BaseDao<T> {
      * @param id
      * @return
      */
-    int delete(Long id);
+     int delete(Long id);
 }

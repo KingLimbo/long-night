@@ -4,14 +4,16 @@
 
 package com.limbo.practice.base.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import com.limbo.practice.core.base.BaseController;
 import com.limbo.practice.base.dao.SysUserDao;
 import com.limbo.practice.base.entity.SysUser;
-
 import com.limbo.practice.base.service.SysUserService;
+import com.limbo.practice.core.base.BaseController;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.PostConstruct;
 
 /**
 *
@@ -27,8 +29,16 @@ import com.limbo.practice.base.service.SysUserService;
 * version V1.0
 */
 
+@Api(tags = "系统用户")
 @Controller
-public class SysUserController extends BaseController {
+@RequestMapping("/sys-user")
+public class SysUserController extends BaseController<SysUser, SysUserDao> {
+
     @Autowired
-    private SysUserService<SysUserDao,SysUser>  sysUserServiceImpl;
+    private SysUserService<SysUser, SysUserDao> sysUserServiceImpl;
+
+    @PostConstruct
+    public void initService(){
+        setService(sysUserServiceImpl);
+    }
 }

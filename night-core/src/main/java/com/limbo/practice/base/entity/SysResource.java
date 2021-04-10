@@ -19,8 +19,7 @@ import com.limbo.practice.base.entity.po.SysResourcePo;
 *
 * version V1.0
 */
-
-public class SysResource extends SysResourcePo{
+public class SysResource extends SysResourcePo {
 
     /**
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)

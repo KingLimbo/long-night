@@ -84,9 +84,11 @@
         <!-- rapid.generator 版本号 -->
         <rapid.generator.version>4.0.6</rapid.generator.version>
         <!-- lombok 版本号 -->
-        <lombok.version>1.16.18</lombok.version>
+        <lombok.version>1.18.0</lombok.version>
         <!-- hutool 版本号 -->
         <hutool.version>5.5.8</hutool.version>
+        <!-- swagger2 版本号 -->
+        <swagger2.version>2.9.2</swagger2.version>
 
         <!--maven-clean版本号-->
         <maven.clean.version>3.1.0</maven.clean.version>
@@ -186,6 +188,12 @@
                 <type>pom</type>
                 <!--表示继承-->
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.databind.version}</version>
             </dependency>
 
             <!-- mybatis 数据访问层 start -->
@@ -356,6 +364,18 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- swagger2文档配置依赖 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

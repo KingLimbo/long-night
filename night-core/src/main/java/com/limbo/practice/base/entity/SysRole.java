@@ -20,7 +20,7 @@ import com.limbo.practice.base.entity.po.SysRolePo;
 * version V1.0
 */
 
-public class SysRole extends SysRolePo{
+public class SysRole extends SysRolePo {
 
     /**
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)

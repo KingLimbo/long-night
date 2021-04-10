@@ -1,8 +1,8 @@
 package com.limbo.practice.core.annotation;
 
-import com.limbo.practice.core.constant.MenuLevelEnum;
-import com.limbo.practice.core.constant.ResourceTypeEnum;
-import com.limbo.practice.core.constant.RoleNameEnum;
+import com.limbo.practice.core.enums.MenuLevelEnum;
+import com.limbo.practice.core.enums.ResourceTypeEnum;
+import com.limbo.practice.core.enums.RoleNameEnum;
 
 import java.lang.annotation.ElementType;
 

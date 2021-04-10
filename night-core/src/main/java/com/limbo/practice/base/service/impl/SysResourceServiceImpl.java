@@ -4,12 +4,11 @@
 
 package com.limbo.practice.base.service.impl;
 
-import org.springframework.stereotype.Service;
-
-import com.limbo.practice.core.base.BaseServiceImpl;
 import com.limbo.practice.base.dao.SysResourceDao;
 import com.limbo.practice.base.entity.SysResource;
 import com.limbo.practice.base.service.SysResourceService;
+import com.limbo.practice.core.base.BaseServiceImpl;
+import org.springframework.stereotype.Service;
 
 /**
 *
@@ -26,7 +25,7 @@ import com.limbo.practice.base.service.SysResourceService;
 */
 
 @Service
-public class SysResourceServiceImpl extends BaseServiceImpl<SysResourceDao,SysResource> implements SysResourceService<SysResourceDao,SysResource> {
+public class SysResourceServiceImpl extends BaseServiceImpl<SysResource, SysResourceDao> implements SysResourceService<SysResource, SysResourceDao> {
 
     @Override
     public void scanApiResource() {

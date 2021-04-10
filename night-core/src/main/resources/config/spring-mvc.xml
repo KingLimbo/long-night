@@ -19,9 +19,14 @@
     <!-- 配置静态资源路径映射 -->
     <mvc:resources mapping="/common/**" location="/common/, classpath*:/common/"/>
     <mvc:resources mapping="/page/**" location="/page/, classpath*:/page/"/>
+    <mvc:resources mapping="/swagger-ui.html" location="classpath:/META-INF/resources/" />
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
 
     <!-- 注册默认的MVC映射处理用到的bean -->
     <mvc:annotation-driven/>
+
+    <!-- swagger -->
+<!--    <bean id="swagger2Config" class="com.limbo.practice.core.swagger.SwaggerConfig"/>-->
 
     <!--===============通用视图解析器 begin===============-->
     <!-- 配置JSP视图解析器 -->

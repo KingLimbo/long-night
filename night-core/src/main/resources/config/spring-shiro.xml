@@ -25,7 +25,7 @@
         <!-- 引用SecurityManager -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 登录的url -->
-        <property name="loginUrl" value="login"/>
+        <property name="loginUrl" value="/login"/>
         <!-- 登录成功的url -->
         <property name="successUrl" value="/page/home.html"/>
         <!-- 如果访问不成功则显示的url为 -->
@@ -37,6 +37,13 @@
                 /login=anon
                 /page/**=anon
                 /common/**=anon
+                <!--swagger start-->
+                /swagger-ui.html=anon
+                /webjars/**=anon
+                /swagger-resources/**=anon
+                /v2/api-docs/**=anon
+                /csrf/**=anon
+                <!--swagger end-->
                 /logout=logout
                 /**=authc
             </value>

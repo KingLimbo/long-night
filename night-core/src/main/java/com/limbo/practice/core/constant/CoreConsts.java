@@ -13,15 +13,29 @@ public class CoreConsts {
     /**
      * 登录相关常量
      */
-    // 登录地址
+    /**
+     * 登录地址
+     */
     public static final String LOGIN_URL = "redirect:/login";
-    // 登录错误信息KEY
+
+    /**
+     * 登录错误信息KEY
+     */
     public static final String LOGIN_ERROR_KEY = "loginError";
-    // 登录锁定_已锁定
+
+    /**
+     * 登录锁定_已锁定
+     */
     public static final Boolean LOGIN_LOCKE_YES = true;
-    // 登录锁定_未锁定
+
+    /**
+     * 登录锁定_未锁定
+     */
     public static final Boolean LOGIN_LOCKE_NO = false;
-    // SALT 固定盐
+
+    /**
+     * SALT 固定盐
+     */
     public static final String SALT_CONNECT = "night-core";
 
     /**
@@ -32,9 +46,13 @@ public class CoreConsts {
     /**
      * Freemarker 使用的变量
      */
-    //输出标签Name
+    /**
+     * 输出标签Name
+     */
     public static final String TARGET = "target";
-    //标签使用目标
+    /**
+     * 标签使用目标
+     */
     public static final String OUT_TAG_NAME = "outTagName";
 
     /**
@@ -74,7 +92,10 @@ public class CoreConsts {
      * cache常用变量
      **/
     public static final String CACHE_NAME = "shiro_cache";
-    // cacheManager bean name
+
+    /**
+     * cacheManager bean name
+     */
     public static final String CACHE_MANAGER = "cacheManager";
 
 
@@ -86,11 +107,20 @@ public class CoreConsts {
     // 版本号，重启的时间
     public static String VERSION = String.valueOf(System.currentTimeMillis());
 
-    // 存储到缓存，标识用户的禁止状态，解决在线用户踢出的问题
+    /**
+     * 存储到缓存，标识用户的禁止状态，解决在线用户踢出的问题
+     */
     public static final String EXECUTE_CHANGE_USER = "SOJSON_EXECUTE_CHANGE_USER";
 
     /**
      * 核心包
      */
     public static final String CORE_PACKAGE = "com.limbo.practice";
+
+    /**
+     *
+     */
+    public static final String SERVICE_SUCCESS = "success";
+
+    public static final String SERVICE_FAIL = "fail";
 }

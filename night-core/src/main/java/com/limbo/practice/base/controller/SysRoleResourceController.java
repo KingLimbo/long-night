@@ -4,14 +4,16 @@
 
 package com.limbo.practice.base.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import com.limbo.practice.core.base.BaseController;
 import com.limbo.practice.base.dao.SysRoleResourceDao;
 import com.limbo.practice.base.entity.SysRoleResource;
-
 import com.limbo.practice.base.service.SysRoleResourceService;
+import com.limbo.practice.core.base.BaseController;
+import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.PostConstruct;
 
 /**
 *
@@ -27,8 +29,17 @@ import com.limbo.practice.base.service.SysRoleResourceService;
 * version V1.0
 */
 
+@Api(tags = "系统角色资源关联")
 @Controller
-public class SysRoleResourceController extends BaseController {
+@RequestMapping("/sys-role-resource")
+public class SysRoleResourceController extends BaseController<SysRoleResource, SysRoleResourceDao> {
+
     @Autowired
-    private SysRoleResourceService<SysRoleResourceDao,SysRoleResource>  sysRoleResourceServiceImpl;
+    private SysRoleResourceService<SysRoleResource, SysRoleResourceDao>  sysRoleResourceServiceImpl;
+
+    @PostConstruct
+    public void initService(){
+        setService(sysRoleResourceServiceImpl);
+    }
+
 }

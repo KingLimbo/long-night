@@ -4,9 +4,10 @@
 
 package com.limbo.practice.base.dao;
 
-import com.limbo.practice.core.mybatis.MybatisDao;
-import com.limbo.practice.core.base.BaseDao;
 import com.limbo.practice.base.entity.SysRole;
+import com.limbo.practice.core.base.BaseDao;
+import com.limbo.practice.core.mybatis.MybatisDao;
+
 
 /**
 *

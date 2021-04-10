@@ -2,22 +2,24 @@ package com.limbo.practice.core.login.controller;
 
 import com.limbo.practice.core.constant.CoreConsts;
 import com.limbo.practice.core.login.domain.LoginUser;
-import com.limbo.practice.core.shiro.session.CustomSessionManager;
 import com.limbo.practice.core.shiro.token.manager.TokenManager;
 import com.limbo.practice.core.util.LoggerUtils;
 import com.limbo.practice.core.util.MessageUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authc.*;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+@Api(tags = "系统登录")
 @Controller
+@RequestMapping("/")
 public class LoginController {
 
     /**
@@ -25,7 +27,8 @@ public class LoginController {
      * @param loginError
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping("/login")
+    @ApiOperation("请求登录页面")
     public ModelAndView login(String loginError){
         ModelAndView view = new ModelAndView("core/login");
         // 设置错误消息
@@ -40,7 +43,8 @@ public class LoginController {
      * @param rememberMe 记住我
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping("/login")
+    @ApiOperation("登录请求")
     public String login(LoginUser loginUser, Boolean rememberMe, ModelMap modelMap, HttpServletRequest req){
         // 路径默认设置登录地址
         String loginPage = CoreConsts.LOGIN_URL;
@@ -99,7 +103,8 @@ public class LoginController {
      *
      * @return
      */
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @GetMapping("/home")
+    @ApiOperation("请求首页")
     public ModelAndView home(){
         // 初始化页面
         ModelAndView view = new ModelAndView("core/home");

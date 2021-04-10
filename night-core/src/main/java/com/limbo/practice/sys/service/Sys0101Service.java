@@ -8,7 +8,7 @@ import com.limbo.practice.core.base.BaseService;
  * @author limbo
  * @date 2019/4/25
  */
-public interface Sys0101Service<D, T>  extends BaseService<D, T> {
+public interface Sys0101Service<T, D>  extends BaseService<T, D> {
 
 
 }
