@@ -10,7 +10,7 @@
         <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
         <#list table.columns as column>
         <#if column.sqlName != "id">
-        <result property="<@getName itemColumn=column/>" column="${column.sqlName}" javaType="${column.javaType}" jdbcType="<@get4JdbcType itemColumn=column/>" />
+        <result property="<@getName itemColumn=column/>" column="${column.sqlName}" javaType="${column.javaType}" jdbcType="<@get4JdbcType itemColumn=column/>"<#if column.sqlTypeName = "BIT" && column.sqlName?contains("type")> typeHandler="com.limbo.practice.core.mybatis.BaseEnumMybatisHandler"</#if> />
         </#if>
         </#list>
     </resultMap>
@@ -25,7 +25,7 @@
         <where>
         <#list table.columns as column>
         <if test="<@getName itemColumn=column/> != null and <@getName itemColumn=column/> != '' ">
-            AND ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>}
+            <#if column.sqlTypeName = "BIT" && column.sqlName?contains("type")>AND ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, typeHandler=com.limbo.practice.core.mybatis.BaseEnumMybatisHandler}<#else>AND ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>}</#if>
         </if>
         </#list>
         </where>
@@ -59,8 +59,8 @@
             ${column.sqlName} <#if column_has_next>,</#if>
         </#list>
         ) VALUES (
-        <#list table.columns as column>        
-            ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if>
+        <#list table.columns as column>
+            <#if column.sqlTypeName = "BIT" && column.sqlName?contains("type")>${"#"}{bean.<@getName itemColumn=column/>, typeHandler=com.limbo.practice.core.mybatis.BaseEnumMybatisHandler} <#if column_has_next>,</#if><#else>${"#"}{bean.<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if></#if>
         </#list>
         )
     </insert>
@@ -73,7 +73,7 @@
         ) VALUES
         <foreach collection="beans" open="(" close=")"  item="bean" separator="),(">
         <#list table.columns as column>
-            ${"#"}{bean.<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if>
+            <#if column.sqlTypeName = "BIT" && column.sqlName?contains("type")>${"#"}{bean.<@getName itemColumn=column/>, typeHandler=com.limbo.practice.core.mybatis.BaseEnumMybatisHandler} <#if column_has_next>,</#if><#else>${"#"}{bean.<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if></#if>
         </#list>
         </foreach>
     </insert>
@@ -81,7 +81,7 @@
     <update id="update">
         UPDATE ${tableName} SET 
         <#list table.notPkColumns as column>
-            ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if>
+            <#if column.sqlTypeName = "BIT" && column.sqlName?contains("type")>${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, typeHandler=com.limbo.practice.core.mybatis.BaseEnumMybatisHandler} <#if column_has_next>,</#if><#else>${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if></#if>
         </#list>
         WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </update>
@@ -90,7 +90,7 @@
         UPDATE ${tableName} SET
         <#list table.notPkColumns as column>
         <if test="<@getName itemColumn=column/> != null and <@getName itemColumn=column/> != '' ">
-            ${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if>
+            <#if column.sqlTypeName = "BIT" && column.sqlName?contains("type")>${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, typeHandler=com.limbo.practice.core.mybatis.BaseEnumMybatisHandler} <#if column_has_next>,</#if><#else>${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if></#if>
         </if>
         </#list>
         WHERE id = ${"#"}{id, jdbcType=BIGINT}
