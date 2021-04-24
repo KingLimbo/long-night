@@ -4,6 +4,7 @@ import com.limbo.practice.core.constant.CoreConsts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -89,6 +90,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      */
     @Override
     public int insertDb(T bean) {
+        bean.setGmtCreate(new Date());
        return dao.insert(bean);
     }
 
@@ -100,6 +102,10 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      */
     @Override
     public int insertBatch(List<T> beanList) {
+        Date gmtModified = new Date();
+        beanList.stream().forEach(o -> {
+            o.setGmtCreate(gmtModified);
+        });
         return dao.insertBatch(beanList);
     }
 }
