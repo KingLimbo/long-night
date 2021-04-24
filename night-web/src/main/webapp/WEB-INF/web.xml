@@ -1,8 +1,8 @@
-<!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
     <display-name>long-night</display-name>
     <!-- log4j日志参数 -->
     <context-param>
@@ -16,7 +16,7 @@
     </context-param>
     <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>springmvc.night-web</param-value>
+        <param-value>springmvc.night-core</param-value>
     </context-param>
     <context-param>
         <param-name>log4jRefreshInterval</param-name>
@@ -76,10 +76,10 @@
     <!-- 配置如果没有权限，则跳转到的页面 -->
     <error-page>
         <exception-type>org.apache.shiro.authz.AuthorizationException</exception-type>
-        <location>/404.jsp</location>
+        <location>/comm/404.jsp</location>
     </error-page>
     <error-page>
         <exception-type>org.apache.shiro.authz.UnauthorizedException</exception-type>
-        <location>/500.jsp</location>
+        <location>/comm/500.jsp</location>
     </error-page>
 </web-app>
