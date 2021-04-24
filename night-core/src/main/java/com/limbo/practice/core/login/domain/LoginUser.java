@@ -3,10 +3,12 @@ package com.limbo.practice.core.login.domain;
 
 import com.limbo.practice.core.base.BaseBO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class LoginUser extends BaseBO {
 
     /**
