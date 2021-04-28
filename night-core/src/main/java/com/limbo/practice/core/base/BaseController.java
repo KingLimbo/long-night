@@ -25,23 +25,28 @@ public class BaseController<T extends BaseBO, D> {
         return service.queryList(vo);
     }
 
-    @PostMapping("/post")
-    @ApiOperation("创建资源")
-    public void postData(){
-
-    }
-
-    @PutMapping("/put")
-    @ApiOperation("更新资源")
-    public void putData(){
-
-    }
-
-    @PatchMapping("/patch")
-    @ApiOperation("局部更新数据")
+    @PostMapping("/insert")
+    @ApiOperation("新增")
     @ResponseBody
-    public ResultBean patchData(T bean){
-        return new ResultBean();
+    public Boolean postData(T data){
+        int insertDb = service.insertDb(data);
+        return insertDb == 1;
+    }
+
+    @PutMapping("/save")
+    @ApiOperation("保存")
+    @ResponseBody
+    public ResultBean putData(T data){
+        ResultBean resultBean = service.save(data);
+        return resultBean;
+    }
+
+    @PatchMapping("/saveActive")
+    @ApiOperation("局部更新")
+    @ResponseBody
+    public ResultBean patchData(T data){
+        ResultBean resultBean = service.saveActive(data);
+        return resultBean;
     }
 
     @DeleteMapping("/delete/{id}")

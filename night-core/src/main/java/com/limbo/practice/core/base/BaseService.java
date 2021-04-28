@@ -30,12 +30,12 @@ public interface BaseService<T, D> {
     ResultBean save(T vo);
 
     /**
-     * 删除
+     * 页面数据保存,局部更新
      *
-     * @param id
+     * @param vo 页面参数
      * @return
      */
-    ResultBean delete(Long id);
+    ResultBean saveActive(T vo);
 
     /**
      * 页面初始查询
@@ -44,6 +44,22 @@ public interface BaseService<T, D> {
      * @return
      */
     PageTableBean queryList(T vo);
+
+    /**
+     * 获取数据
+     *
+     * @param vo 查询参数
+     * @return
+     */
+    T get(T vo);
+
+    /**
+     * 通过ID获取数据
+     *
+     * @param id id
+     * @return
+     */
+    T getById(Long id);
 
     /**
      * 插入数据
@@ -60,4 +76,12 @@ public interface BaseService<T, D> {
      * @return
      */
     int insertBatch(List<T> beanList);
+
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
+    ResultBean delete(Long id);
 }

@@ -49,16 +49,16 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
     }
 
     /**
-     * 删除
+     * 页面数据保存,局部更新
      *
-     * @param id
+     * @param vo 页面参数
      * @return
      */
     @Override
-    public ResultBean delete(Long id){
+    public ResultBean saveActive(T vo) {
         ResultBean resultBean = new ResultBean();
-        int i = dao.delete(id);
-        if (i == 1) {
+        int update = dao.updateActive(vo);
+        if (update == 1) {
             resultBean.setResultFlg(CoreConsts.SERVICE_SUCCESS);
         } else {
             resultBean.setResultFlg(CoreConsts.SERVICE_FAIL);
@@ -77,9 +77,33 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
         PageTableBean pageTableBean = new PageTableBean();
         List<T> list = dao.list(vo);
         pageTableBean.setData(list);
-        pageTableBean.setCode(0);
+        pageTableBean.setCode(200);
         pageTableBean.setCount((long) list.size());
         return pageTableBean;
+    }
+
+    /**
+     * 获取数据
+     *
+     * @param vo 查询参数
+     * @return
+     */
+    @Override
+    public T get(T vo){
+        T data = dao.get(vo);
+        return data;
+    }
+
+    /**
+     * 通过ID获取数据
+     *
+     * @param id id
+     * @return
+     */
+    @Override
+    public T getById(Long id){
+        T data = dao.getById(id);
+        return data;
     }
 
     /**
@@ -107,5 +131,23 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
             o.setGmtCreate(gmtModified);
         });
         return dao.insertBatch(beanList);
+    }
+
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultBean delete(Long id){
+        ResultBean resultBean = new ResultBean();
+        int i = dao.delete(id);
+        if (i == 1) {
+            resultBean.setResultFlg(CoreConsts.SERVICE_SUCCESS);
+        } else {
+            resultBean.setResultFlg(CoreConsts.SERVICE_FAIL);
+        }
+        return resultBean;
     }
 }
