@@ -38,6 +38,22 @@ public interface BaseService<T, D> {
     ResultBean saveActive(T vo);
 
     /**
+     * 页面数据保存
+     *
+     * @param vo 页面参数
+     * @return
+     */
+    int update(T vo);
+
+    /**
+     * 页面数据保存,局部更新
+     *
+     * @param vo 页面参数
+     * @return
+     */
+    int updateActive(T vo);
+
+    /**
      * 页面初始查询
      *
      * @param vo 页面参数
@@ -67,7 +83,7 @@ public interface BaseService<T, D> {
      * @param bean
      * @return
      */
-    int insertDb(T bean);
+    Long insertDb(T bean);
 
     /**
      * 批量插入数据

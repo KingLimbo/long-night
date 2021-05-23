@@ -19,7 +19,7 @@ public @interface ApiResources {
      * 类型
      * @return
      */
-    ResourceTypeEnum type() default ResourceTypeEnum.MENU;
+    ResourceTypeEnum type() default ResourceTypeEnum.RESOURCE;
 
     /**
      * 父节点

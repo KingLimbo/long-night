@@ -6,6 +6,7 @@ package ${basepackage}.${sysKey}.entity.po;
 import ${basepackage}.core.base.BaseBO;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 /**
 *
 * @ProjectName: long-night
@@ -21,6 +22,7 @@ import lombok.Setter;
 */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class ${table.className}Po extends BaseBO {
 
     /**

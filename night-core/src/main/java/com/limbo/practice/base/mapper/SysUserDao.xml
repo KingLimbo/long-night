@@ -105,7 +105,7 @@
         <include refid="Base_Where_List"/>
     </select>
     
-    <insert id="insert">
+    <insert id="insert" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         INSERT IGNORE INTO sys_user(
             id ,
             login_account ,
@@ -230,9 +230,7 @@
         <if test="gmtCreate != null and gmtCreate != '' ">
             gmt_create = #{gmtCreate, jdbcType=DATE} ,
         </if>
-        <if test="gmtModified != null and gmtModified != '' ">
-            gmt_modified = #{gmtModified, jdbcType=DATE} 
-        </if>
+            gmt_modified = NOW()
         WHERE id = #{id, jdbcType=BIGINT}
     </update>
     

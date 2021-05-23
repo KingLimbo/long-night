@@ -28,9 +28,8 @@ public class BaseController<T extends BaseBO, D> {
     @PostMapping("/insert")
     @ApiOperation("新增")
     @ResponseBody
-    public Boolean postData(T data){
-        int insertDb = service.insertDb(data);
-        return insertDb == 1;
+    public Long postData(T data){
+        return service.insertDb(data);
     }
 
     @PutMapping("/save")

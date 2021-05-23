@@ -12,15 +12,45 @@ import java.lang.annotation.ElementType;
 @org.springframework.stereotype.Component
 public @interface ApiMethodResources {
 
+    /**
+     * 资源类型
+     *
+     * @return
+     */
     ResourceTypeEnum type() default ResourceTypeEnum.RESOURCE;
 
+    /**
+     * 父级
+     *
+     * @return
+     */
     MenuLevelEnum parent() default MenuLevelEnum.ROOT;
 
+    /**
+     * 角色
+     *
+     * @return
+     */
     RoleNameEnum roleName();
 
+    /**
+     * 名称
+     *
+     * @return
+     */
     String name() default "";
 
+    /**
+     * 排序
+     *
+     * @return
+     */
     int order() default 1;
 
+    /**
+     * 路由
+     *
+     * @return
+     */
     String route() default "";
 }

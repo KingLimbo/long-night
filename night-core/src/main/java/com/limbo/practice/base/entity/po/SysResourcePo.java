@@ -8,6 +8,8 @@ import com.limbo.practice.core.base.BaseBO;
 import com.limbo.practice.core.enums.ResourceTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+
 /**
 *
 * @ProjectName: long-night
@@ -23,7 +25,8 @@ import lombok.Setter;
 */
 @Getter
 @Setter
-public class SysResourcePo extends BaseBO{
+@Accessors(chain = true)
+public class SysResourcePo extends BaseBO {
 
     /**
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)

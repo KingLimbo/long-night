@@ -67,6 +67,28 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
     }
 
     /**
+     * 页面数据保存
+     *
+     * @param vo 页面参数
+     * @return
+     */
+    @Override
+    public int update(T vo) {
+        return dao.update(vo);
+    }
+
+    /**
+     * 页面数据保存,局部更新
+     *
+     * @param vo 页面参数
+     * @return
+     */
+    @Override
+    public int updateActive(T vo) {
+        return dao.updateActive(vo);
+    }
+
+    /**
      * 页面初始查询
      *
      * @param vo 页面参数
@@ -113,9 +135,9 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    public int insertDb(T bean) {
+    public Long insertDb(T bean) {
         bean.setGmtCreate(new Date());
-       return dao.insert(bean);
+       return dao.insert(bean) > 0 ? bean.getId() : null;
     }
 
     /**

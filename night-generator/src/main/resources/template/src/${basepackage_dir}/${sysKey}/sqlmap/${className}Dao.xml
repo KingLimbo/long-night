@@ -53,7 +53,7 @@
         <include refid="Base_Where_List"/>
     </select>
     
-    <insert id="insert">
+    <insert id="insert" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         INSERT IGNORE INTO ${tableName}(
          <#list table.columns as column>
             ${column.sqlName} <#if column_has_next>,</#if>
@@ -89,10 +89,13 @@
     <update id="updateActive">
         UPDATE ${tableName} SET
         <#list table.notPkColumns as column>
+        <#if column.sqlName != "gmt_modified">
         <if test="<@getName itemColumn=column/> != null and <@getName itemColumn=column/> != '' ">
             <#if column.sqlTypeName = "BIT" && column.sqlName?contains("type")>${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, typeHandler=com.limbo.practice.core.mybatis.BaseEnumMybatisHandler} <#if column_has_next>,</#if><#else>${column.sqlName} = ${"#"}{<@getName itemColumn=column/>, jdbcType=<@get4JdbcType itemColumn=column/>} <#if column_has_next>,</#if></#if>
         </if>
+        </#if>
         </#list>
+        gmt_modified = NOW()
         WHERE id = ${"#"}{id, jdbcType=BIGINT}
     </update>
     

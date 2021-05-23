@@ -2,6 +2,7 @@ package com.limbo.practice.core.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.Date;
  * @date : 2020/4/28
  */
 @Data
+@Accessors(chain = true)
 public class BaseBO implements Serializable {
 
     /**
