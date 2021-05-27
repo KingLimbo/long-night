@@ -4,11 +4,16 @@
 
 package com.limbo.practice.base.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.limbo.practice.base.dao.SysRoleResourceDao;
 import com.limbo.practice.base.entity.SysRoleResource;
 import com.limbo.practice.base.service.SysRoleResourceService;
 import com.limbo.practice.core.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
+import java.util.Set;
 
 /**
 *
@@ -23,8 +28,14 @@ import org.springframework.stereotype.Service;
 *
 * version V1.0
 */
-
 @Service
 public class SysRoleResourceServiceImpl extends BaseServiceImpl<SysRoleResource, SysRoleResourceDao>  implements SysRoleResourceService<SysRoleResource, SysRoleResourceDao> {
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteByRoleIdResourceIds(Long roleId, Set<Long> resourceIds) {
+        if (Objects.nonNull(roleId) && CollectionUtil.isNotEmpty(resourceIds)) {
+            dao.deleteByRoleIdResourceIds(roleId, resourceIds);
+        }
+    }
 }

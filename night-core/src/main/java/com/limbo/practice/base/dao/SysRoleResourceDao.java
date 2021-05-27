@@ -4,9 +4,12 @@
 
 package com.limbo.practice.base.dao;
 
-import com.limbo.practice.core.mybatis.MybatisDao;
-import com.limbo.practice.core.base.BaseDao;
 import com.limbo.practice.base.entity.SysRoleResource;
+import com.limbo.practice.core.base.BaseDao;
+import com.limbo.practice.core.mybatis.MybatisDao;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Set;
 
 /**
 *
@@ -25,4 +28,5 @@ import com.limbo.practice.base.entity.SysRoleResource;
 @MybatisDao
 public interface SysRoleResourceDao extends BaseDao<SysRoleResource> {
 
+    int deleteByRoleIdResourceIds(@Param("roleId") Long roleId, @Param("resourceIds") Set<Long> resourceIds);
 }

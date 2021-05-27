@@ -20,7 +20,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,
+        `id`,
         parent_id,
         name,
         url,
@@ -244,5 +244,12 @@
         DELETE FROM sys_resource
         WHERE id = #{id, jdbcType=BIGINT}
     </delete>
-    
+
+    <delete id="deleteByPid">
+        DELETE FROM sys_resource WHERE parent_id = #{pid, jdbcType=BIGINT} OR parents LIKE CONCAT('%,', #{pid, jdbcType=BIGINT}, ',%')
+    </delete>
+
+    <select id="selectChildAndSelfById" parameterType="Long" resultType="Long">
+        SELECT `id` FROM sys_resource WHERE id = #{id, jdbcType=BIGINT} OR parent_id = #{id, jdbcType=BIGINT} OR parents LIKE CONCAT('%,', #{id, jdbcType=BIGINT}, ',%')
+    </select>
 </mapper>

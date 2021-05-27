@@ -4,9 +4,11 @@
 
 package com.limbo.practice.base.dao;
 
-import com.limbo.practice.core.mybatis.MybatisDao;
-import com.limbo.practice.core.base.BaseDao;
 import com.limbo.practice.base.entity.SysResource;
+import com.limbo.practice.core.base.BaseDao;
+import com.limbo.practice.core.mybatis.MybatisDao;
+
+import java.util.Set;
 
 /**
 *
@@ -25,4 +27,7 @@ import com.limbo.practice.base.entity.SysResource;
 @MybatisDao
 public interface SysResourceDao extends BaseDao<SysResource> {
 
+    int deleteByPid(Long pid);
+
+    Set<Long> selectChildAndSelfById(Long id);
 }

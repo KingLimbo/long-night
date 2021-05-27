@@ -12,6 +12,7 @@ import com.limbo.practice.comm.service.SysInitService;
 import com.limbo.practice.core.annotation.ApiResources;
 import com.limbo.practice.core.base.BaseController;
 import com.limbo.practice.core.enums.MenuLevelEnum;
+import com.limbo.practice.core.enums.ResourceTypeEnum;
 import com.limbo.practice.core.enums.RoleNameEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,15 +41,14 @@ import java.util.List;
 *
 * version V1.0
 */
-@Api(tags = "系统菜单资源")
-@ApiResources(roleName = RoleNameEnum.ADMIN, parent = MenuLevelEnum.SYS)
+@Api(tags = "系统资源管理")
+@ApiResources(type = ResourceTypeEnum.MENU, roleName = RoleNameEnum.ADMIN, parent = MenuLevelEnum.SYS)
 @Controller
 @RequestMapping("/sys-resource")
 public class SysResourceController extends BaseController<SysResource, SysResourceDao> {
 
     @Autowired
     private SysResourceService<SysResource, SysResourceDao> sysResourceServiceImpl;
-
     @Autowired
     private SysInitService sysInitService;
     @Autowired

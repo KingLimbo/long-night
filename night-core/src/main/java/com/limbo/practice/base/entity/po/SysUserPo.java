@@ -7,6 +7,8 @@ package com.limbo.practice.base.entity.po;
 import com.limbo.practice.core.base.BaseBO;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+
 /**
 *
 * @ProjectName: long-night
@@ -22,7 +24,8 @@ import lombok.Setter;
 */
 @Getter
 @Setter
-public class SysUserPo extends BaseBO{
+@Accessors(chain = true)
+public class SysUserPo extends BaseBO {
 
     /**
      * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)

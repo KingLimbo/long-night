@@ -100,4 +100,12 @@ public interface BaseService<T, D> {
      * @return
      */
     ResultBean delete(Long id);
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    ResultBean batchDelete(Long[] ids);
 }

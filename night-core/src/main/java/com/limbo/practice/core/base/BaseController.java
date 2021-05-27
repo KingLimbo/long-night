@@ -54,4 +54,11 @@ public class BaseController<T extends BaseBO, D> {
     public ResultBean delete(@ApiParam("删除id") @PathVariable("id") Long id){
         return service.delete(id);
     }
+
+    @DeleteMapping("/batch-delete/{ids}")
+    @ApiOperation("批量删除")
+    @ResponseBody
+    public ResultBean batchDelete(@ApiParam("删除ids") @PathVariable("ids") Long[] ids){
+        return service.batchDelete(ids);
+    }
 }

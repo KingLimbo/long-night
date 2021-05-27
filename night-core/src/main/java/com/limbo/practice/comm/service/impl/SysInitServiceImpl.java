@@ -38,6 +38,7 @@ public class SysInitServiceImpl implements SysInitService {
         List<SysRole> data = new ArrayList<>();
         for (RoleNameEnum roleNameEnum : RoleNameEnum.values()) {
           SysRole role = new SysRole();
+          role.setId(Long.valueOf(roleNameEnum.getValue()));
           role.setName(roleNameEnum.getName());
           role.setAutoGeneration(true);
           data.add(role);

@@ -1,9 +1,12 @@
 package com.limbo.practice.core.base;
 
+import cn.hutool.core.util.ArrayUtil;
 import com.limbo.practice.core.constant.CoreConsts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +20,7 @@ import java.util.List;
 public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements BaseService<T, D> {
 
     @Autowired
-    private D dao;
+    protected D dao;
 
     /**
      * 页面初始化
@@ -37,6 +40,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ResultBean save(T vo) {
         ResultBean resultBean = new ResultBean();
         int update = dao.update(vo);
@@ -55,6 +59,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ResultBean saveActive(T vo) {
         ResultBean resultBean = new ResultBean();
         int update = dao.updateActive(vo);
@@ -73,6 +78,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int update(T vo) {
         return dao.update(vo);
     }
@@ -84,6 +90,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int updateActive(T vo) {
         return dao.updateActive(vo);
     }
@@ -135,6 +142,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Long insertDb(T bean) {
         bean.setGmtCreate(new Date());
        return dao.insert(bean) > 0 ? bean.getId() : null;
@@ -147,6 +155,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int insertBatch(List<T> beanList) {
         Date gmtModified = new Date();
         beanList.stream().forEach(o -> {
@@ -162,6 +171,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ResultBean delete(Long id){
         ResultBean resultBean = new ResultBean();
         int i = dao.delete(id);
@@ -169,6 +179,26 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
             resultBean.setResultFlg(CoreConsts.SERVICE_SUCCESS);
         } else {
             resultBean.setResultFlg(CoreConsts.SERVICE_FAIL);
+        }
+        return resultBean;
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public ResultBean batchDelete(Long[] ids) {
+        ResultBean resultBean = new ResultBean();
+        if (ArrayUtil.isNotEmpty(ids)) {
+            Arrays.stream(ids).forEach(o -> dao.delete(o));
+            resultBean.setResultFlg(CoreConsts.SERVICE_SUCCESS);
+        } else {
+            resultBean.setResultFlg(CoreConsts.SERVICE_FAIL);
+            resultBean.setMessage("删除id不能为空！");
         }
         return resultBean;
     }

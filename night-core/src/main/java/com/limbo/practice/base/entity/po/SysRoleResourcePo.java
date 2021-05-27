@@ -7,6 +7,8 @@ package com.limbo.practice.base.entity.po;
 import com.limbo.practice.core.base.BaseBO;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+
 /**
 *
 * @ProjectName: long-night
@@ -22,6 +24,7 @@ import lombok.Setter;
 */
 @Getter
 @Setter
+@Accessors(chain = true)
 public class SysRoleResourcePo extends BaseBO{
 
     /**

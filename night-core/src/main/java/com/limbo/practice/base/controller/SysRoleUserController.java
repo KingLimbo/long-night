@@ -7,7 +7,10 @@ package com.limbo.practice.base.controller;
 import com.limbo.practice.base.dao.SysRoleUserDao;
 import com.limbo.practice.base.entity.SysRoleUser;
 import com.limbo.practice.base.service.SysRoleUserService;
+import com.limbo.practice.core.annotation.ApiResources;
 import com.limbo.practice.core.base.BaseController;
+import com.limbo.practice.core.enums.MenuLevelEnum;
+import com.limbo.practice.core.enums.RoleNameEnum;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,7 @@ import javax.annotation.PostConstruct;
 */
 
 @Api(tags = "系统角色用户关联")
+@ApiResources(roleName = RoleNameEnum.ADMIN, parent = MenuLevelEnum.SYS, order = 4)
 @Controller
 @RequestMapping("/sys-role-user")
 public class SysRoleUserController extends  BaseController<SysRoleUser, SysRoleUserDao> {

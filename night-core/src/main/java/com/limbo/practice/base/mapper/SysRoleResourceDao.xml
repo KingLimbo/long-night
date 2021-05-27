@@ -140,5 +140,13 @@
         DELETE FROM sys_role_resource
         WHERE id = #{id, jdbcType=BIGINT}
     </delete>
-    
+
+    <delete id="deleteByRoleIdResourceIds">
+        DELETE FROM sys_role_resource
+        WHERE role_id = #{roleId, jdbcType=BIGINT}
+            AND resource_id IN
+            <foreach collection="resourceIds" open="(" item="resourceId" close=")" separator=",">
+                #{resourceId, jdbcType=BIGINT}
+            </foreach>
+    </delete>
 </mapper>

@@ -34,8 +34,9 @@ CREATE TABLE `sys_resource` (
   `is_deleted` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除 说明：1 表示删除，0 表示未删除',
   `gmt_create` datetime NOT NULL COMMENT '创建时间',
   `gmt_modified` datetime DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统资源表';
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_name_url` (`name`,`url`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COMMENT='系统资源表';
 
 -- ----------------------------
 -- Records of sys_resource
@@ -55,7 +56,7 @@ CREATE TABLE `sys_role` (
   `gmt_modified` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_sys_role1` (`name`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COMMENT='系统角色表';
 
 -- ----------------------------
 -- Records of sys_role

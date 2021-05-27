@@ -6,6 +6,8 @@ package com.limbo.practice.base.service;
 
 import com.limbo.practice.core.base.BaseService;
 
+import java.util.Set;
+
 /**
 *
 * @ProjectName: long-night
@@ -21,5 +23,5 @@ import com.limbo.practice.core.base.BaseService;
 */
 public interface SysRoleResourceService<T, D> extends BaseService<T, D> {
 
-
+    void deleteByRoleIdResourceIds(Long roleId, Set<Long> resourceIds);
 }

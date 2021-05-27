@@ -8,8 +8,9 @@ import java.util.Objects;
 
 @Getter
 public enum MenuLevelEnum implements BaseEnum {
-    ROOT(1001, "根目录", null, 1),
-    SYS(1002, "系统管理", ROOT, 1),
+    ROOT(1, "根目录", null, 1),
+    SYS(2, "系统管理", ROOT, 1),
+    BUSINESS(3, "业务管理", ROOT, 2),
     ;
 
     private final int value;
