@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 加载JDBC配置文件-->
     <context:property-placeholder ignore-unresolvable="true" location="classpath:config/jdbc.properties"/>
@@ -53,41 +54,51 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-        <!--<tx:attributes>-->
-            <!--<tx:method name="publish*"/>-->
-            <!--<tx:method name="save*"/>-->
-            <!--<tx:method name="add*"/>-->
-            <!--<tx:method name="update*"/>-->
-            <!--<tx:method name="insert*"/>-->
-            <!--<tx:method name="create*"/>-->
-            <!--<tx:method name="del*"/>-->
-            <!--<tx:method name="load*"/>-->
-            <!--<tx:method name="init*"/>-->
-            <!--<tx:method name="*" read-only="true"/>-->
-        <!--</tx:attributes>-->
-    <!--</tx:advice>-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="publish*"/>
+            <tx:method name="save*"/>
+            <tx:method name="add*"/>
+            <tx:method name="update*"/>
+            <tx:method name="insert*"/>
+            <tx:method name="create*"/>
+            <tx:method name="del*"/>
+            <tx:method name="load*"/>
+            <tx:method name="init*"/>
+            <tx:method name="*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
 
-    <!--&lt;!&ndash; 开启事务注解驱动 &ndash;&gt;-->
-    <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
-    <!--&lt;!&ndash; 注册事物拦截器 &ndash;&gt;-->
-    <!--<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">-->
-        <!--&lt;!&ndash; 事务拦截器需要依赖注入一个事务管理器 &ndash;&gt;-->
-        <!--<property name="transactionManager" ref="transactionManager" />-->
-        <!--&lt;!&ndash; 定义事务传播属性 &ndash;&gt;-->
-        <!--<property name="transactionAttributes">-->
-            <!--<props>-->
-                <!--<prop key="*">PROPAGATION_REQUIRED</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
+    <!-- 开启事务注解驱动 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- 注册事物拦截器 -->
+    <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <!-- 事务拦截器需要依赖注入一个事务管理器 -->
+        <property name="transactionManager" ref="transactionManager" />
+        <!-- 定义事务传播属性 -->
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
 
-    <!--&lt;!&ndash; 开启spring方法调用监控 &ndash;&gt;-->
-    <!--<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor"/>-->
+    <!-- APO配置 -->
+    <aop:config>
+        <aop:pointcut id="myPointcut" expression="execution(public * com.limbo.practice.*.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut" />
+    </aop:config>
 
-    <!--&lt;!&ndash; APO配置 &ndash;&gt;-->
-    <!--<aop:config>-->
-        <!--<aop:pointcut id="myPointcut" expression="execution(public * com.limbo.practice.*.service.impl.*.*(..))"/>-->
-        <!--<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="myPointcut" />-->
-    <!--</aop:config>-->
+    <!-- 开启spring方法调用监控 -->
+    <bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor"/>
+
+    <bean id="druid-type-proxyCreator" class="com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator">
+        <!-- 所有ABCInterface的派生类被拦截监控  -->
+        <property name="targetBeanType" value="com.limbo.practice.core.base.BaseService" />
+        <property name="interceptorNames">
+            <list>
+                <value>druid-stat-interceptor</value>
+            </list>
+        </property>
+    </bean>
 </beans>

@@ -2,6 +2,8 @@ package com.limbo.practice.core.login.service;
 
 import com.limbo.practice.core.login.domain.LoginUser;
 
+import java.util.List;
+
 /**
  * 登录服务Service
  *
@@ -41,4 +43,12 @@ public interface LoginService {
      * @return
      */
     LoginUser getUserInfoByLoginMessage(String param);
+
+    /**
+     * 根据登录id获取用户url权限
+     *
+     * @param userId
+     * @return
+     */
+    List<String> getUserUrlAuth(Long userId);
 }

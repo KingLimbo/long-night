@@ -3,17 +3,17 @@
 <mapper namespace="com.limbo.practice.core.login.dao.LoginDao">
 
     <resultMap id="BaseResultMap" type="com.limbo.practice.core.login.domain.LoginUser">
-        <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
-        <result property="loginAccount" column="login_account" javaType="java.lang.String" jdbcType="VARCHAR" />
-        <result property="loginPass" column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR" />
-        <result property="loginSalt" column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR" />
-        <result property="userName" column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-        <result property="userPhone" column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
-        <result property="userEmail" column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
-        <result property="locked" column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT" />
-        <result property="deleted" column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
-        <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-        <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <id property="id" column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        <result property="loginAccount" column="login_account" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="loginPass" column="login_pass" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="loginSalt" column="login_salt" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="userPhone" column="user_phone" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="userEmail" column="user_email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="locked" column="is_locked" javaType="java.lang.Boolean" jdbcType="BIT"/>
+        <result property="deleted" column="is_deleted" javaType="java.lang.Boolean" jdbcType="BIT"/>
+        <result property="gmtCreate" column="gmt_create" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <result property="gmtModified" column="gmt_modified" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -28,7 +28,7 @@
         is_deleted,
         gmt_create,
         gmt_modified
-   </sql>
+    </sql>
 
     <!-- 根据用户名查询用户 -->
     <select id="selectUserInfoByUserName" resultMap="BaseResultMap">
@@ -69,6 +69,18 @@
         WHERE
             login_account = #{param1} OR user_email = #{param1} OR user_phone = #{param1}
         LIMIT 1
+    </select>
+
+    <!-- 根据用户ID查询用户URL权限 -->
+    <select id="selectUserUrlByUserId" resultType="String">
+        select
+            s.url
+        from sys_user a
+             left join sys_role_user sru on a.id = sru.user_id
+             left join sys_role sr on sru.role_id = sr.id
+             left join sys_role_resource srr on sr.id = srr.role_id
+             left join sys_resource s on srr.resource_id = s.id
+        where a.id = #{param1}
     </select>
 
 </mapper>

@@ -7,6 +7,9 @@ import com.limbo.practice.core.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * 登录服务Service 实现类
  *
@@ -77,5 +80,18 @@ public class LoginServiceImpl implements LoginService {
         }
         LoginUser user = loginDao.selectUserInfoByLoginMessage(param);
         return user;
+    }
+
+    /**
+     * 根据登录id获取用户url权限
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<String> getUserUrlAuth(Long userId) {
+        if (Objects.nonNull(userId)) {
+            return loginDao.selectUserUrlByUserId(userId);
+        }
+        return null;
     }
 }

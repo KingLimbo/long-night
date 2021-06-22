@@ -54,7 +54,8 @@
         <!-- redis版本号 -->
         <jedis.version>2.9.0</jedis.version>
         <!-- redis,data版本号 -->
-        <redis.data.version>2.1.2.RELEASE</redis.data.version>
+        <redis.data.version>1.6.0.RELEASE</redis.data.version>
+<!--        <redis.data.version>2.1.2.RELEASE</redis.data.version>-->
         <!-- protostuff,data版本号 -->
         <protostuff.version>1.6.0</protostuff.version>
         <!-- jstl版本号 -->
@@ -188,6 +189,18 @@
                 <type>pom</type>
                 <!--表示继承-->
                 <scope>import</scope>
+            </dependency>
+
+            <!--aspectj-->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
             </dependency>
 
             <dependency>

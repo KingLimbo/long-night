@@ -4,10 +4,11 @@
 
 package com.limbo.practice.base.controller;
 
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.StrUtil;
 import com.limbo.practice.base.dao.SysResourceDao;
 import com.limbo.practice.base.entity.SysResource;
 import com.limbo.practice.base.service.SysResourceService;
-import com.limbo.practice.comm.service.AnnotationService;
 import com.limbo.practice.comm.service.SysInitService;
 import com.limbo.practice.core.annotation.ApiResources;
 import com.limbo.practice.core.base.BaseController;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Objects;
 
 /**
 *
@@ -51,8 +53,6 @@ public class SysResourceController extends BaseController<SysResource, SysResour
     private SysResourceService<SysResource, SysResourceDao> sysResourceServiceImpl;
     @Autowired
     private SysInitService sysInitService;
-    @Autowired
-    private AnnotationService annotationService;
 
     @PostConstruct
     public void initService(){
@@ -66,7 +66,7 @@ public class SysResourceController extends BaseController<SysResource, SysResour
     }
 
 
-    @GetMapping("/init-sys-resource")
+    @GetMapping("/init-role-resource")
     @ApiOperation("初始化系统资源")
     @ResponseBody
     public void initSysResource(){
@@ -78,6 +78,19 @@ public class SysResourceController extends BaseController<SysResource, SysResour
     @ApiOperation("扫描资源")
     @ResponseBody
     public List<SysResource> scanResource(){
-        return annotationService.autoGeneratorAllMenuResource();
+        return sysResourceServiceImpl.autoGeneratorAllMenuResource();
+    }
+
+    @GetMapping("/scan-resource/{zlass}")
+    @ApiOperation("扫描资源")
+    @ResponseBody
+    public List<SysResource> scanResourceByClass(@ApiParam() @PathVariable("zlass") String zlass){
+        if (StrUtil.isNotBlank(zlass)) {
+            Class<Object> loadClass = ClassUtil.loadClass(zlass);
+            if (Objects.nonNull(loadClass)) {
+                return sysResourceServiceImpl.scanController(loadClass);
+            }
+        }
+        return null;
     }
 }

@@ -1,7 +1,9 @@
 package com.limbo.practice.core.shiro.realm;
 
 import com.limbo.practice.core.constant.CoreConsts;
+import com.limbo.practice.core.constant.RedisKey;
 import com.limbo.practice.core.login.domain.LoginUser;
+import com.limbo.practice.core.login.domain.LoginUserMemento;
 import com.limbo.practice.core.login.service.LoginService;
 import com.limbo.practice.core.shiro.token.LoginToken;
 import org.apache.shiro.authc.*;
@@ -10,6 +12,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+
+import java.util.List;
 
 /**
  * 简单的Realm
@@ -24,6 +29,8 @@ public class SimpleRealm extends AuthorizingRealm {
      */
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 授权
@@ -33,6 +40,10 @@ public class SimpleRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        LoginUserMemento primaryPrincipal = (LoginUserMemento) principalCollection.getPrimaryPrincipal();
+        Long userId = primaryPrincipal.getId();
+        List<String> userUrlAuth = loginService.getUserUrlAuth(userId);
+        redisTemplate.opsForList().leftPushAll(RedisKey.USER_URL_AUTH + userId, userUrlAuth);
         return null;
     }
 

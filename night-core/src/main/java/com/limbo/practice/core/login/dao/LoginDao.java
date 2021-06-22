@@ -3,6 +3,8 @@ package com.limbo.practice.core.login.dao;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.mybatis.MybatisDao;
 
+import java.util.List;
+
 /**
  * 登录DAO
  *
@@ -43,4 +45,12 @@ public interface LoginDao {
      * @return
      */
     LoginUser selectUserInfoByLoginMessage(String param);
+
+    /**
+     * 根据登录id获取用户url权限
+     *
+     * @param param
+     * @return
+     */
+    List<String> selectUserUrlByUserId(Long param);
 }

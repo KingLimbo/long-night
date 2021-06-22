@@ -35,23 +35,6 @@ public class LoginToken extends UsernamePasswordToken  implements java.io.Serial
         this.phone = user.getUserPhone();
     }
 
-///    /**
-//     * 构造方法
-//     *
-//     * @param username 用户名
-//     * @param password 密码
-//     * @param rememberMe 记住我标识
-//     * @param host ip地址
-//     * @param email
-//     * @param phone
-//     */
-///    public LoginToken(java.lang.String username, java.lang.String password, boolean rememberMe,
-//               java.lang.String host,String email,String phone){
-//        super(username, password, rememberMe, host);
-//        this.email = email;
-//        this.phone = phone;
-//    }
-
     public java.lang.String getEmail() {
         return email;
     }

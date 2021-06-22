@@ -7,6 +7,7 @@ package com.limbo.practice.base.service.impl;
 import cn.hutool.core.annotation.AnnotationUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -21,6 +22,7 @@ import com.limbo.practice.base.service.SysRoleResourceService;
 import com.limbo.practice.base.service.SysRoleService;
 import com.limbo.practice.core.annotation.ApiResources;
 import com.limbo.practice.core.base.BaseServiceImpl;
+import com.limbo.practice.core.constant.CoreConsts;
 import com.limbo.practice.core.enums.MenuLevelEnum;
 import com.limbo.practice.core.enums.ResourceTypeEnum;
 import com.limbo.practice.core.enums.RoleNameEnum;
@@ -61,6 +63,19 @@ public class SysResourceServiceImpl extends BaseServiceImpl<SysResource, SysReso
     private SysRoleService<SysRole, SysRoleDao> sysRoleService;
     @Autowired
     private SysRoleResourceService<SysRoleResource, SysRoleResourceDao> sysRoleResourceService;
+
+    @Override
+    public List<SysResource> autoGeneratorAllMenuResource() {
+        List<SysResource> resources = Lists.newArrayList();
+        // 获取所有的ApiResources注解标记的Controller
+        Set<Class<?>> classSet = ClassUtil.scanPackageByAnnotation(CoreConsts.CORE_PACKAGE, ApiResources.class);
+        if (CollectionUtil.isNotEmpty(classSet)) {
+            classSet.forEach(aClass -> {
+                resources.addAll(scanController(aClass));
+            });
+        }
+        return resources;
+    }
 
     @Transactional(rollbackFor = Exception.class)
     public List<SysResource> scanController(Class c) {

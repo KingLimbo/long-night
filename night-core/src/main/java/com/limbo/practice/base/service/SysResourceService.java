@@ -24,6 +24,12 @@ import java.util.List;
 public interface SysResourceService<T, D> extends BaseService<T, D> {
 
     /**
+     * 自动生成所有菜单资源
+     * @return
+     */
+    List<SysResource> autoGeneratorAllMenuResource();
+
+    /**
      * 扫描资源
      */
     List<SysResource> scanController(Class c);
