@@ -2,15 +2,10 @@ package com.limbo.practice.core.shiro.token.manager;
 
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.login.domain.LoginUserMemento;
-import com.limbo.practice.core.shiro.realm.SimpleRealm;
 import com.limbo.practice.core.shiro.token.LoginToken;
-import com.limbo.practice.core.util.CookieUtil;
-import com.limbo.practice.core.util.SpringContextUtil;
-import com.limbo.practice.core.shiro.session.CustomSessionManager;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
-
-import java.util.List;
+import org.apache.shiro.subject.Subject;
 
 
 /**
@@ -95,7 +90,9 @@ public class TokenManager {
     public static LoginUser login(LoginUser user, Boolean rememberMe) {
         if (null == rememberMe) rememberMe = false;
         LoginToken token = new LoginToken(user, rememberMe);
-        SecurityUtils.getSubject().login(token);
+        Subject subject = SecurityUtils.getSubject();
+        subject.login(token);
+        subject.isPermitted("admin:admin");
         return getToken();
     }
 

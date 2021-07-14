@@ -5,6 +5,12 @@
 package com.limbo.practice.base.entity;
 
 import com.limbo.practice.base.entity.po.SysResourcePo;
+import com.limbo.practice.core.enums.ResourceTypeEnum;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+import java.util.List;
 
 /**
 *
@@ -19,6 +25,9 @@ import com.limbo.practice.base.entity.po.SysResourcePo;
 *
 * version V1.0
 */
+@Getter
+@Setter
+@Accessors(chain = true)
 public class SysResource extends SysResourcePo {
 
     /**
@@ -26,4 +35,10 @@ public class SysResource extends SysResourcePo {
      */
     private static final long serialVersionUID = 1L;
 
+
+    /**
+     * 资源类型 说明：0 表示菜单，1 表示资源
+     * db_column: type
+     */
+    private List<ResourceTypeEnum> types;
 }

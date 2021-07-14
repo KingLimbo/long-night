@@ -76,6 +76,9 @@
     </section>
     <div class="layout-footer">@2020 0.1 www.mycodes.net</div>
 </div>
+<script type="text/javascript">
+    let menu = ${menus};
+</script>
 <script type="text/javascript" src="common/core/lib/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="common/core/js/sccl.js"></script>
 <script type="text/javascript" src="common/core/js/sccl-util.js"></script>

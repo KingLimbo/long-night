@@ -12,6 +12,7 @@
         <property name="dataSource" ref="dataSource"/>
         <!-- mybatis配置 -->
         <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+        <property name="typeAliasesSuperType" value="com.limbo.practice.core.base.BaseBO" />
         <!-- mapper路径 -->
         <property name="mapperLocations">
             <list>

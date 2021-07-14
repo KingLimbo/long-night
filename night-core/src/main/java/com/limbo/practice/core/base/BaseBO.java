@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 基础类
@@ -27,6 +28,11 @@ public class BaseBO implements Serializable {
      * 主键ID
      */
     protected Long id;
+
+    /**
+     * 主键IDs
+     */
+    protected List<Long> ids;
 
     /**
      * 是否删除

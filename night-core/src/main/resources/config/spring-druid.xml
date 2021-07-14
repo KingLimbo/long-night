@@ -65,7 +65,9 @@
             <tx:method name="del*"/>
             <tx:method name="load*"/>
             <tx:method name="init*"/>
-            <tx:method name="*" read-only="true"/>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="list*" read-only="true"/>
+            <tx:method name="select*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
 

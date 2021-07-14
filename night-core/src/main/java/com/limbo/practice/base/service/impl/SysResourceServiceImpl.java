@@ -77,7 +77,7 @@ public class SysResourceServiceImpl extends BaseServiceImpl<SysResource, SysReso
         return resources;
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public List<SysResource> scanController(Class c) {
         System.out.println(c.getName());
         // 获取ApiResources注解
@@ -104,6 +104,7 @@ public class SysResourceServiceImpl extends BaseServiceImpl<SysResource, SysReso
                 controllerResource.setUrl(cUrl);
                 controllerResource.setUrlType("GET");
                 controllerResource.setRoute(route);
+                controllerResource.setAutoGeneration(true);
                 Api api = AnnotationUtil.getAnnotation(c, Api.class);
                 if (Objects.isNull(api)) {
                     return resources;
@@ -144,7 +145,7 @@ public class SysResourceServiceImpl extends BaseServiceImpl<SysResource, SysReso
                     String mUrl = "";
                     GetMapping get = method.getAnnotation(GetMapping.class);
                     if (Objects.nonNull(get)) {
-                        mUrl = get.value()[0];
+                        mUrl = get.value()[0] + "*";
                         methodResource.setUrlType("GET");
                         resources.add(methodResource);
                     }
@@ -177,6 +178,7 @@ public class SysResourceServiceImpl extends BaseServiceImpl<SysResource, SysReso
                     methodResource.setUrl(replaceAllUrlParams(mUrl));
                     methodResource.setParentId(controllerId);
                     methodResource.setParents(sysResource.getParents() + StrUtil.C_COMMA + controllerId.toString());
+                    methodResource.setAutoGeneration(true);
                     insertDb(methodResource);
                 }
             }

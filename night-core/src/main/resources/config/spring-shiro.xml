@@ -19,6 +19,7 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="simpleRealm"/>
     </bean>
+    <bean id="myAuthcFilter" class="com.limbo.practice.core.shiro.filter.MyAuthenticationFilter"/>
 
     <!-- 配置与shiro的整合,此名称与web.xml中配置的targetBeanName相同 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -27,9 +28,14 @@
         <!-- 登录的url -->
         <property name="loginUrl" value="/login"/>
         <!-- 登录成功的url -->
-        <property name="successUrl" value="/page/home.html"/>
+        <property name="successUrl" value="/home"/>
         <!-- 如果访问不成功则显示的url为 -->
         <property name="unauthorizedUrl" value="/page/login.html"/>
+        <property name="filters">
+            <map>
+                <entry key="authc" value-ref="myAuthcFilter" />
+            </map>
+        </property>
         <!-- 定义安全的页面及访问规则 -->
         <property name="filterChainDefinitions">
             <value>

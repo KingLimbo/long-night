@@ -4,9 +4,11 @@
 
 package com.limbo.practice.base.dao;
 
-import com.limbo.practice.core.mybatis.MybatisDao;
-import com.limbo.practice.core.base.BaseDao;
 import com.limbo.practice.base.entity.SysUser;
+import com.limbo.practice.core.base.BaseDao;
+import com.limbo.practice.core.mybatis.MybatisDao;
+
+import java.util.List;
 
 /**
 *
@@ -25,4 +27,11 @@ import com.limbo.practice.base.entity.SysUser;
 @MybatisDao
 public interface SysUserDao extends BaseDao<SysUser> {
 
+    /**
+     * 根据用户id查询资源id
+     *
+     * @param userId
+     * @return
+     */
+    List<Long> selectResourceIdByUserId(Long userId);
 }

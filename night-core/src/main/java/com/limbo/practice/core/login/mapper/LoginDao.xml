@@ -83,4 +83,17 @@
         where a.id = #{param1}
     </select>
 
+
+    <!-- 根据用户ID查询用户菜单 -->
+    <select id="selectUserMenuByUserId" resultType="com.limbo.practice.base.entity.SysResource">
+        select
+            s.url
+        from sys_user a
+             left join sys_role_user sru on a.id = sru.user_id
+             left join sys_role sr on sru.role_id = sr.id
+             left join sys_role_resource srr on sr.id = srr.role_id
+             left join sys_resource s on srr.resource_id = s.id
+        where a.id = #{param1}
+    </select>
+
 </mapper>

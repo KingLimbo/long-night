@@ -40,7 +40,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public ResultBean save(T vo) {
         ResultBean resultBean = new ResultBean();
         int update = dao.update(vo);
@@ -59,7 +59,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public ResultBean saveActive(T vo) {
         ResultBean resultBean = new ResultBean();
         int update = dao.updateActive(vo);
@@ -78,7 +78,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public int update(T vo) {
         return dao.update(vo);
     }
@@ -90,7 +90,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public int updateActive(T vo) {
         return dao.updateActive(vo);
     }
@@ -142,7 +142,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public Long insertDb(T bean) {
         bean.setGmtCreate(new Date());
        return dao.insert(bean) > 0 ? bean.getId() : null;
@@ -155,7 +155,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public int insertBatch(List<T> beanList) {
         Date gmtModified = new Date();
         beanList.stream().forEach(o -> {
@@ -171,7 +171,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public ResultBean delete(Long id){
         ResultBean resultBean = new ResultBean();
         int i = dao.delete(id);
@@ -190,7 +190,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
      * @return
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public ResultBean batchDelete(Long[] ids) {
         ResultBean resultBean = new ResultBean();
         if (ArrayUtil.isNotEmpty(ids)) {

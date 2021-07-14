@@ -32,7 +32,7 @@ import java.util.Set;
 public class SysRoleResourceServiceImpl extends BaseServiceImpl<SysRoleResource, SysRoleResourceDao>  implements SysRoleResourceService<SysRoleResource, SysRoleResourceDao> {
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
     public void deleteByRoleIdResourceIds(Long roleId, Set<Long> resourceIds) {
         if (Objects.nonNull(roleId) && CollectionUtil.isNotEmpty(resourceIds)) {
             dao.deleteByRoleIdResourceIds(roleId, resourceIds);

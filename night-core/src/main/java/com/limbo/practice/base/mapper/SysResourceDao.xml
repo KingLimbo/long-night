@@ -41,6 +41,12 @@
         <if test="id != null and id != '' ">
             AND id = #{id, jdbcType=BIGINT}
         </if>
+        <if test="ids != null and ids.size() > 0">
+            AND id in
+            <foreach collection="ids" open="(" separator="," close=")" item="id">
+                #{id, jdbcType=BIGINT}
+            </foreach>
+        </if>
         <if test="parentId != null and parentId != '' ">
             AND parent_id = #{parentId, jdbcType=BIGINT}
         </if>
@@ -55,6 +61,12 @@
         </if>
         <if test="type != null and type != '' ">
             AND type = #{type, typeHandler=com.limbo.practice.core.mybatis.BaseEnumMybatisHandler}
+        </if>
+        <if test="types != null and types.size() > 0">
+            AND type in
+            <foreach collection="types" open="(" separator="," close=")" item="type">
+                #{type, typeHandler=com.limbo.practice.core.mybatis.BaseEnumMybatisHandler}
+            </foreach>
         </if>
         <if test="route != null and route != '' ">
             AND route = #{route, jdbcType=VARCHAR}

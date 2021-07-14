@@ -244,5 +244,14 @@
         DELETE FROM sys_user
         WHERE id = #{id, jdbcType=BIGINT}
     </delete>
-    
+
+    <select id="selectResourceIdByUserId" resultType="Long">
+        select distinct resource_id
+        from sys_role_resource
+            where role_id in (
+                select id
+                from sys_role_user
+                where user_id = #{id, jdbcType=BIGINT}
+            )
+    </select>
 </mapper>

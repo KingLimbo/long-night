@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum RoleNameEnum implements BaseEnum {
     ADMIN(1, "超级管理员"),
+    NORMAL(2, "普通用户"),
     ;
 
     private final int value;

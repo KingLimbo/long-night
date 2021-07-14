@@ -1,6 +1,15 @@
 package com.limbo.practice.core.login.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.limbo.practice.base.dao.SysUserDao;
+import com.limbo.practice.base.entity.SysResource;
+import com.limbo.practice.base.entity.SysUser;
+import com.limbo.practice.base.service.SysUserService;
+import com.limbo.practice.core.annotation.ApiResources;
 import com.limbo.practice.core.constant.CoreConsts;
+import com.limbo.practice.core.enums.MenuLevelEnum;
+import com.limbo.practice.core.enums.ResourceTypeEnum;
+import com.limbo.practice.core.enums.RoleNameEnum;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.shiro.token.manager.TokenManager;
 import com.limbo.practice.core.util.LoggerUtils;
@@ -8,6 +17,7 @@ import com.limbo.practice.core.util.MessageUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authc.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +26,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Api(tags = "系统登录")
+@ApiResources(type = ResourceTypeEnum.RESOURCE, roleName = RoleNameEnum.NORMAL, parent = MenuLevelEnum.SYS)
 @Controller
-@RequestMapping("/")
+@RequestMapping()
 public class LoginController {
+
+    @Autowired
+    private SysUserService<SysUser, SysUserDao> sysUserService;
 
     /**
      * 访问登录页面
@@ -108,6 +123,8 @@ public class LoginController {
     public ModelAndView home(){
         // 初始化页面
         ModelAndView view = new ModelAndView("core/home");
+        List<SysResource> menus = sysUserService.getMenuByUserId(TokenManager.getUserId());
+        view.addObject("menus", JSON.toJSONString(menus));
         return view;
     }
 }

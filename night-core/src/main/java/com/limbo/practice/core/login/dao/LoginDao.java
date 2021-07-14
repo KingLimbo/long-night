@@ -1,5 +1,6 @@
 package com.limbo.practice.core.login.dao;
 
+import com.limbo.practice.base.entity.SysResource;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.mybatis.MybatisDao;
 
@@ -53,4 +54,12 @@ public interface LoginDao {
      * @return
      */
     List<String> selectUserUrlByUserId(Long param);
+
+    /**
+     * 根据登录id获取用户menu
+     *
+     * @param param
+     * @return
+     */
+    List<SysResource> selectUserMenuByUserId(Long param);
 }

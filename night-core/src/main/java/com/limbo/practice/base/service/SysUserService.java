@@ -4,7 +4,10 @@
 
 package com.limbo.practice.base.service;
 
+import com.limbo.practice.base.entity.SysResource;
 import com.limbo.practice.core.base.BaseService;
+
+import java.util.List;
 
 /**
 *
@@ -22,4 +25,5 @@ import com.limbo.practice.core.base.BaseService;
 public interface SysUserService<T, D> extends BaseService<T, D> {
 
 
+    List<SysResource> getMenuByUserId(Long userId);
 }
