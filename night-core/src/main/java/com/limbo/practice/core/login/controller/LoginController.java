@@ -31,7 +31,7 @@ import java.util.List;
 @Api(tags = "系统登录")
 @ApiResources(type = ResourceTypeEnum.RESOURCE, roleName = RoleNameEnum.NORMAL, parent = MenuLevelEnum.SYS)
 @Controller
-@RequestMapping()
+@RequestMapping("/")
 public class LoginController {
 
     @Autowired

@@ -11,6 +11,7 @@ import com.limbo.practice.base.entity.SysResource;
 import com.limbo.practice.base.service.SysResourceService;
 import com.limbo.practice.comm.service.SysInitService;
 import com.limbo.practice.core.annotation.ApiResources;
+import com.limbo.practice.core.annotation.PublicUrl;
 import com.limbo.practice.core.base.BaseController;
 import com.limbo.practice.core.enums.MenuLevelEnum;
 import com.limbo.practice.core.enums.ResourceTypeEnum;
@@ -69,14 +70,17 @@ public class SysResourceController extends BaseController<SysResource, SysResour
     @GetMapping("/init-role-resource")
     @ApiOperation("初始化系统资源")
     @ResponseBody
+    @PublicUrl
     public void initSysResource(){
         sysInitService.initRole();
         sysInitService.initMenuLevel();
+        sysResourceServiceImpl.autoGeneratorAllMenuResource();
     }
 
     @GetMapping("/scan-resource")
     @ApiOperation("扫描资源")
     @ResponseBody
+    @PublicUrl
     public List<SysResource> scanResource(){
         return sysResourceServiceImpl.autoGeneratorAllMenuResource();
     }

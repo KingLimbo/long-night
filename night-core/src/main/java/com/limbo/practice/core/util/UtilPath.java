@@ -1,9 +1,13 @@
 package com.limbo.practice.core.util;
 
+import cn.hutool.core.util.StrUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -161,4 +165,40 @@ public class UtilPath {
         return getRootPath() + "images/";
     }
 
+    /**
+     * 替换url参数
+     *
+     * @param url
+     * @return
+     */
+    public static String replaceAllUrlParams(String url) {
+        String str = "";
+        if (StrUtil.isNotBlank(url)) {
+            String patternDoubleSlash = "\\//";
+            Pattern rDoubleSlash = Pattern.compile(patternDoubleSlash);
+            Matcher mDoubleSlash = rDoubleSlash.matcher(url);
+            url = mDoubleSlash.replaceAll("/");
+            String pattern = "\\{[a-zA-Z0-9-]*}";
+            Pattern r = Pattern.compile(pattern);
+            Matcher m = r.matcher(url);
+            str = m.replaceAll(".*");
+        }
+        return str;
+    }
+
+    /**
+     * 替换url,shiro[none]验证规则
+     *
+     * @param url
+     * @return
+     */
+    public static String replaceAllUrlShiroNone(String url) {
+        String str = replaceAllUrlParams(url);
+        if (StrUtil.isNotBlank(str)) {
+            if (StrUtil.endWith(str, "*")) {
+                str += "*";
+            }
+        }
+        return str;
+    }
 }

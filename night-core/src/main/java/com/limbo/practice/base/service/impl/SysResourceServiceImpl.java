@@ -26,6 +26,7 @@ import com.limbo.practice.core.constant.CoreConsts;
 import com.limbo.practice.core.enums.MenuLevelEnum;
 import com.limbo.practice.core.enums.ResourceTypeEnum;
 import com.limbo.practice.core.enums.RoleNameEnum;
+import com.limbo.practice.core.util.UtilPath;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
@@ -38,8 +39,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
 *
@@ -175,7 +174,7 @@ public class SysResourceServiceImpl extends BaseServiceImpl<SysResource, SysReso
                     }
 
                     mUrl = cUrl + mUrl;
-                    methodResource.setUrl(replaceAllUrlParams(mUrl));
+                    methodResource.setUrl(UtilPath.replaceAllUrlParams(mUrl));
                     methodResource.setParentId(controllerId);
                     methodResource.setParents(sysResource.getParents() + StrUtil.C_COMMA + controllerId.toString());
                     methodResource.setAutoGeneration(true);
@@ -195,21 +194,4 @@ public class SysResourceServiceImpl extends BaseServiceImpl<SysResource, SysReso
         }
     }
 
-
-    /**
-     * 替换url参数
-     *
-     * @param url
-     * @return
-     */
-    private String replaceAllUrlParams(String url) {
-        String str = "";
-        if (StrUtil.isNotBlank(url)) {
-            String pattern = "\\{[a-zA-Z0-9-]*}";
-            Pattern r = Pattern.compile(pattern);
-            Matcher m = r.matcher(url);
-            str = m.replaceAll(".*");
-        }
-        return str;
-    }
 }
