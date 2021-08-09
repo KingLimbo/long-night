@@ -4,8 +4,6 @@ import com.limbo.practice.core.util.LoggerUtils;
 import com.limbo.practice.core.util.SerializeUtil;
 import com.limbo.practice.core.util.StringUtils;
 import org.apache.shiro.session.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.exceptions.JedisConnectionException;
@@ -21,10 +19,8 @@ import java.util.Set;
  * @version 1.0
  * @date 2019/4/9 17:31
  */
-@Component
 public class JedisManager {
 
-    @Autowired
     private JedisPool jedisPool;
 
     public Jedis getJedis() {

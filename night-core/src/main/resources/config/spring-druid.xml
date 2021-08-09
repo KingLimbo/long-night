@@ -6,14 +6,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 加载JDBC配置文件-->
     <context:property-placeholder ignore-unresolvable="true" location="classpath:config/jdbc.properties"/>
 
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
@@ -35,23 +39,24 @@
         <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
         <property name="testOnReturn" value="${jdbc.testOnReturn}"/>
         <!-- 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql5.5以下的版本中没有PSCache功能，建议关闭掉。5.5及以上版本有PSCache，建议开启。 -->
-        <property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}" />
+        <property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}"/>
         <!-- 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。 -->
-        <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}" />
+        <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}"/>
         <!-- 指定每个PSCache连接上PSCache的大小 -->
-        <property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.maxPoolPreparedStatementPerConnectionSize}" />
+        <property name="maxPoolPreparedStatementPerConnectionSize"
+                  value="${jdbc.maxPoolPreparedStatementPerConnectionSize}"/>
         <!-- 是否自动回收超时连接 -->
         <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
         <!-- 超时时间(以秒数为单位) -->
         <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
         <!-- 关闭自动回收超时输出错误日志 -->
-        <property name="logAbandoned" value="${jdbc.logAbandoned}" />
+        <property name="logAbandoned" value="${jdbc.logAbandoned}"/>
         <property name="filters" value="${jdbc.filters}"/>
     </bean>
 
     <!-- 注册事物管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -72,11 +77,11 @@
     </tx:advice>
 
     <!-- 开启事务注解驱动 -->
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
     <!-- 注册事物拦截器 -->
     <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
         <!-- 事务拦截器需要依赖注入一个事务管理器 -->
-        <property name="transactionManager" ref="transactionManager" />
+        <property name="transactionManager" ref="transactionManager"/>
         <!-- 定义事务传播属性 -->
         <property name="transactionAttributes">
             <props>
@@ -88,7 +93,7 @@
     <!-- APO配置 -->
     <aop:config>
         <aop:pointcut id="myPointcut" expression="execution(public * com.limbo.practice.*.service.impl.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>
     </aop:config>
 
     <!-- 开启spring方法调用监控 -->
@@ -96,7 +101,7 @@
 
     <bean id="druid-type-proxyCreator" class="com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator">
         <!-- 所有ABCInterface的派生类被拦截监控  -->
-        <property name="targetBeanType" value="com.limbo.practice.core.base.BaseService" />
+        <property name="targetBeanType" value="com.limbo.practice.core.base.BaseService"/>
         <property name="interceptorNames">
             <list>
                 <value>druid-stat-interceptor</value>

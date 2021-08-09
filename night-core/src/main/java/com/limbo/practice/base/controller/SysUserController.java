@@ -13,9 +13,12 @@ import com.limbo.practice.core.enums.MenuLevelEnum;
 import com.limbo.practice.core.enums.ResourceTypeEnum;
 import com.limbo.practice.core.enums.RoleNameEnum;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 
@@ -45,5 +48,11 @@ public class SysUserController extends BaseController<SysUser, SysUserDao> {
     @PostConstruct
     public void initService(){
         setService(sysUserServiceImpl);
+    }
+
+    @GetMapping("/view")
+    @ApiOperation("显示页面")
+    public ModelAndView view() {
+        return new ModelAndView("/sys/user");
     }
 }

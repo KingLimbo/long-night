@@ -1,7 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 加载JDBC配置文件-->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:config/limbo-night.properties"/>
+
+    <!--redis settings-->
+    <import resource="classpath:config/spring-redis.xml"/>
+
+    <!-- 会话Session ID生成器 -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+    <!-- 会话Cookie模板 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!--cookie的name，我故意取名叫xxxxbaidu -->
+        <constructor-arg value="limbo-user"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="-1"/>
+    </bean>
+
+    <!-- 用户信息记住我功能的相关配置 -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="limbo-re-user"/>
+        <property name="httpOnly" value="true"/>
+        <!-- 配置存储rememberMe Cookie的domain为 一级域名
+        <property name="domain" value=".itboy.net"/>
+         -->
+        <!-- 30天时间，记住我30天 -->
+        <property name="maxAge" value="2592000"/>
+    </bean>
+
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!-- rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
+        <property name="cipherKey"
+                  value="#{T(org.apache.shiro.codec.Base64).decode('3AvVhmFLUs0KTA3Kprsdag==')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+
+    <!-- session 创建、删除、查询 -->
+    <bean id="jedisShiroSessionRepository" class="com.limbo.practice.core.shiro.cache.JedisShiroSessionRepository">
+        <property name="jedisManager" ref="jedisManager"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+    </bean>
+
+    <!-- custom session listener -->
+    <bean id="customSessionListener" class="com.limbo.practice.core.shiro.listener.CustomSessionListener">
+        <property name="shiroSessionRepository" ref="jedisShiroSessionRepository"/>
+    </bean>
+
+    <!-- custom shiro session dao -->
+    <bean id="customShiroSessionDAO" class="com.limbo.practice.core.shiro.session.CustomShiroSessionDAO">
+        <property name="shiroSessionRepository" ref="jedisShiroSessionRepository"/>
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+    </bean>
+
+    <!-- 手动操作Session，管理Session -->
+    <bean id="customSessionManager" class="com.limbo.practice.core.shiro.session.CustomSessionManager">
+        <property name="shiroSessionRepository" ref="jedisShiroSessionRepository"/>
+        <property name="customShiroSessionDAO" ref="customShiroSessionDAO"/>
+    </bean>
+
+    <!-- 会话验证调度器 -->
+    <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
+        <!-- 间隔多少时间检查，不配置是60分钟 -->
+        <property name="interval" value="${session.validate.timespan}"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <!-- 用户缓存管理器 -->
+    <bean id="customShiroCacheManager" class="com.limbo.practice.core.shiro.cache.impl.CustomShiroCacheManager">
+        <property name="shiroCacheManager" ref="jedisShiroCacheManager"/>
+    </bean>
+
+    <!-- shiro 缓存实现，对ShiroCacheManager，我是采用redis的实现 -->
+    <bean id="jedisShiroCacheManager" class="com.limbo.practice.core.shiro.cache.impl.JedisShiroCacheManager">
+        <property name="jedisManager" ref="jedisManager"/>
+    </bean>
+    <!-- redis 的缓存 -->
+    <bean id="jedisManager" class="com.limbo.practice.core.shiro.cache.JedisManager">
+        <property name="jedisPool" ref="jedisPool"/>
+    </bean>
+
+    <!-- Session Manager -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- 相隔多久检查一次session的有效性   -->
+        <property name="sessionValidationInterval" value="1800000"/>
+        <!-- session 有效时间为半小时 （毫秒单位）-->
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="sessionDAO" ref="customShiroSessionDAO"/>
+        <!-- session 监听，可以多个。 -->
+        <property name="sessionListeners">
+            <list>
+                <ref bean="customSessionListener"/>
+            </list>
+        </property>
+        <!-- 间隔多少时间检查，不配置是60分钟 -->
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <!-- 是否开启 检测，默认开启 -->
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <!-- 是否删除无效的，默认也是开启 -->
+        <property name="deleteInvalidSessions" value="true"/>
+        <!-- 会话Cookie模板 -->
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
 
     <!-- 密码匹配器 -->
     <bean id="passwordMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
@@ -18,6 +128,9 @@
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="simpleRealm"/>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="rememberMeManager" ref="rememberMeManager"/>
+        <property name="cacheManager" ref="customShiroCacheManager"/>
     </bean>
     <bean id="myAuthcFilter" class="com.limbo.practice.core.shiro.filter.MyAuthenticationFilter"/>
 

@@ -1,5 +1,6 @@
 package com.limbo.practice.core.login.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.limbo.practice.core.login.dao.LoginDao;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.login.service.LoginService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 登录服务Service 实现类
@@ -90,7 +92,8 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public List<String> getUserUrlAuth(Long userId) {
         if (Objects.nonNull(userId)) {
-            return loginDao.selectUserUrlByUserId(userId);
+            List<String> list = loginDao.selectUserUrlByUserId(userId);
+            return list.stream().filter(s -> StrUtil.isNotBlank(s)).collect(Collectors.toList());
         }
         return null;
     }

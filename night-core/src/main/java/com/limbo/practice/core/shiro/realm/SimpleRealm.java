@@ -7,6 +7,7 @@ import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.login.domain.LoginUserMemento;
 import com.limbo.practice.core.login.service.LoginService;
 import com.limbo.practice.core.shiro.token.LoginToken;
+import com.limbo.practice.core.shiro.token.manager.TokenManager;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -46,6 +47,7 @@ public class SimpleRealm extends AuthorizingRealm {
         Long userId = primaryPrincipal.getId();
         List<String> userUrlAuth = loginService.getUserUrlAuth(userId);
         redisTemplate.opsForValue().set(RedisKey.USER_URL_AUTH + userId, JSONObject.toJSONString(userUrlAuth), 30, TimeUnit.MINUTES);
+        TokenManager.setVal2Session(RedisKey.USER_URL_AUTH, userUrlAuth);
         return null;
     }
 

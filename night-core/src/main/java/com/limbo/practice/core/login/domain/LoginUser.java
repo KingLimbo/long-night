@@ -15,26 +15,32 @@ public class LoginUser extends BaseBO {
      * 登录账户
      */
     private String loginAccount;
+
     /**
      * 登录密码
      */
     private String loginPass;
+
     /**
      * 登录盐
      */
     private String loginSalt;
+
     /**
      * 用户名
      */
     private String userName;
+
     /**
      * 用户电话
      */
     private String userPhone;
+
     /**
      * 用户邮箱
      */
     private String userEmail;
+
     /**
      * 是否被锁
      */

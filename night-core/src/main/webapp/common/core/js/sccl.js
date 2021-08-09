@@ -416,7 +416,7 @@ function getChildMenus(menus, parentId) {
 				"id": itemMenu.id,
 				"name": itemMenu.name,
 				"parentId": parentId,
-				"url": itemMenu.url,
+				"url": ctx + itemMenu.url + "/view",
 				"icon": "",
 				"order": itemMenu.sort,
 				"isHeader": "0",

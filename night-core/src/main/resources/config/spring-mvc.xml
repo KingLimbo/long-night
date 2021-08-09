@@ -8,7 +8,8 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-4.0.xsd
     http://www.springframework.org/schema/mvc
-    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/context">
 
 
     <!-- 自动扫描(自动注入) -->
@@ -20,14 +21,14 @@
     <!-- 配置静态资源路径映射 -->
     <mvc:resources mapping="/common/**" location="/common/, classpath*:/common/"/>
     <mvc:resources mapping="/page/**" location="/page/, classpath*:/page/"/>
-    <mvc:resources mapping="/swagger-ui.html" location="classpath:/META-INF/resources/" />
-    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
+    <mvc:resources mapping="/swagger-ui.html" location="classpath:/META-INF/resources/"/>
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
     <!-- 注册默认的MVC映射处理用到的bean -->
     <mvc:annotation-driven/>
 
     <!-- swagger -->
-<!--    <bean id="swagger2Config" class="com.limbo.practice.core.swagger.SwaggerConfig"/>-->
+    <!--    <bean id="swagger2Config" class="com.limbo.practice.core.swagger.SwaggerConfig"/>-->
 
     <!--===============通用视图解析器 begin===============-->
     <!-- 配置JSP视图解析器 -->
@@ -45,7 +46,7 @@
         <property name="exposeSessionAttributes" value="true"/>
         <property name="exposeSpringMacroHelpers" value="true"/>
         <property name="cache" value="true"/>
-        <property name="prefix" value="/page/" />
+        <property name="prefix" value="/page/"/>
         <property name="suffix" value=".html"/>
         <property name="order" value="1"/>
     </bean>
@@ -88,7 +89,7 @@
         :默认语言 -->
     <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="zh_CN" />
+        <property name="defaultLocale" value="zh_CN"/>
     </bean>
 
     <!-- 国际化资源文件 messageSource配置的是国际化资源文件的路径， classpath:messages指的是classpath路径下的
@@ -96,8 +97,8 @@
         把它设置为True，则找不到不会抛出异常，而是使用messageKey作为返回值。 -->
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="defaultEncoding" value="UTF-8" />
-        <property name="useCodeAsDefaultMessage" value="true" />
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
         <property name="basenames">
             <list>
                 <value>classpath:config/messages/message</value>

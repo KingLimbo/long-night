@@ -78,6 +78,7 @@
 </div>
 <script type="text/javascript">
     let menu = ${menus};
+    let ctx = "<%=basePath%>";
 </script>
 <script type="text/javascript" src="common/core/lib/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="common/core/js/sccl.js"></script>

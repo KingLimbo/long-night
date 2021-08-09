@@ -60,10 +60,10 @@ public class SysResourceController extends BaseController<SysResource, SysResour
         setService(sysResourceServiceImpl);
     }
 
-    @GetMapping("/init/{json}")
-    @ApiOperation("初始化")
-    public ModelAndView init(@ApiParam("初始化json") @PathVariable("json") String json){
-        return new ModelAndView();
+    @GetMapping("/view")
+    @ApiOperation("显示页面")
+    public ModelAndView view() {
+        return new ModelAndView("/sys/resource");
     }
 
 
@@ -97,4 +97,5 @@ public class SysResourceController extends BaseController<SysResource, SysResour
         }
         return null;
     }
+
 }

@@ -127,4 +127,26 @@ public class LoginController {
         view.addObject("menus", JSON.toJSONString(menus));
         return view;
     }
+
+    /**
+     * 404页面
+     *
+     * @return
+     */
+    @GetMapping("/404")
+    @ApiOperation("404")
+    public ModelAndView page404(){
+        return new ModelAndView("comm/404");
+    }
+
+    /**
+     * 500页面
+     *
+     * @return
+     */
+    @GetMapping("/500")
+    @ApiOperation("404")
+    public ModelAndView page500(){
+        return new ModelAndView("comm/500");
+    }
 }

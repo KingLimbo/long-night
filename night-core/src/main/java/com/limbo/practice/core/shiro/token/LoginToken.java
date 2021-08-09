@@ -1,6 +1,8 @@
 package com.limbo.practice.core.shiro.token;
 
 import com.limbo.practice.core.login.domain.LoginUser;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**
@@ -9,6 +11,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
  * @author limbo
  * @date 2019/4/25
  */
+@Setter
+@Getter
 public class LoginToken extends UsernamePasswordToken  implements java.io.Serializable{
 
     private static final long serialVersionUID = -6451794657814516574L;
@@ -35,19 +39,4 @@ public class LoginToken extends UsernamePasswordToken  implements java.io.Serial
         this.phone = user.getUserPhone();
     }
 
-    public java.lang.String getEmail() {
-        return email;
-    }
-
-    public void setEmail(java.lang.String email) {
-        this.email = email;
-    }
-
-    public java.lang.String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(java.lang.String phone) {
-        this.phone = phone;
-    }
 }
