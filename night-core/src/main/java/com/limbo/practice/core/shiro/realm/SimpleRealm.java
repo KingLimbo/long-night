@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 简单的Realm
@@ -46,8 +45,7 @@ public class SimpleRealm extends AuthorizingRealm {
         LoginUserMemento primaryPrincipal = (LoginUserMemento) principalCollection.getPrimaryPrincipal();
         Long userId = primaryPrincipal.getId();
         List<String> userUrlAuth = loginService.getUserUrlAuth(userId);
-        redisTemplate.opsForValue().set(RedisKey.USER_URL_AUTH + userId, JSONObject.toJSONString(userUrlAuth), 30, TimeUnit.MINUTES);
-        TokenManager.setVal2Session(RedisKey.USER_URL_AUTH, userUrlAuth);
+        TokenManager.setVal2Session(RedisKey.USER_URL_AUTH, JSONObject.toJSONString(userUrlAuth));
         return null;
     }
 

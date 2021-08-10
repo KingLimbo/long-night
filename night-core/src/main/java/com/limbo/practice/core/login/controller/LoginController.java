@@ -6,6 +6,7 @@ import com.limbo.practice.base.entity.SysResource;
 import com.limbo.practice.base.entity.SysUser;
 import com.limbo.practice.base.service.SysUserService;
 import com.limbo.practice.core.annotation.ApiResources;
+import com.limbo.practice.core.annotation.PublicUrl;
 import com.limbo.practice.core.constant.CoreConsts;
 import com.limbo.practice.core.enums.MenuLevelEnum;
 import com.limbo.practice.core.enums.ResourceTypeEnum;
@@ -135,6 +136,7 @@ public class LoginController {
      */
     @GetMapping("/404")
     @ApiOperation("404")
+    @PublicUrl
     public ModelAndView page404(){
         return new ModelAndView("comm/404");
     }
@@ -146,6 +148,7 @@ public class LoginController {
      */
     @GetMapping("/500")
     @ApiOperation("404")
+    @PublicUrl
     public ModelAndView page500(){
         return new ModelAndView("comm/500");
     }

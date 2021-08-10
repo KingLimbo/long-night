@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.limbo.practice.core.constant.RedisKey;
 import com.limbo.practice.core.login.domain.LoginUserMemento;
+import com.limbo.practice.core.shiro.token.manager.TokenManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -13,7 +14,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -44,8 +50,7 @@ public class MyAuthenticationFilter extends FormAuthenticationFilter {
         if (Objects.isNull(primaryPrincipal)) {
             return false;
         }
-        Long userId = primaryPrincipal.getId();
-        Object result = redisTemplate.opsForValue().get(RedisKey.USER_URL_AUTH + userId);
+        Object result = TokenManager.getVal2Session(RedisKey.USER_URL_AUTH);
         if (Objects.nonNull(request)) {
             List<String> userUrlAuth = JSONObject.parseArray(result.toString(), String.class);
             AtomicBoolean allow = new AtomicBoolean(false);
@@ -82,18 +87,21 @@ public class MyAuthenticationFilter extends FormAuthenticationFilter {
                 log.trace("Attempting to access a path which requires authentication.  Forwarding to the " +
                         "Authentication url [" + getLoginUrl() + "]");
             }
-            if (WebUtils.toHttp(request).getMethod().equalsIgnoreCase(GET_METHOD)) {
-                if (isNotLogin(request, response)) {
-                    saveRequestAndRedirectToLogin(request, response);
-                } else {
-                    WebUtils.issueRedirect(request, response, "/comm/404");
-                }
-            } else {
-                response.getWriter().print("403权限错误");
+            if (isAjax(request)) {
                 // 设置缓存区编码为UTF-8编码格式
                 response.setCharacterEncoding("UTF-8");
                 // 可以使用封装类简写Content-Type，使用该方法则无需使用setCharacterEncoding
-                response.setContentType("text/html;charset=UTF-8");
+                response.setContentType("application/json;charset=utf-8");
+                Map<String,String> resultMap = new HashMap<String, String>();
+                resultMap.put("login_status", "300");
+                resultMap.put("message", "403权限错误");
+                outJson(response, resultMap);
+            } else {
+                if (isNotLogin(request, response)) {
+                    saveRequestAndRedirectToLogin(request, response);
+                } else {
+                    WebUtils.issueRedirect(request, response, "/404");
+                }
             }
 
             return false;
@@ -116,5 +124,40 @@ public class MyAuthenticationFilter extends FormAuthenticationFilter {
         return false;
     }
 
-    // WebUtils.toHttp(request).getMethod().equalsIgnoreCase(POST_METHOD)
+    /**
+     * 是否是Ajax请求
+     *
+     * @param request
+     * @return
+     */
+    private boolean isAjax(ServletRequest request){
+        return "XMLHttpRequest".equalsIgnoreCase(((HttpServletRequest) request).getHeader("X-Requested-With"));
+    }
+
+    /**
+     * response 输出JSON
+     *
+     * @param response
+     * @param resultMap
+     * @throws IOException
+     */
+    private void outJson(ServletResponse response, Map<String, String> resultMap){
+
+        PrintWriter out = null;
+        try {
+            // 设置缓存区编码为UTF-8编码格式
+            response.setCharacterEncoding("UTF-8");
+            // 可以使用封装类简写Content-Type，使用该方法则无需使用setCharacterEncoding
+            response.setContentType("text/html;charset=UTF-8");
+            out = response.getWriter();
+            out.println(JSONObject.toJSONString(resultMap));
+        } catch (Exception e) {
+            log.debug("输出JSON报错：", e);
+        }finally{
+            if(null != out){
+                out.flush();
+                out.close();
+            }
+        }
+    }
 }
