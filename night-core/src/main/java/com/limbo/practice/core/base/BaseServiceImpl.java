@@ -1,7 +1,10 @@
 package com.limbo.practice.core.base;
 
 import cn.hutool.core.util.ArrayUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.limbo.practice.core.constant.CoreConsts;
+import com.limbo.practice.core.util.LoggerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
@@ -104,10 +107,22 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
     @Override
     public PageTableBean queryList(T vo){
         PageTableBean pageTableBean = new PageTableBean();
-        List<T> list = dao.list(vo);
-        pageTableBean.setData(list);
-        pageTableBean.setCode(200);
-        pageTableBean.setCount((long) list.size());
+        try {
+            Page<T> page = null;
+            if (vo.needPage()) {
+                page = PageHelper.startPage(vo.getPage(), vo.getLimit(), true);
+            }
+            List<T> list = dao.list(vo);
+            pageTableBean.setData(list);
+            pageTableBean.setCode(200);
+            if (vo.needPage()) {
+                pageTableBean.setCount(page.getTotal());
+            }
+        } catch (Exception e) {
+            LoggerUtils.fmtError(BaseServiceImpl.class, e, "分页查询失败");
+            pageTableBean.setCode(500);
+            pageTableBean.setMsg(e.getMessage());
+        }
         return pageTableBean;
     }
 
@@ -201,5 +216,19 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
             resultBean.setMessage("删除id不能为空！");
         }
         return resultBean;
+    }
+
+    protected PageTableBean queryPage(PageTableBean pageTableBean, T vo){
+        Page<T> page = null;
+        if (vo.needPage()) {
+            page = PageHelper.startPage(vo.getPage(), vo.getLimit(), true);
+        }
+        List<T> list = dao.list(vo);
+        pageTableBean.setData(list);
+        pageTableBean.setCode(200);
+        if (vo.needPage()) {
+            pageTableBean.setCount(page.getTotal());
+        }
+        return pageTableBean;
     }
 }

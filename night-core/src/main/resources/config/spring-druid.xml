@@ -91,6 +91,7 @@
     </bean>
 
     <!-- APO配置 -->
+    <aop:aspectj-autoproxy />
     <aop:config>
         <aop:pointcut id="myPointcut" expression="execution(public * com.limbo.practice.*.service.impl.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>

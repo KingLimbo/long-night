@@ -21,10 +21,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
@@ -77,7 +74,7 @@ public class SysResourceController extends BaseController<SysResource, SysResour
         sysResourceServiceImpl.autoGeneratorAllMenuResource();
     }
 
-    @GetMapping("/scan-resource")
+    @GetMapping("/scan-resource/all")
     @ApiOperation("扫描资源")
     @ResponseBody
     @PublicUrl
@@ -85,7 +82,7 @@ public class SysResourceController extends BaseController<SysResource, SysResour
         return sysResourceServiceImpl.autoGeneratorAllMenuResource();
     }
 
-    @GetMapping("/scan-resource/{zlass}")
+    @PutMapping("/scan-resource/{zlass}")
     @ApiOperation("扫描资源")
     @ResponseBody
     public List<SysResource> scanResourceByClass(@ApiParam() @PathVariable("zlass") String zlass){

@@ -24,6 +24,7 @@
         table.render({
             elem: '#user-table'
             ,url:'${ctx}/sys-role/list'
+            ,page:true
             ,response: {
                 statusCode: 200 //规定成功的状态码，默认：0
             }

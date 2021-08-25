@@ -5,7 +5,9 @@
 package com.limbo.practice.base.service;
 
 import com.limbo.practice.base.entity.SysResource;
+import com.limbo.practice.base.entity.ro.SysUserRO;
 import com.limbo.practice.core.base.BaseService;
+import com.limbo.practice.core.base.PageTableBean;
 
 import java.util.List;
 
@@ -26,4 +28,6 @@ public interface SysUserService<T, D> extends BaseService<T, D> {
 
 
     List<SysResource> getMenuByUserId(Long userId);
+
+    PageTableBean pageUsers(SysUserRO ro);
 }

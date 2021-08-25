@@ -2,10 +2,10 @@ package com.limbo.practice.core.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +17,8 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class BaseBO implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class BaseBO extends PageRO {
 
     /**
      * 设置序列化ID
