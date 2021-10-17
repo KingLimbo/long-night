@@ -3,6 +3,7 @@ package com.limbo.practice.core.shiro.session;
 
 //import com.limbo.practice.base.entity.SysUser;
 
+import com.limbo.practice.core.constant.CoreConsts;
 import com.limbo.practice.core.login.domain.LoginUser;
 import com.limbo.practice.core.login.domain.LoginUserMemento;
 import com.limbo.practice.core.util.StringUtils;
@@ -165,14 +166,14 @@ public class CustomSessionManager {
                 session.setAttribute(SESSION_STATUS, sessionStatus);
                 customShiroSessionDAO.update(session);
             }
-            map.put("status", 200);
+            map.put("status", CoreConsts.CODE_NORMAL);
             map.put("sessionStatus", status ? 1 : 0);
             map.put("sessionStatusText", status ? "踢出" : "激活");
             map.put("sessionStatusTextTd", status ? "有效" : "已踢出");
         } catch (Exception e) {
             log.error("改变Session状态错误，sessionId[%s]", sessionIds);
             log.error("", e);
-            map.put("status", 500);
+            map.put("status", CoreConsts.CODE_ERROR);
             map.put("message", "改变失败，有可能Session不存在，请刷新再试！");
         }
         return map;

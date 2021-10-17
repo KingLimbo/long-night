@@ -114,13 +114,13 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
             }
             List<T> list = dao.list(vo);
             pageTableBean.setData(list);
-            pageTableBean.setCode(200);
+            pageTableBean.setCode(CoreConsts.CODE_NORMAL);
             if (vo.needPage()) {
                 pageTableBean.setCount(page.getTotal());
             }
         } catch (Exception e) {
             LoggerUtils.fmtError(BaseServiceImpl.class, e, "分页查询失败");
-            pageTableBean.setCode(500);
+            pageTableBean.setCode(CoreConsts.CODE_ERROR);
             pageTableBean.setMsg(e.getMessage());
         }
         return pageTableBean;
@@ -225,7 +225,7 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
         }
         List<T> list = dao.list(vo);
         pageTableBean.setData(list);
-        pageTableBean.setCode(200);
+        pageTableBean.setCode(CoreConsts.CODE_NORMAL);
         if (vo.needPage()) {
             pageTableBean.setCount(page.getTotal());
         }

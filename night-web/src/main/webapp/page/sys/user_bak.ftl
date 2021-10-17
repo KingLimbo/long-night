@@ -16,58 +16,68 @@
 
 <form class="layui-form" action="" lay-filter="user-form">
     <div class="layui-form-item">
-        <div class="layui-row layui-col-xs4">
-            <label class="layui-form-label">用户名</label>
-            <div class="layui-input-block">
-                <input type="text" name="loginAccount" lay-verify="title" autocomplete="off" placeholder="请输入用户名" class="layui-input">
-            </div>
+        <label class="layui-form-label">输入框</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
         </div>
-        <div class="layui-row layui-col-xs4">
-            <label class="layui-form-label">姓名</label>
-            <div class="layui-input-block">
-                <input type="text" name="userName" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-row layui-col-xs4">
-            <label class="layui-form-label">性别</label>
-            <div class="layui-input-block">
-                <input type="radio" name="userSex" value="男" title="男">
-                <input type="radio" name="userSex" value="女" title="女">
-                <input type="radio" name="userSex" value="null" title="未知">
-            </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码框</label>
+        <div class="layui-input-block">
+            <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <div class="layui-row layui-col-xs4">
-            <label class="layui-form-label">用户类型</label>
-            <div class="layui-input-block">
-                <select name="userType" lay-filter="">
-                    <option value=""></option>
-                    <option value="0">写作</option>
-                    <option value="1">阅读</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-row layui-col-xs4">
-            <label class="layui-form-label">角色名称</label>
-            <div class="layui-input-block">
-                <input type="text" name="roleName" lay-verify="title" autocomplete="off" placeholder="请输入角色名称" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-row layui-col-xs4">
-            <label class="layui-form-label">是否锁定</label>
-            <div class="layui-input-block">
-                <input type="radio" name="locked" value="1" title="是">
-                <input type="radio" name="locked" value="0" title="否" checked="">
-            </div>
+        <label class="layui-form-label">选择框</label>
+        <div class="layui-input-block">
+            <select name="interest" lay-filter="aihao">
+                <option value=""></option>
+                <option value="0">写作</option>
+                <option value="1">阅读</option>
+                <option value="2">游戏</option>
+                <option value="3">音乐</option>
+                <option value="4">旅行</option>
+            </select>
         </div>
     </div>
 
     <div class="layui-form-item">
-        <div class="layui-col-xs-offset9">
-            <button type="button" class="layui-btn layui-btn-normal" id="reset">重置</button>
-            <button type="button" class="layui-btn layui-btn-normal" id="search">查询</button>
+        <label class="layui-form-label">复选框</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="like[write]" title="写作">
+            <input type="checkbox" name="like[read]" title="阅读">
+            <input type="checkbox" name="like[daze]" title="发呆">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">开关</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">单选框</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="男" title="男" checked="">
+            <input type="radio" name="sex" value="女" title="女">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">赋值</button>
+            <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">取值</button>
+            <button type="button" class="layui-btn layui-btn-normal" id="search">search</button>
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
         </div>
     </div>
 </form>
@@ -107,12 +117,11 @@
                 , {field: 'locked', title: '锁定', sort: true}
                 , {
                     field: 'roles', title: '角色', sort: true, templet: function (res) {
-                        let itemHtml = '';
-                        const roles = res.roles;
-                        for (const i in roles) {
-                            itemHtml += roles[i].name;
+                        const itemHtml = '';
+                        for (const role in res) {
+
                         }
-                        return '<em>' + itemHtml + '</em>'
+                        return '<em>' + res.email + '</em>'
                     }
                 }
                 , {field: 'gmtCreate', title: '创建时间'}
@@ -136,22 +145,30 @@
         });
 
         // 表单赋值
-        layui.$('#reset').on('click', function(){
+        layui.$('#LAY-component-form-setval').on('click', function(){
             form.val('user-form', {
-                "loginAccount": null
-                ,"userName": null
-                ,"userSex": "null"
-                ,"userType": null
-                ,"roleName": null
-                ,"locked": "0"
+                "username": "贤心" // "name": "value"
+                ,"password": "123456"
+                ,"interest": 1
+                ,"like[write]": true //复选框选中状态
+                ,"close": true //开关状态
+                ,"sex": "女"
+                ,"desc": "我爱 layui"
             });
+        });
+
+        // 表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('user-form');
+            alert(JSON.stringify(data));
         });
 
         // 表单取值
         layui.$('#search').on('click', function(){
             tableIns.reload({
-                // 设定异步数据接口的额外参数，任意设
-                where: form.val('user-form')
+                where: { //设定异步数据接口的额外参数，任意设
+
+                }
                 ,page: {
                     curr: 1 //重新从第 1 页开始
                 }

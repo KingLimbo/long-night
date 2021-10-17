@@ -69,6 +69,13 @@
         FROM sys_role
         <include refid="Base_Where_List"/>
     </select>
+
+    <select id="listRoleByUserId" resultMap="BaseResultMap">
+        select a.* from sys_role a
+        left join sys_role_user sru on a.id = sru.role_id
+        where sru.user_id = #{userId, jdbcType=BIGINT}
+            and a.id is not null
+    </select>
     
     <insert id="insert" keyProperty="id" keyColumn="id" useGeneratedKeys="true">
         INSERT IGNORE INTO sys_role(

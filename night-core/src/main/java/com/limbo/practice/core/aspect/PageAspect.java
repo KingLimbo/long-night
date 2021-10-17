@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.limbo.practice.core.base.PageRO;
 import com.limbo.practice.core.base.PageTableBean;
+import com.limbo.practice.core.constant.CoreConsts;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -50,7 +51,7 @@ public class PageAspect {
         } catch (Throwable throwable) {
             log.error("PageAspect setPageLimit error", throwable);
             throwable.printStackTrace();
-            pageTable.setCode(500);
+            pageTable.setCode(CoreConsts.CODE_ERROR);
             pageTable.setMsg(throwable.getMessage());
         }
         return pageTable;

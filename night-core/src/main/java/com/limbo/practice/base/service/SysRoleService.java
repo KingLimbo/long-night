@@ -4,7 +4,10 @@
 
 package com.limbo.practice.base.service;
 
+import com.limbo.practice.base.entity.SysRole;
 import com.limbo.practice.core.base.BaseService;
+
+import java.util.Set;
 
 /**
 *
@@ -21,5 +24,11 @@ import com.limbo.practice.core.base.BaseService;
 */
 public interface SysRoleService<T, D> extends BaseService<T, D> {
 
-
+    /**
+     * 通过用户id查询角色
+     *
+     * @param userId
+     * @return
+     */
+    Set<SysRole> listRoleByUserId(Long userId);
 }

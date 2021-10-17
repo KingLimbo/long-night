@@ -7,6 +7,9 @@ package com.limbo.practice.base.dao;
 import com.limbo.practice.base.entity.SysRole;
 import com.limbo.practice.core.base.BaseDao;
 import com.limbo.practice.core.mybatis.MybatisDao;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Set;
 
 
 /**
@@ -26,4 +29,5 @@ import com.limbo.practice.core.mybatis.MybatisDao;
 @MybatisDao
 public interface SysRoleDao extends BaseDao<SysRole> {
 
+    Set<SysRole> listRoleByUserId(@Param("userId") Long userId);
 }

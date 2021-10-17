@@ -1,13 +1,12 @@
 package com.limbo.practice.core.freemarker.extend;
 
-import java.util.Date;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.limbo.practice.core.constant.CoreConsts;
 import com.limbo.practice.core.util.LoggerUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * FreeMarker视图扩赞类
@@ -28,7 +27,7 @@ public class FreeMarkerViewExtend extends FreeMarkerView {
         // 系统时间
         model.put("_time", new Date().getTime());
         // 今年
-        model.put("NOW_YEAY", CoreConsts.NOW_YEAY);
+        model.put("NOW_YEAY", CoreConsts.NOW_YEAR);
 
         // 版本号，重启的时间
         model.put("_v", CoreConsts.VERSION);

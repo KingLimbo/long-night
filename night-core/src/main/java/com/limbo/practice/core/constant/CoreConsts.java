@@ -11,9 +11,6 @@ import java.util.Calendar;
 public class CoreConsts {
 
     /**
-     * 登录相关常量
-     */
-    /**
      * 登录地址
      */
     public static final String LOGIN_URL = "redirect:/login";
@@ -43,9 +40,7 @@ public class CoreConsts {
      */
     public static final String CONTEXT_PATH = "ctx";
 
-    /**
-     * Freemarker 使用的变量
-     */
+
     /**
      * 输出标签Name
      */
@@ -102,25 +97,30 @@ public class CoreConsts {
     /**
      * 当前年份
      **/
-    public static final int NOW_YEAY = Calendar.getInstance().get(Calendar.YEAR);
-
-    // 版本号，重启的时间
-    public static String VERSION = String.valueOf(System.currentTimeMillis());
-
+    public static final int NOW_YEAR= Calendar.getInstance().get(Calendar.YEAR);
     /**
-     * 存储到缓存，标识用户的禁止状态，解决在线用户踢出的问题
+     * 处理状态 成功
      */
-    public static final String EXECUTE_CHANGE_USER = "SOJSON_EXECUTE_CHANGE_USER";
+    public static final String SERVICE_SUCCESS = "success";
 
     /**
      * 核心包
      */
     public static final String CORE_PACKAGE = "com.limbo.practice";
-
     /**
-     *
+     * 处理状态 失败
      */
-    public static final String SERVICE_SUCCESS = "success";
-
     public static final String SERVICE_FAIL = "fail";
+    /**
+     * 反馈编号 正常
+     */
+    public static final Integer CODE_NORMAL = 200;
+    /**
+     * 反馈编号 错误
+     */
+    public static final Integer CODE_ERROR = 500;
+    /**
+     * 版本号，重启的时间
+     */
+    public static String VERSION = String.valueOf(System.currentTimeMillis());
 }

@@ -10,47 +10,70 @@
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
-<form class="layui-form" action="" lay-filter="example">
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>查询条件</legend>
+</fieldset>
+<form class="layui-form" action="" lay-filter="resource-form">
     <div class="layui-form-item">
-        <label class="layui-form-label">输入框</label>
-        <div class="layui-input-block">
-            <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+        <div class="layui-row layui-col-xs4">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+            </div>
         </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">密码框</label>
-        <div class="layui-input-block">
-            <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        <div class="layui-row layui-col-xs4">
+            <label class="layui-form-label">URL类型</label>
+            <div class="layui-input-block">
+                <select name="interest" lay-filter="aihao">
+                    <option value=""></option>
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="PATCH">PATCH</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-row layui-col-xs4">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <select name="interest" lay-filter="aihao">
+                    <option value=""></option>
+                    <option value="0">资源</option>
+                    <option value="1">菜单</option>
+                    <option value="2">目录</option>
+                </select>
+            </div>
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">选择框</label>
-        <div class="layui-input-block">
-            <select name="interest" lay-filter="aihao">
-                <option value=""></option>
-                <option value="0">写作</option>
-                <option value="1">阅读</option>
-                <option value="2">游戏</option>
-                <option value="3">音乐</option>
-                <option value="4">旅行</option>
-            </select>
+        <div class="layui-row layui-col-xs4">
+            <label class="layui-form-label">父节点ID</label>
+            <div class="layui-input-block">
+                <select name="interest" lay-filter="aihao">
+                    <option value=""></option>
+                    <option value="0">写作</option>
+                    <option value="1">阅读</option>
+                    <option value="2">游戏</option>
+                    <option value="3">音乐</option>
+                    <option value="4">旅行</option>
+                </select>
+            </div>
         </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">复选框</label>
-        <div class="layui-input-block">
-            <input type="checkbox" name="like[write]" title="写作">
-            <input type="checkbox" name="like[read]" title="阅读">
-            <input type="checkbox" name="like[daze]" title="发呆">
+        <div class="layui-row layui-col-xs4">
+            <label class="layui-form-label">开关</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+            </div>
         </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">开关</label>
-        <div class="layui-input-block">
-            <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+        <div class="layui-row layui-col-xs4">
+            <label class="layui-form-label">复选框</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="like[write]" title="写作">
+                <input type="checkbox" name="like[read]" title="阅读">
+                <input type="checkbox" name="like[daze]" title="发呆">
+            </div>
         </div>
     </div>
 
@@ -77,39 +100,60 @@
         </div>
     </div>
 </form>
-<table class="layui-hide" id="user-table"></table>
+<table class="layui-hide" id="resource-table"></table>
 
-
+<script type="text/html" id="resourceBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 <script src="${ctx}/common/core/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 
 <script>
-    layui.use('table', function(){
-        var table = layui.table;
+    layui.use(['table', 'form'], function(){
+        const table = layui.table
+            , form = layui.form
+        ;
 
-        var tableIns = table.render({
-            elem: '#user-table'
-            ,url:'${ctx}/sys-resource/list'
-            ,page:true
-            ,response: {
+        const tableIns = table.render({
+            elem: '#resource-table'
+            , url: '${ctx}/sys-resource/list'
+            , page: true
+            , response: {
                 statusCode: 200 //规定成功的状态码，默认：0
             }
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'name', width:80, title: '名称'}
-                ,{field:'url', width: 150, title: 'URL', sort: true}
-                ,{field:'urlType', width:80, title: 'URL类型'}
-                ,{field:'type', title: '类型', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                ,{field:'route', title: '路由', sort: true}
-                ,{field:'parentId', title: '父节点'}
-                ,{field:'sort', title: '排序', sort: true}
-                ,{field:'parents', title: '父节点们'}
-                ,{field:'description', width:137, title: '描述', sort: true}
-                ,{field:'deleted', width:137, title: '是否删除'}
-                ,{field:'gmtCreate', title: '创建时间'}
-                ,{field:'gmtModified', width:137, title: '修改时间', sort: true}
+            , cellMinWidth: 70 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[
+                {field: 'id', width: 70, title: 'ID', sort: true}
+                , {field: 'name', width: 160, title: '名称'}
+                , {field: 'url', minWidth: 150, title: 'URL', sort: true}
+                , {field: 'urlType', width: 100, title: 'URL类型'}
+                , {field: 'type', width: 110, title: '类型'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                , {field: 'route', minWidth: 200, title: '路由'}
+                , {field: 'parentId', width: 80, title: '父节点'}
+                , {field: 'sort', width: 80, title: '排序', sort: true}
+                , {field: 'parents', width: 90, title: '父节点们'}
+                , {field: 'description', width: 120, title: '描述', sort: true}
+                , {field: 'deleted', width: 90, title: '是否删除'}
+                , {field: 'gmtCreate', width: 170, title: '创建时间'}
+                , {field: 'gmtModified', width: 150, title: '修改时间', sort: true}
+                , {fixed: 'right', width: 178, align: 'center', toolbar: '#resourceBar'}
             ]]
+        });
+        //监听工具条
+        table.on('tool(table)', function(obj){
+            const data = obj.data;
+            if(obj.event === 'detail'){
+                layer.msg('ID：'+ data.id + ' 的查看操作');
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
         });
 
         //表单取值

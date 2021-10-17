@@ -10,6 +10,9 @@ import com.limbo.practice.base.service.SysRoleService;
 import com.limbo.practice.core.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+import java.util.Set;
+
 /**
 *
 * @ProjectName: long-night
@@ -23,8 +26,14 @@ import org.springframework.stereotype.Service;
 *
 * version V1.0
 */
-
 @Service
 public class SysRoleServiceImpl extends BaseServiceImpl<SysRole, SysRoleDao> implements SysRoleService<SysRole, SysRoleDao> {
 
+    @Override
+    public Set<SysRole> listRoleByUserId(Long userId) {
+        if (Objects.nonNull(userId)) {
+            return dao.listRoleByUserId(userId);
+        }
+        return null;
+    }
 }
