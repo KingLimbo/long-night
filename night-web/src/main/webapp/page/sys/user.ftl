@@ -33,7 +33,7 @@
             <div class="layui-input-block">
                 <input type="radio" name="userSex" value="男" title="男">
                 <input type="radio" name="userSex" value="女" title="女">
-                <input type="radio" name="userSex" value="null" title="未知">
+                <input type="radio" name="userSex" value="" title="未知">
             </div>
         </div>
     </div>
@@ -66,8 +66,8 @@
 
     <div class="layui-form-item">
         <div class="layui-col-xs-offset9">
-            <button type="button" class="layui-btn layui-btn-normal" id="reset">重置</button>
-            <button type="button" class="layui-btn layui-btn-normal" id="search">查询</button>
+            <button type="button" class="layui-btn layui-btn-sm layui-btn-warm" id="reset">重置</button>
+            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="search">查询</button>
         </div>
     </div>
 </form>
@@ -140,7 +140,7 @@
             form.val('user-form', {
                 "loginAccount": null
                 ,"userName": null
-                ,"userSex": "null"
+                ,"userSex": ""
                 ,"userType": null
                 ,"roleName": null
                 ,"locked": "0"

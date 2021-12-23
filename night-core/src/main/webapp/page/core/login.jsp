@@ -78,7 +78,7 @@
     layui.use(['layer', 'form'], function () {
         var layer = layui.layer,
             $ = layui.jquery,
-            form = layui.form();
+            form = layui.form;
 
         form.verify({
             loginAccount: function (value) {

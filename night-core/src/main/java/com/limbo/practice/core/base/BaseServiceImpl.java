@@ -218,17 +218,17 @@ public class BaseServiceImpl<T extends BaseBO, D extends BaseDao<T>> implements 
         return resultBean;
     }
 
-    protected PageTableBean queryPage(PageTableBean pageTableBean, T vo){
-        Page<T> page = null;
-        if (vo.needPage()) {
-            page = PageHelper.startPage(vo.getPage(), vo.getLimit(), true);
-        }
-        List<T> list = dao.list(vo);
-        pageTableBean.setData(list);
-        pageTableBean.setCode(CoreConsts.CODE_NORMAL);
-        if (vo.needPage()) {
-            pageTableBean.setCount(page.getTotal());
-        }
-        return pageTableBean;
-    }
+//    protected PageTableBean queryPage(PageTableBean pageTableBean, T vo){
+//        Page<T> page = null;
+//        if (vo.needPage()) {
+//            page = PageHelper.startPage(vo.getPage(), vo.getLimit(), true);
+//        }
+//        List<T> list = dao.list(vo);
+//        pageTableBean.setData(list);
+//        pageTableBean.setCode(CoreConsts.CODE_NORMAL);
+//        if (vo.needPage()) {
+//            pageTableBean.setCount(page.getTotal());
+//        }
+//        return pageTableBean;
+//    }
 }

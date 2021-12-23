@@ -93,8 +93,13 @@ public class MyAuthenticationFilter extends FormAuthenticationFilter {
                 // 可以使用封装类简写Content-Type，使用该方法则无需使用setCharacterEncoding
                 response.setContentType("application/json;charset=utf-8");
                 Map<String,String> resultMap = new HashMap<String, String>();
-                resultMap.put("login_status", "300");
-                resultMap.put("message", "403权限错误");
+                if (isNotLogin(request, response)) {
+                    resultMap.put("code", "300");
+                    resultMap.put("message", "用户未登录！！！");
+                } else {
+                    resultMap.put("code", "403");
+                    resultMap.put("message", "403权限错误！！！");
+                }
                 outJson(response, resultMap);
             } else {
                 if (isNotLogin(request, response)) {
