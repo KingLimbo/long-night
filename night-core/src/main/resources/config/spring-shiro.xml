@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <!-- 加载JDBC配置文件-->
+    <!-- 加载工程配置文件-->
     <context:property-placeholder ignore-unresolvable="true" location="classpath:config/limbo-night.properties"/>
 
     <!--redis settings-->
@@ -19,7 +19,7 @@
 
     <!-- 会话Cookie模板 -->
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <!--cookie的name，我故意取名叫xxxxbaidu -->
+        <!--cookie的name-->
         <constructor-arg value="limbo-user"/>
         <property name="httpOnly" value="true"/>
         <property name="maxAge" value="-1"/>
@@ -132,8 +132,11 @@
         <property name="rememberMeManager" ref="rememberMeManager"/>
         <property name="cacheManager" ref="customShiroCacheManager"/>
     </bean>
+
+    <!--自定义权限过滤器-->
     <bean id="myAuthcFilter" class="com.limbo.practice.core.shiro.filter.MyAuthenticationFilter"/>
 
+    <!--自定义的动态获取资源类 -->
     <bean id="chainDefinitionSectionMetaSource" class="com.limbo.practice.core.shiro.filter.ChainDefinitionSectionMetaSource">
         <!-- 定义安全的页面及访问规则 -->
         <property name="filterChainDefinitions">

@@ -10,11 +10,16 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * 自定义的动态获取资源类
+ *
  * @author limbo
  * @date 2021/7/30
  */
 @Component
 public class ChainDefinitionSectionMetaSource implements FactoryBean<Ini.Section> {
+
+    @Autowired
+    private AnnotationScanService annotationScanService;
 
     /**
      * 默认permission字符串
@@ -22,8 +27,10 @@ public class ChainDefinitionSectionMetaSource implements FactoryBean<Ini.Section
     public static final String PERMISSION = "anon";
     public static final String LAST_FILTER_KEY = "/**";
     public static final String LAST_FILTER_VALUE = "authc";
-    @Autowired
-    private AnnotationScanService annotationScanService;
+
+    /**
+     * 过滤规则
+     */
     private String filterChainDefinitions;
 
     @Override
@@ -32,7 +39,7 @@ public class ChainDefinitionSectionMetaSource implements FactoryBean<Ini.Section
         List<String> list = annotationScanService.scanUrlByPublicUrl();
 
         Ini ini = new Ini();
-        //加载默认的url
+        // 加载默认的url
         ini.load(filterChainDefinitions);
         Ini.Section section = ini.getSection(Ini.DEFAULT_SECTION_NAME);
         if (Objects.isNull(section)) {

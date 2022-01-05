@@ -40,7 +40,7 @@ public class BaseController<T extends BaseBO, D> {
         return resultBean;
     }
 
-    @PatchMapping("/saveActive")
+    @PatchMapping("/save-active")
     @ApiOperation("局部更新")
     @ResponseBody
     public ResultBean patchData(T data){

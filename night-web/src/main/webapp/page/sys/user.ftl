@@ -42,11 +42,9 @@
         <div class="layui-row layui-col-xs4">
             <label class="layui-form-label">用户类型</label>
             <div class="layui-input-block">
-                <select name="userType" lay-filter="">
-                    <option value=""></option>
-                    <option value="0">写作</option>
-                    <option value="1">阅读</option>
-                </select>
+                <input type="radio" name="userType" value="1" title="系统管理员">
+                <input type="radio" name="userType" value="0" title="普通用户">
+                <input type="radio" name="userType" value="" title="所有" checked="">
             </div>
         </div>
         <div class="layui-row layui-col-xs4">

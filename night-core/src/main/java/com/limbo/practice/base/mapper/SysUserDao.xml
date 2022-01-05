@@ -236,7 +236,7 @@
     
     <update id="logicDelete">
         UPDATE sys_user SET
-            is_deleted = "1"
+            is_deleted = '1'
         WHERE id = #{id, jdbcType=BIGINT}
     </update>
     
