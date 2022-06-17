@@ -65,7 +65,7 @@
         <!-- taglibs版本号 -->
         <taglibs.version>1.1.2</taglibs.version>
         <!-- fastjson版本号 -->
-        <fastjson.version>1.2.47</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <!-- jackson-databind版本号 -->
         <jackson.databind.version>2.7.4</jackson.databind.version>
         <!-- shiro 版本号 -->
