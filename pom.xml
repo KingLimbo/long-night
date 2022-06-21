@@ -48,7 +48,7 @@
         <!-- druid版本号 -->
         <druid.version>1.1.10</druid.version>
         <!-- mysql连接工具版本号 -->
-        <mysql.connetction.version>5.1.35</mysql.connetction.version>
+        <mysql.connetction.version>8.0.28</mysql.connetction.version>
         <!-- oracle版本号 -->
         <oracle.version>11.2.0.1.0</oracle.version>
         <!-- redis版本号 -->
